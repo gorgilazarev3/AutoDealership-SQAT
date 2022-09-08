@@ -1,0 +1,328 @@
+﻿@model AutoDealership.Models.CreateVehicleViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Vehicle</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Vehicle.Vehicle.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vehicle.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Vehicle.Brand.Id, new SelectList(Model.Brands, "Id", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.Vehicle.Brand.Name)
+            @Html.HiddenFor(model => model.Vehicle.Brand.LogoURL)
+            @Html.HiddenFor(model => model.Vehicle.Brand.Vehicles)
+            @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group" id="brand-div">
+        @*<button type="button" id="add-brand-btn" class="btn btn-info">Add brand</button>*@
+        @Html.ActionLink("Add a new brand", "CreateBrand", "Vehicle", new { @class = "btn btn-info" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Model, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Model, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Vehicle.FuelType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Vehicle.BodyStyle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Transmission.NumberSpeeds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Transmission.NumberSpeeds, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Transmission.NumberSpeeds, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Vehicle.Transmission.TransmissionType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Year, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Year, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Mileage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Mileage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Mileage, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Vehicle.DrivetrainType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Color, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Color, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.InteriorColor, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.InteriorColor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.InteriorColor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.FuelEfficiency, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.FuelEfficiency, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.FuelEfficiency, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Horsepower, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Horsepower, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Horsepower, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Torque, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Torque, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Torque, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Engine, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Engine, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Engine, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.IsForLease, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Vehicle.IsForLease)
+                @Html.ValidationMessageFor(model => model.Vehicle.IsForLease, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.IsForRent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Vehicle.IsForRent)
+                @Html.ValidationMessageFor(model => model.Vehicle.IsForRent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.MonthlyPayment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.MonthlyPayment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.MonthlyPayment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.DailyPayment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.DailyPayment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.DailyPayment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.VehicleStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Vehicle.VehicleStatus, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Vehicle.VehicleStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.InStock, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Vehicle.InStock)
+                @Html.ValidationMessageFor(model => model.Vehicle.InStock, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.CoverImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.CoverImageURL, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.CoverImageURL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#add-brand-btn").click(function () {
+                var div = $("#brand-div");
+                var btn = $(this);
+                $.ajax({
+                    type: 'GET',
+                    url: '/Vehicle/CreateBrand',
+                    //success: function (partial_view) {
+                    //    if (!btn.hasClass("active")) {
+                    //        btn.addClass("active");
+                    //        var partialDiv = document.createElement("div");
+                    //        partialDiv.id = "brand-partial-div";
+                    //        div.append(partialDiv);
+                    //        partialDiv.innerHTML = partial_view;
+                    //    }
+                    //    else {
+                    //        btn.removeClass("active");
+                    //        var partialDiv = $("#brand-partial-div");
+                    //        div.children("#brand-partial-div").remove();
+                    //    }
+                        
+                    //}
+                    success: function () {
+                        alert("WORKS");
+                    },
+                    error: function () {
+                        alert("DOESNT");
+                    }
+                })
+            }
+            );
+
+            $("#Vehicle_Brand_Id").change(function () {
+                var brandName = $("#Vehicle_Brand_Name");
+                var brandLogo = $("#Vehicle_Brand_LogoURL");
+                var brandVehicles = $("#Vehicle_Brand_Vehicles");
+                var brandId = $("#Vehicle_Brand_Id").val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/Vehicle/GetBrand',
+                    data: { 'id': brandId },
+                    dataType: 'json',
+                    success: function (data) {
+                        var brand = $.parseJSON(JSON.stringify(data));
+                        alert(brand.Id + " " + brand.LogoURL + " " + brand.Name);
+                        brandName.val(brand.Name);
+                        brandLogo.val(brand.LogoURL);
+                        brandVehicles.val(brand.Vehicles);
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                })
+            })
+
+
+        });
+
+        //$(document).ready(function () {
+
+        //});
+        function test() {
+            //$("#create-brand-btn").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Vehicle/CreateBrand',
+                    success: function (data) {
+                        alert("WORKS");
+                    },
+                    error: function (result) {
+                        alert("ERROR:" + result);
+                    }
+                })
+            //})
+        }
+
+    </script>
+}
