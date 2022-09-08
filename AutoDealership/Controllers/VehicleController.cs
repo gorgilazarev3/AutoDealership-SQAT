@@ -48,7 +48,7 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Brand,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle, CreateVehicleViewModel vehicleModel)
+        public ActionResult Create([Bind(Include = "Id,Brand,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
             vehicle.ImagesURL = new List<string>();
             vehicle.Features = new List<string>();
@@ -58,7 +58,7 @@ namespace AutoDealership.Controllers
                 var brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Name.Equals(vehicle.Brand.Name)).FirstOrDefault();
                 if(brand != null)
                 {
-                    //vehicle.Brand = brand;
+                    vehicle.Brand = brand;
                     if(brand.Vehicles == null)
                     {
                         brand.Vehicles = new List<Vehicle>();
@@ -66,7 +66,7 @@ namespace AutoDealership.Controllers
                     brand.Vehicles.Add(vehicle);
                     //db.Entry<Vehicle>(vehicle).State = EntityState.Modified;
                     //db.Entry<Brand>(brand).State = EntityState.Modified;
-                     db.Vehicles.Add(vehicle);
+                    db.Vehicles.Add(vehicle);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

@@ -292,7 +292,6 @@
                     dataType: 'json',
                     success: function (data) {
                         var brand = $.parseJSON(JSON.stringify(data));
-                        alert(brand.Id + " " + brand.LogoURL + " " + brand.Name);
                         brandName.val(brand.Name);
                         brandLogo.val(brand.LogoURL);
                         brandVehicles.val(brand.Vehicles);
