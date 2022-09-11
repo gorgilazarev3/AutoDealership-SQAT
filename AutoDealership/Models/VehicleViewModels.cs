@@ -12,4 +12,11 @@ namespace AutoDealership.Models
         public IEnumerable<Brand> Brands { get; set; }
         public Brand NewBrand { get; set; }
     }
+
+    public class VehicleDetailsViewModel
+    {
+        public Vehicle Vehicle { get; set; }
+        public Brand Brand { get; set; }
+    }
+
 }

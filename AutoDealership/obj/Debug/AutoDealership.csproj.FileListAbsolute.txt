@@ -196,9 +196,9 @@ F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Up
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedTransmissionTypeModel.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedBrandsModel.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedBrandModelAgain.resources
-F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedVehiclesCollectionInBrandModel.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.csproj.GenerateResource.cache
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.csproj.CoreCompileInputs.cache
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.csproj.CopyComplete
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.dll
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.pdb
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedVehicleModel.resources

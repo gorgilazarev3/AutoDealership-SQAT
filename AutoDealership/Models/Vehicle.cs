@@ -11,22 +11,29 @@ namespace AutoDealership.Models
     {
         [Key]
         public int Id { get; set; }
-        public Brand Brand { get; set; }
+        public int BrandId { get; set; }
         public string Model { get; set; }
+        [Display(Name = "Fuel Type")]
         public Fuel FuelType { get; set; }
         public IEnumerable<string> Features { get; set; }
+        [Display(Name = "Body Style")]
         public BodyStyle BodyStyle { get; set; }
         public Transmission Transmission { get; set; }
         public int Year { get; set; }
 
         //Mileage is stored in kilometers
         public int Mileage { get; set; }
+        [Display(Name = "Drivetrain")]
         public Drivetrain DrivetrainType { get; set; }
+        [Display(Name = "Exterior Color")]
         public string Color { get; set; }
+        [Display(Name = "Interior Color")]
         public string InteriorColor { get; set; }
 
         //Fuel efficiency is stored in l/100km
+        [Display(Name = "Fuel Efficiency")]
         public double FuelEfficiency { get; set; }
+        [Display(Name = "Power")]
         public int Horsepower { get; set; }
         public int Torque { get; set; }
         public string Engine { get; set; }
@@ -39,11 +46,16 @@ namespace AutoDealership.Models
         public int MonthlyPayment { get; set; }
         //If vehicle is for rent
         public int DailyPayment { get; set; }
-
+        [Display (Name = "Vehicle Status")]
         public VehicleStatus VehicleStatus { get; set; }
         public bool InStock { get; set; }
 
         public string CoverImageURL { get; set; }
         public List<string> ImagesURL { get; set; }
+
+        public double GetMPG()
+        {
+            return FuelEfficiency * 235.214583;
+        }  
     }
 }

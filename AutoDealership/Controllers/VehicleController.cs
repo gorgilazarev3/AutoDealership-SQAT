@@ -28,11 +28,15 @@ namespace AutoDealership.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Vehicle vehicle = db.Vehicles.Find(id);
+            Brand brand = db.Brands.Find(vehicle.BrandId);
+            VehicleDetailsViewModel model = new VehicleDetailsViewModel();
+            model.Vehicle = vehicle;
+            model.Brand = brand;
             if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(model);
         }
         [Authorize]
         // GET: Vehicle/Create
@@ -48,17 +52,18 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Brand,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
             vehicle.ImagesURL = new List<string>();
             vehicle.Features = new List<string>();
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
-                var brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Name.Equals(vehicle.Brand.Name)).FirstOrDefault();
+                //var brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Name.Equals(vehicle.Brand.Name)).FirstOrDefault();
+                var brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Id.Equals(vehicle.BrandId)).FirstOrDefault();
                 if(brand != null)
                 {
-                    vehicle.Brand = brand;
+                    //vehicle.Brand = brand;
                     if(brand.Vehicles == null)
                     {
                         brand.Vehicles = new List<Vehicle>();
@@ -123,7 +128,7 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Brand,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

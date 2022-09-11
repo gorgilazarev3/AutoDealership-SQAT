@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoDealership.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,8 @@ namespace AutoDealership.Controllers
     {
         public ActionResult Index()
         {
+            var db = new ApplicationDbContext();
+            ViewData.Model = db.Vehicles.ToList();
             return View();
         }
 
