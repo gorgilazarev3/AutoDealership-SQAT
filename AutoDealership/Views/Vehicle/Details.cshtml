@@ -196,9 +196,9 @@
     </dl>
 </div>*@
 
-<div class="container">
+<div class="container" style="padding-top: 5em">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8" style="padding-right: 10em">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -225,6 +225,11 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+
+            <div>
+                @Html.DisplayFor(model => model.Vehicle.Features)
+            </div>
+
             @*<img src="@Url.Content(Model.Vehicle.CoverImageURL)" />*@
         </div>
         <div class="col-lg-4">

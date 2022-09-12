@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<AutoDealership.Models.Vehicle>
+@using AutoDealership.Models
 @{
     int i = 0;
 }
 <div class="row row-cols-4">
     @foreach (var vehicle in Model)
     {
-
+        var brands = ViewData["Brands"] as List<Brand>;
+        var brand = brands.Find(b => b.Id == vehicle.BrandId);
         <div class="col" style="padding-bottom: 2em">
             <div class="card" style="width: 18rem;">
                 <img src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">@vehicle.Year @vehicle.BrandId @vehicle.Model</h5>
+                    <h5 class="card-title">@vehicle.Year @brand.Name @vehicle.Model</h5>
                     <p class="card-text">@vehicle.Description</p>
                     <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary">View</a>
                 </div>

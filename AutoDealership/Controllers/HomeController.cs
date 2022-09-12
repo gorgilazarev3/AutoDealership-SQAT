@@ -13,6 +13,7 @@ namespace AutoDealership.Controllers
         {
             var db = new ApplicationDbContext();
             ViewData.Model = db.Vehicles.ToList();
+            ViewData["Brands"] = db.Brands.ToList();
             return View();
         }
 
