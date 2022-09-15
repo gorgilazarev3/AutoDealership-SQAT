@@ -1,0 +1,40 @@
+﻿@model AutoDealership.Models.IndexViewModel
+
+
+<div class="container">
+    <h4>Profile Information</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col">
+            <strong>Email</strong>
+            <br />
+            <p class="lead">@User.Identity.Name</p>
+        </div>
+
+        <div class="col">
+            <strong>Phone Number</strong>
+            <br />
+            <div>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")</text>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

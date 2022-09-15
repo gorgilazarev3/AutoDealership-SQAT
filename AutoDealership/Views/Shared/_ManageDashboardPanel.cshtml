@@ -1,0 +1,51 @@
+﻿@model AutoDealership.Models.IndexViewModel
+
+<div class="container">
+    <h4>Dashboard</h4>
+    <hr />
+    @if (User.IsInRole("Administrator"))
+    {
+        <div class="row">
+            <div class="col">
+                <div>
+                    @Html.ActionLink("List of users", "AllUsers", "Account", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
+                    @*<button class="btn btn-block btn-outline-dark">List of users</button>*@
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    @Html.ActionLink("List of Vehicles","Index","Vehicle", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
+                    @*<button class="btn btn-block btn-outline-info">List of Vehicles</button>*@
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <button class="btn btn-block btn-outline-info">List of Reservations / Test Drives</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div>
+                    <button class="btn btn-block btn-outline-dark">List of roles</button>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <button class="btn btn-block btn-outline-info">List a new vehicle</button>
+                </div>
+            </div>
+
+            <div class="col">
+                <div>
+                    <button class="btn btn-block btn-outline-info">TO BE ADDED</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

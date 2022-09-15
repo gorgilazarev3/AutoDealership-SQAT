@@ -17,6 +17,7 @@ namespace AutoDealership.Controllers
         // GET: Vehicle
         public ActionResult Index()
         {
+            ViewBag.Brands = db.Brands.Include(b => b.Vehicles).ToList();
             return View(db.Vehicles.ToList());
         }
 

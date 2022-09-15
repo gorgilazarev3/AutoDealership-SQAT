@@ -63,6 +63,10 @@ namespace AutoDealership.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+
+            if(ViewBag.ActiveBtn == null)
+                ViewBag.ActiveBtn = "profile";
+
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
@@ -320,6 +324,34 @@ namespace AutoDealership.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        public async Task<ActionResult> GetUserPanelAsync()
+        {
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            };
+            return PartialView("_ManageUserPanel", model);
+        }
+
+        public async Task<ActionResult> GetDashboardPanelAsync()
+        {
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            };
+            return PartialView("_ManageDashboardPanel", model);
         }
 
         protected override void Dispose(bool disposing)

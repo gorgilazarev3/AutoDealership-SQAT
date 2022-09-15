@@ -49,6 +49,7 @@ namespace AutoDealership.Models
         [Display (Name = "Vehicle Status")]
         public VehicleStatus VehicleStatus { get; set; }
         public bool InStock { get; set; }
+        public bool IsTestDriven { get; set; }
 
         public string CoverImageURL { get; set; }
         public List<string> ImagesURL { get; set; }

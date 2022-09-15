@@ -134,7 +134,7 @@
 
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col">
             <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-4">User Management</span>
@@ -142,7 +142,7 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" id="manage-profile" class="nav-link active" aria-current="page">
+                        <a href="#" id="manage-profile" class="nav-link text-white active" aria-current="page">
                             Profile
                         </a>
                     </li>
@@ -184,16 +184,10 @@
             </div>
         </div>
 
-        <div class="col-md-10 justify-content-center">
-            @if (Model.HasPassword)
-            {
-                <button class="btn btn-danger">@Html.ActionLink("Change your password", "ChangePassword")</button>
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            <button class="btn btn-danger">@Html.ActionLink("List a vehicle", "Create", "Vehicle")</button>
+        <div class="col">
+            <div id="manage-div">
+                @Html.Partial("_ManageUserPanel", Model)
+            </div>
         </div>
 
     </div>
@@ -202,9 +196,49 @@
 
 @section Scripts {
     <script>
+
         $(document).ready(function () {
 
             var logOutBtn = $("#manage-log-out");
+            var dashboardBtn = $("#manage-dashboard");
+            var profileBtn = $("#manage-profile");
+
+            dashboardBtn.click(function () {
+                var manageDiv = $("#manage-div");
+                @ViewBag.ActiveBtn = "dashboard";
+                profileBtn.removeClass("active");
+                dashboardBtn.addClass("active");
+                $.ajax({
+                    url: '/Manage/GetDashboardPanelAsync',
+                    type: 'GET',
+                    success: function (data) {
+                        var newDiv = document.createElement("div");
+                        newDiv.setAttribute("id", "manage-div");
+                        newDiv.innerHTML = data;
+                        manageDiv.replaceWith(newDiv);
+                        console.log(data);
+                    }
+                });
+            });
+
+            profileBtn.click(function () {
+                var manageDiv = $("#manage-div");
+                @ViewBag.ActiveBtn = "profile";
+                profileBtn.addClass("active");
+                dashboardBtn.removeClass("active");
+                $.ajax({
+                    url: '/Manage/GetUserPanelAsync',
+                    type: 'GET',
+                    success: function (data) {
+                        var newDiv = document.createElement("div");
+                        newDiv.setAttribute("id", "manage-div");
+                        newDiv.innerHTML = data;
+                        manageDiv.replaceWith(newDiv);
+                        console.log(data);
+                    }
+                });
+            });
+
             logOutBtn.click(function () {
                 document.getElementById('logoutForm').submit();
             });

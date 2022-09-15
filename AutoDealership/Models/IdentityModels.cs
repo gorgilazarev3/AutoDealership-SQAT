@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace AutoDealership.Models
         [Required]
         [Display(Name ="Full Name")]
         public string FullName { get; set; }
+        [Display(Name = "Reserved Vehicle")]
+        public Vehicle ReservedVehicle { get; set; }
+
+        [Display(Name = "Last viewed vehicles")]
+        public ICollection<Vehicle> ViewedVehicles { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -36,5 +42,6 @@ namespace AutoDealership.Models
 
         public System.Data.Entity.DbSet<AutoDealership.Models.Vehicle> Vehicles { get; set; }
         public DbSet<Brand> Brands { get; set; }
+
     }
 }

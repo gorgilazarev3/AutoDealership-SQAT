@@ -403,6 +403,14 @@ namespace AutoDealership.Controllers
             return View();
         }
 
+        public ActionResult AllUsers()
+        {
+            var db = new ApplicationDbContext();
+            var users = db.Users.ToList();
+            ViewBag.Roles = db.Roles.ToList();
+            return View(users);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
