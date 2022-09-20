@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutoDealership.Models
@@ -112,5 +113,18 @@ namespace AutoDealership.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class UserRoleViewModel
+    {
+        public string UserEmail { get; set; }
+        public IEnumerable<string> Roles { get; set; }
+        public string SelectedRole { get; set; }
+    }
+
+    public class RolesViewModel
+    {
+        public IEnumerable<IdentityRole> Roles { get; set; }
+        public string NewRole { get; set; }
     }
 }

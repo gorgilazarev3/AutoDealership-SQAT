@@ -29,6 +29,7 @@ namespace AutoDealership.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Vehicle vehicle = db.Vehicles.Find(id);
+            //Vehicle vehicle = db.Vehicles.Include(v => v.Features).Where(v => v.Id == id).FirstOrDefault();
             Brand brand = db.Brands.Find(vehicle.BrandId);
             VehicleDetailsViewModel model = new VehicleDetailsViewModel();
             model.Vehicle = vehicle;
@@ -53,10 +54,10 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Features,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
             vehicle.ImagesURL = new List<string>();
-            vehicle.Features = new List<string>();
+            //string[] featureArray = viewModel.ListOfFeatures.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
@@ -83,13 +84,14 @@ namespace AutoDealership.Controllers
             model.Brands = db.Brands.ToList();
             return View(model);
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult CreateBrand()
         {
             CreateVehicleViewModel model = new CreateVehicleViewModel();
             model.Brands = db.Brands.ToList();
             return View("CreateBrand", model);
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult CreateBrand(CreateVehicleViewModel model)
         {
@@ -107,9 +109,44 @@ namespace AutoDealership.Controllers
             return HttpNotFound();
             
         }
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Brands() 
+        {
+            return View(db.Brands.Include(b => b.Vehicles).ToList());
+        }
+
+        // GET: Vehicle/EditBrand/5
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditBrand(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Brand brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Id == id).FirstOrDefault();
+            if (brand == null)
+            {
+                return HttpNotFound();
+            }
+            return View(brand);
+        }
+
+        //POST: Vehicle/EditBrand/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditBrand([Bind(Include = "Id,Name,LogoURL,Vehicles")] Brand brand)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(brand).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Brands");
+        }
 
         // GET: Vehicle/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrator, Editor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -165,6 +202,54 @@ namespace AutoDealership.Controllers
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // DELETE: Vehicle/DeleteAllFromBrand
+        [HttpDelete]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeleteAllFromBrand(int id)
+        {
+            var brand = db.Brands.Include(b => b.Vehicles).Where(b => b.Id == id).FirstOrDefault();
+            var vehiclesInBrand = brand.Vehicles;
+            foreach(var vehicle in vehiclesInBrand.ToList())
+            {
+                db.Vehicles.Remove(vehicle);
+            }
+            brand.Vehicles.Clear();
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult VehicleReservations()
+        {
+            ViewBag.Users = db.Users.ToList();
+            ViewBag.Vehicles = db.Vehicles.ToList();
+            return View(db.VehicleReservations.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult ReserveVehicle(VehicleReservation model)
+        {
+            var user = db.Users.Where(u => u.UserName.Equals(model.UserId)).FirstOrDefault();
+            model.UserId = user.Id;
+            var vehicle = db.Vehicles.Find(model.VehicleId);
+            vehicle.InStock = false;
+            if (model.IsTestDrive)
+                vehicle.IsTestDriven = true;
+            db.VehicleReservations.Add(model);
+            db.SaveChanges();
+            return Redirect("/Vehicle/Details/" + model.VehicleId);
+        }
+
+        [HttpDelete]
+        public ActionResult CancelReservation(int id)
+        {
+            var reservation = db.VehicleReservations.Find(id);
+            var vehicle = db.Vehicles.Find(reservation.VehicleId);
+            vehicle.InStock = true;
+            db.VehicleReservations.Remove(reservation);
+            db.SaveChanges();
+            return RedirectToAction("VehicleReservations");
         }
 
         protected override void Dispose(bool disposing)

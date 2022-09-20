@@ -305,3 +305,7 @@ E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.csproj.CopyCo
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.dll
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.pdb
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedUserAndVehicleModels.resources
+E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedUserAndVehicleModels.resources
+E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.AddedVehicleReservationModel.resources
+E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedTypeOfUserId.resources
+E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources

@@ -22,7 +22,8 @@
 
             <div class="col">
                 <div>
-                    <button class="btn btn-block btn-outline-info">List of Reservations / Test Drives</button>
+                    @Html.ActionLink("List of Reservations / Test Drives", "VehicleReservations", "Vehicle", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
+                    @*<button class="btn btn-block btn-outline-info">List of Reservations / Test Drives</button>*@
                 </div>
             </div>
         </div>
@@ -31,7 +32,7 @@
 
             <div class="col">
                 <div>
-                    <button class="btn btn-block btn-outline-dark">List of roles</button>
+                    @Html.ActionLink("List of roles","Roles","Account", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
                 </div>
             </div>
 

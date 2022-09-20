@@ -1,0 +1,159 @@
+﻿@model AutoDealership.Models.Brand
+
+@{
+    ViewBag.Title = "EditBrand";
+}
+
+<h2>EditBrand</h2>
+
+@using (Html.BeginForm("EditBrand","Vehicle"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Brand</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LogoURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LogoURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LogoURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h4 class="display-4">List of vehicles under this brand</h4>
+
+        <table id="brand-vehicles-table" class="table table-bordered">
+            <thead>
+                <tr>
+                        <th>Model</th>
+                        <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in Model.Vehicles)
+                {
+                    <tr>
+                        <td>
+                            @vehicle.Year  @vehicle.Model
+                        </td>
+                        <td>
+                                @Html.ActionLink("Edit Vehicle", "Edit", new { id=vehicle.Id }, new { @class = "btn btn-info" })
+                                | 
+                                <button data-veh-id="@vehicle.Id" class="brands-delete-veh-btn btn btn-danger">Delete vehicle</button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Model</td>
+                    <td>
+                        <button data-brand-id="@Model.Id" class="btn btn-lg btn-danger delete-all-veh-btn">Delete All Vehicles</button>
+                        @Html.ActionLink("Add a new vehicle","Create", new { }, new { @class= "btn btn-lg btn-success" })
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="edit-brand-btn" type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Brands")
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            //$("#edit-brand-btn").click(function () {
+            //    $("form").submit();
+            //}); 
+
+            $("#brand-vehicles-table .brands-delete-veh-btn").click(function (e) {
+                e.preventDefault();
+                var deleteVehBtn = $(this);
+                var id = deleteVehBtn.attr("data-veh-id");
+                bootbox.confirm({
+                    message: "Are you sure you want to delete this vehicle?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-dark'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '/api/Vehicles/' + id,
+                                type: 'DELETE',
+                                success: function () {
+                                    deleteVehBtn.parent().parent().remove();
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+
+            $("#brand-vehicles-table .delete-all-veh-btn").click(function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var brandId = btn.attr("data-brand-id");
+                var table = $("#brand-vehicles-table");
+                bootbox.confirm({
+                    message: "<strong class='text-danger'>WARNING! THIS WILL DELETE ALL VEHICLES UNDER THIS BRAND. PROCEED WITH DELETION?</strong>",
+                    buttons: {
+                        confirm: {
+                            label: 'I understand',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'Cancel',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '/Vehicle/DeleteAllFromBrand/' + brandId,
+                                type: 'DELETE',
+                                success: function () {
+                                    table.children("tbody").remove();
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>    
+}

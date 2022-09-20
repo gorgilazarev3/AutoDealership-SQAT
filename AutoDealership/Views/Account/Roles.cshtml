@@ -1,0 +1,89 @@
+﻿@model AutoDealership.Models.RolesViewModel
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<h2 class="display-2">Roles</h2>
+
+<div class="container">
+    <table id="roles-table" class="table-bordered table">
+        <thead>
+            <tr>
+                <td><strong>Role</strong></td>
+                <td><strong>Number of users in role</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>@role.Users.Count</td>
+                    <td><button class="delete-role-btn btn btn-danger" data-role-name="@role.Name">Delete role</button></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-center">
+                    <button class="btn btn-secondary" data-bs-target="#add-role-modal" data-bs-toggle="modal" id="add-role-btn">Add a new role</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add-role-modal" tabindex="-1" aria-labelledby="add-role-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-role-modalLabel">Add a new role</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Roles", "Account"))
+                {
+                    @Html.HiddenFor(model => model.Roles)
+                    @Html.EditorFor(model => model.NewRole, new { @class = "form-control" })
+
+                    <button type="submit" class="btn btn-dark">Save Changes</button>
+
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                @*<button type="submit" class="btn btn-primary submit-role-btn">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#roles-table .add-role-btn").click(function () {
+                $("#add-role-modal").modal('show');
+            });
+
+            $("#roles-table .delete-role-btn").click(function () {
+                var table = $("#roles-table");
+                var btn = $(this);
+                var roleName = btn.attr("data-role-name");
+                var result = confirm("Are you sure you want to delete this role?");
+                if(result)
+                    $.ajax({
+                        url: '/Account/DeleteRole',
+                        type: 'POST',
+                        data: { 'role': roleName },
+                        success: function (res) {
+                            btn.parent().parent().remove();
+                        }
+                    });
+            });
+
+        });
+    </script>
+
+}

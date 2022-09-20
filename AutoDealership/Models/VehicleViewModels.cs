@@ -11,6 +11,8 @@ namespace AutoDealership.Models
         public Vehicle Vehicle { get; set; }
         public IEnumerable<Brand> Brands { get; set; }
         public Brand NewBrand { get; set; }
+        public string ListOfFeatures { get; set; }
+        public string ListOfImages { get; set; }
     }
 
     public class VehicleDetailsViewModel

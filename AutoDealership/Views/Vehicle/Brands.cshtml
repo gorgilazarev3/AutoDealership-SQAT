@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AutoDealership.Models.Brand>
+
+@{
+    ViewBag.Title = "Brands";
+}
+
+<h2>Brands</h2>
+
+
+    @Html.ActionLink("Create New", "CreateBrand")
+
+<table id="brands-table" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogoURL)
+        </th>
+        <th>
+            Number of vehicles in brand
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <img width="50px" src="@Html.DisplayFor(modelItem => item.LogoURL)" alt="Brand Logo" />
+        </td>
+        <td>
+            @item.Vehicles.Count
+        </td>
+        <td>
+            @Html.ActionLink("View", "EditBrand", new { id=item.Id }, new { @class = "btn btn-info" }) |
+            <button data-brand-num-veh="@item.Vehicles.Count" data-brand-id="@item.Id" class="btn btn-danger delete-brand-btn shadow-lg">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#brands-table .delete-brand-btn").click(function () {
+                var btn = $(this);
+                var id = btn.attr("data-brand-id");
+                var numVeh = btn.attr("data-brand-num-veh");
+                if (numVeh > 0) {
+                    bootbox.alert({
+                        message: "You cannot delete this brand since it contains vehicles. Please delete the vehicles first!",
+                        buttons: {
+                            ok: {
+                                label: 'OK',
+                                className: 'btn-danger'
+                            }
+                        }
+                    });
+                }
+                else {
+                    bootbox.confirm({
+                        message: "Are you sure you want to delete this brand?",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-danger'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-dark'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/api/Brands/' + id,
+                                    type: 'DELETE',
+                                    success: function () {
+                                        btn.parent().parent().remove();
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

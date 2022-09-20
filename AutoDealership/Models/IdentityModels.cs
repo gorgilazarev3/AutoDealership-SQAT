@@ -42,6 +42,7 @@ namespace AutoDealership.Models
 
         public System.Data.Entity.DbSet<AutoDealership.Models.Vehicle> Vehicles { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<VehicleReservation> VehicleReservations { get; set; }
 
     }
 }

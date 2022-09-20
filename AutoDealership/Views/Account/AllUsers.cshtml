@@ -4,9 +4,9 @@
     ViewBag.Title = "AllUsers";
 }
 
-<h2>AllUsers</h2>
+<h2>All Users</h2>
 
-<table class="table">
+<table class="table" id="users-table">
     <thead>
         <tr>
             <th>
@@ -56,7 +56,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FullName)
                 </td>
-                <td id="email-cell">
+                <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
@@ -90,8 +90,8 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modal-btn">
-                        Update Role
+                    <button type="button" class="btn btn-primary update-role-btn" data-bs-target="#update-role-modal" data-bs-toggle="modal" data-user-email="@item.Email">
+                        Update Role 
                     </button>
                 </td>
             </tr>
@@ -100,11 +100,11 @@
 </table>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="update-role-modal" tabindex="-1" aria-labelledby="update-role-modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Select user role</h5>
+                <h5 class="modal-title" id="update-role-modalLabel">Select user role</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -112,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                @*<button type="submit" class="btn btn-primary submit-role-btn">Save changes</button>*@
             </div>
         </div>
     </div>
@@ -121,10 +121,24 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $("#modal-btn").click(function () {
-                var email = $("#email-cell").val();
-                alert(email);
+            $("#users-table .update-role-btn").click(function () {
+                var btn = $(this);
+                var userEmail = btn.attr("data-user-email");
+                $("#update-role-modal").modal('show');
+                $.ajax({
+                    url: "/Account/GetRoleToUser",
+                    type: "GET",
+                    data: { "userEmail": userEmail },
+                    success: function (data) {
+                        $("#update-role-modal .modal-body").html(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+                
             });
+
         });
     </script>
            

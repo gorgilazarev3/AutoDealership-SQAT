@@ -9,7 +9,9 @@ namespace AutoDealership
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.dataTables.min.js",
+                        "~/Scripts/dataTables.bootstrap5.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -21,12 +23,12 @@ namespace AutoDealership
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/DataTables/jquery.dataTables.js"));
+                      "~/Scripts/bootbox.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap4.css"));
+                      "~/Content/dataTables.bootstrap5.css",
+                      "~/Content/Site.css"));
         }
     }
 }

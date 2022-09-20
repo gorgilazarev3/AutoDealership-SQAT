@@ -15,7 +15,7 @@ namespace AutoDealership.Models
         public string Model { get; set; }
         [Display(Name = "Fuel Type")]
         public Fuel FuelType { get; set; }
-        public IEnumerable<string> Features { get; set; }
+        public string Features { get; set; }
         [Display(Name = "Body Style")]
         public BodyStyle BodyStyle { get; set; }
         public Transmission Transmission { get; set; }
@@ -53,6 +53,11 @@ namespace AutoDealership.Models
 
         public string CoverImageURL { get; set; }
         public List<string> ImagesURL { get; set; }
+
+        public Vehicle()
+        {
+            ImagesURL = new List<string>();
+        }
 
         public double GetMPG()
         {

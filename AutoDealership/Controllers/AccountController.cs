@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AutoDealership.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AutoDealership.Controllers
 {
@@ -402,13 +403,69 @@ namespace AutoDealership.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult AllUsers()
         {
             var db = new ApplicationDbContext();
             var users = db.Users.ToList();
             ViewBag.Roles = db.Roles.ToList();
             return View(users);
+        }
+
+        
+        public ActionResult GetRoleToUser(string userEmail)
+        {
+            var db = new ApplicationDbContext();
+            UserRoleViewModel model = new UserRoleViewModel();
+            model.UserEmail = userEmail;
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleMngr = new RoleManager<IdentityRole>(roleStore);
+            model.Roles = roleMngr.Roles.Select(role => role.Name).ToList();
+            return PartialView("_RoleToUser", model);
+        }
+        [HttpPost]
+        public async Task<ActionResult> SetRoleToUser(UserRoleViewModel model)
+        {
+            var user = UserManager.FindByEmail(model.UserEmail);
+            var roles = UserManager.GetRoles(user.Id).ToArray();
+            await UserManager.RemoveFromRolesAsync(user.Id, roles);
+            await UserManager.AddToRoleAsync(user.Id, model.SelectedRole);
+            //var db = new ApplicationDbContext();
+            //db.SaveChanges();
+            return View("AllUsers", UserManager.Users.ToList());
+        }
+
+        public ActionResult Roles()
+        {
+            var db = new ApplicationDbContext();
+            RolesViewModel model = new RolesViewModel();
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleMngr = new RoleManager<IdentityRole>(roleStore);
+            model.Roles = roleMngr.Roles.ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Roles(RolesViewModel model)
+        {
+            var db = new ApplicationDbContext();
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleMngr = new RoleManager<IdentityRole>(roleStore);
+            roleMngr.Create(new IdentityRole(model.NewRole));
+            model.Roles = roleMngr.Roles.ToList();
+            return RedirectToAction("Roles", model);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRole(string role)
+        {
+            var db = new ApplicationDbContext();
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleMngr = new RoleManager<IdentityRole>(roleStore);
+            roleMngr.Delete(roleMngr.FindByName(role));
+            RolesViewModel model = new RolesViewModel();
+            model.Roles = roleMngr.Roles.ToList();
+            return View("Roles",model);
         }
 
         protected override void Dispose(bool disposing)
