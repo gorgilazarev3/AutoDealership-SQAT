@@ -309,3 +309,4 @@ E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Up
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.AddedVehicleReservationModel.resources
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedTypeOfUserId.resources
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources
+E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedImagesURLTypeInVehicleModel.resources

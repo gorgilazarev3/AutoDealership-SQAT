@@ -228,6 +228,10 @@
     <Compile Include="Migrations\202209202148031_UpdatedFeaturesTypeInVehicleModel.Designer.cs">
       <DependentUpon>202209202148031_UpdatedFeaturesTypeInVehicleModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209222224042_ChangedImagesURLTypeInVehicleModel.cs" />
+    <Compile Include="Migrations\202209222224042_ChangedImagesURLTypeInVehicleModel.Designer.cs">
+      <DependentUpon>202209222224042_ChangedImagesURLTypeInVehicleModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -499,6 +503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209202148031_UpdatedFeaturesTypeInVehicleModel.resx">
       <DependentUpon>202209202148031_UpdatedFeaturesTypeInVehicleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209222224042_ChangedImagesURLTypeInVehicleModel.resx">
+      <DependentUpon>202209222224042_ChangedImagesURLTypeInVehicleModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

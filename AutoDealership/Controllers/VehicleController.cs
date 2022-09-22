@@ -29,7 +29,7 @@ namespace AutoDealership.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Vehicle vehicle = db.Vehicles.Find(id);
-            //Vehicle vehicle = db.Vehicles.Include(v => v.Features).Where(v => v.Id == id).FirstOrDefault();
+            //Vehicle vehicle = db.Vehicles.Include(v => v.ImagesURL).Where(v => v.Id == id).FirstOrDefault();
             Brand brand = db.Brands.Find(vehicle.BrandId);
             VehicleDetailsViewModel model = new VehicleDetailsViewModel();
             model.Vehicle = vehicle;
@@ -54,9 +54,8 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Features,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Features,ImagesURL,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
-            vehicle.ImagesURL = new List<string>();
             //string[] featureArray = viewModel.ListOfFeatures.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
@@ -166,7 +165,7 @@ namespace AutoDealership.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,BrandId,Model,FuelType,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,BrandId,Model,FuelType,Features,ImagesURL,BodyStyle,Transmission,Year,Mileage,DrivetrainType,Color,InteriorColor,FuelEfficiency,Horsepower,Torque,Engine,Description,Price,IsForLease,IsForRent,MonthlyPayment,DailyPayment,VehicleStatus,InStock,CoverImageURL")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

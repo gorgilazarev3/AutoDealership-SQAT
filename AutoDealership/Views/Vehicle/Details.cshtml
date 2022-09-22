@@ -210,12 +210,15 @@
                     <div class="carousel-item active">
                         <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
+                    @{
+                        var images = Model.Vehicle.ImagesURL.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                        foreach (var image in images)
+                        {
+                            <div class="carousel-item">
+                                <img src="@image" class="d-block w-100" alt="Vehicle Image">
+                            </div>
+                        }
+                    }
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

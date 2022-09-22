@@ -52,12 +52,8 @@ namespace AutoDealership.Models
         public bool IsTestDriven { get; set; }
 
         public string CoverImageURL { get; set; }
-        public List<string> ImagesURL { get; set; }
+        public string ImagesURL { get; set; }
 
-        public Vehicle()
-        {
-            ImagesURL = new List<string>();
-        }
 
         public double GetMPG()
         {
