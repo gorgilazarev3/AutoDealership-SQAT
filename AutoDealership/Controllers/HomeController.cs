@@ -12,6 +12,7 @@ namespace AutoDealership.Controllers
         public ActionResult Index()
         {
             var db = new ApplicationDbContext();
+            ViewBag.ActiveNav = "Home";
             ViewData.Model = db.Vehicles.ToList();
             ViewData["Brands"] = db.Brands.ToList();
             return View();
@@ -19,6 +20,7 @@ namespace AutoDealership.Controllers
 
         public ActionResult About()
         {
+            ViewBag.ActiveNav = "About";
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -26,6 +28,7 @@ namespace AutoDealership.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.ActiveNav = "Contact";
             ViewBag.Message = "Your contact page.";
 
             return View();

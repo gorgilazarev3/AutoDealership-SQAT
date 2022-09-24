@@ -1,4 +1,8 @@
-﻿body {
+﻿:root {
+    --my-orange: #ffc107;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -24,9 +28,16 @@ textarea {
 }
 
 .my-navbar {
-    background: rgb(2,0,36) !important;
-    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 86%, rgba(5,1,130,1) 100%) !important;
+    /*background: rgb(2,0,36) !important;*/
+    /*background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 86%, rgba(5,1,130,1) 100%) !important;*/
+    background: rgb(2,92,173) !important;
+    background: linear-gradient(90deg, rgba(2,92,173,1) 0%, rgba(5,39,90,1) 19%, rgba(5,39,90,1) 75%, rgba(2,92,173,1) 100%) !important;
     color: white !important;
+}
+
+.my-navbar-active {
+    border-bottom: solid 2px var(--my-orange) !important;
+    font-weight: 500;
 }
 
 ul.my-navbar-text li a {
@@ -35,5 +46,7 @@ ul.my-navbar-text li a {
 }
 
 ul.my-navbar-text li a:hover {
-    color: rgb(187, 192, 255) !important;
+    color: var(--my-orange) !important;
+    text-shadow: 0px 2px 0px 0px black;
+    font-weight: 500;
 }

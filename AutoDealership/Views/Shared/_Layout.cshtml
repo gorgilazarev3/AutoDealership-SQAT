@@ -47,9 +47,9 @@
                     @*<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>*@
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li id="nav-item-home" class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li id="nav-item-about" class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li id="nav-item-contact" class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 @*<form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -128,5 +128,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                if (@ViewBag.ActiveNav.Equals("Home")) {
+                    $("#nav-item-home").addClass("my-navbar-active");
+                }
+                else if (@ViewBag.ActiveNav.Equals("About")) {
+                    $("#nav-item-about").addClass("my-navbar-active");
+                }
+                else if (@ViewBag.ActiveNav.Equals("Contact")) {
+                    $("#nav-item-contact").addClass("my-navbar-active");
+                }
+            });
+        </script>
+        }
 </body>
 </html>

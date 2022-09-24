@@ -207,17 +207,32 @@
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
-                    </div>
+                    @*<div class="carousel-item active">
+            <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
+        </div>*@
                     @{
-                        var images = Model.Vehicle.ImagesURL.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                        foreach (var image in images)
+                        var i = 0;
+                        if (Model.Vehicle.ImagesURL != null)
                         {
-                            <div class="carousel-item">
-                                <img src="@image" class="d-block w-100" alt="Vehicle Image">
-                            </div>
+                            var images = Model.Vehicle.ImagesURL.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                            foreach (var image in images)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="@image" class="d-block w-100" alt="Vehicle Image">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="carousel-item">
+                                        <img src="@image" class="d-block w-100" alt="Vehicle Image">
+                                    </div>
+                                }
+                                i++;
+                            }
                         }
+
                     }
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -282,7 +297,16 @@
                                 <strong>@Html.DisplayNameFor(model => model.Vehicle.Horsepower):</strong>
                             </div>
                             <div class="col float-end" style="display: inline-block;">
-                                @Html.DisplayFor(model => model.Vehicle.Horsepower) HP (@Html.DisplayFor(model => model.Vehicle.Torque) nm)
+                                @Html.DisplayFor(model => model.Vehicle.Horsepower) HP (@String.Format("{0:0.00}", Model.Vehicle.Horsepower/ 1.341) KW)
+                            </div>
+
+                            <br />
+
+                            <div class="col" style="display: inline-block">
+                                <strong>@Html.DisplayNameFor(model => model.Vehicle.Torque):</strong>
+                            </div>
+                            <div class="col float-end" style="display: inline-block;">
+                                @Html.DisplayFor(model => model.Vehicle.Torque) nm
                             </div>
 
                             <hr />
