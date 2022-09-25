@@ -251,12 +251,16 @@
                 <h4 class="display-6">List of features:</h4>
                 <ul>
                     @{
-                        var features = Model.Vehicle.Features.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                        foreach (var feature in features) 
-                        { 
-                            <li>@feature</li>
+                        if (Model.Vehicle.Features != null)
+                        {
+                            var features = Model.Vehicle.Features.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                            foreach (var feature in features)
+                            {
+                                <li>@feature</li>
+                            }
                         }
-                     }
+
+                    }
                 </ul>
             </div>
 

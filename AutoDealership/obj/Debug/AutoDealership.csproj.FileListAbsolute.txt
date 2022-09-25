@@ -310,3 +310,7 @@ E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Ad
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedTypeOfUserId.resources
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedImagesURLTypeInVehicleModel.resources
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.AddedVehicleReservationModel.resources
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedTypeOfUserId.resources
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedImagesURLTypeInVehicleModel.resources

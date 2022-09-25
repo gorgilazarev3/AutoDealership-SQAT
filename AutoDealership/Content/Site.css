@@ -46,7 +46,12 @@ ul.my-navbar-text li a {
 }
 
 ul.my-navbar-text li a:hover {
-    color: var(--my-orange) !important;
-    text-shadow: 0px 2px 0px 0px black;
-    font-weight: 500;
+        color: var(--my-orange) !important;
+        text-shadow: 0px 2px 0px 0px black;
+        font-weight: 500;
+        border-bottom: solid 2px var(--my-orange) !important;
+}
+
+a#register-Link:hover {
+    color: white !important;
 }

@@ -33,5 +33,13 @@ namespace AutoDealership.Controllers
 
             return View();
         }
+
+        public ActionResult Inventory()
+        {
+            var db = new ApplicationDbContext();
+            ViewBag.ActiveNav = "Home";
+            ViewData["Brands"] = db.Brands.ToList();
+            return View(db.Vehicles.ToList());
+        }
     }
 }
