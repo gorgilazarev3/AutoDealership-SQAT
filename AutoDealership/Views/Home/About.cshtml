@@ -5,3 +5,13 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#nav-item-home").removeClass("my-navbar-active");
+            $("#nav-item-contact").removeClass("my-navbar-active");
+            $("#nav-item-about").addClass("my-navbar-active");
+        });
+    </script>    
+}

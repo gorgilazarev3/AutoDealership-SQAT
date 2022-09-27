@@ -4,57 +4,110 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+
+<div class="container mt-xl-5">
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="card">
+                <img src="https://www.spectos.com/wp-content/uploads/2019/10/xBanner-Spectos-Automotive-Kundenzufriedenheitt.jpg.pagespeed.ic.JlFC5O2FaX.jpg" class="card-img-top"/>
+                <div class="card-body">
+
+                    <h6 class="display-6 text-center">Log In</h6>
+
+                    <section id="loginForm" class="m-auto" style="width: 60%">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group mb-4 pt-3" style="padding-left: 6em">
+                                @Html.LabelFor(m => m.Email, new { @class = "control-label" }) Address
+                                <div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "name@example.com" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group mb-4" style="padding-left: 6em">
+                                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                <div>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", aria_describedby = "passwordReqDiv" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    <div id="passwordReqDiv" class="form-text">
+                                        Your password must be minimum 6 characters long, must contain at least one uppercase letter, one lowercase letter, a special character and a number.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="col-md-offset-2 col-md-10" style="padding-left: 6em">
+                                    <input type="submit" value="Log in" class="btn w-100 btn-lg btn-warning" />
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 4em">
+                                <div class="form-group col">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <p>
+                                        @Html.ActionLink("Forgot your password?", "ForgotPassword", null, new { @class = "page-link" })
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <p>
+                                    Not a member? @Html.ActionLink("Register as a new user", "Register", null, new { @class = " page-link link-warning" })
+                                </p>
+                            </div>
+                            //Enable this once you have account confirmation enabled for password reset functionality
+
+                        }
+                    </section>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
+
+            </div>
+
+        </div>
+        <div class="col-md-4 card" style="        background-image: url(https://img.freepik.com/free-vector/white-abstract-background_23-2148806276.jpg?w=2000);
+        background-position-x: center;">
+            @*<section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        </section>*@
+
+            <div class="card-body">
+                <div style="border-left: solid 5px gray" class="mb-md-4">
+                    <p class="lead text-uppercase p-md-3 fw-semibold">Create your free account today and buy your dream car, fast and easy!</p>
+                </div>
+
+                <div class="mb-sm-1">
+                    <p class="lead text-uppercase fw-semibold">Creating an account allows you to:</p>
+                </div>
+
+                <div class="mb-sm-1">
+                    <p class="lead text-uppercase p-1 fw-semibold">Search all of the inventory of new and used vehicles</p>
+                </div>
+
+                <div class="mb-sm-1">
+                    <p class="lead text-uppercase p-1 fw-semibold">Reserve your dream car and make an appointment</p>
+                </div>
+
+                <div class="mb-sm-1">
+                    <p class="lead text-uppercase p-1 fw-semibold">Schedule a test drive</p>
+                </div>
+
+                <div class="mb-sm-1">
+                    <p class="lead text-uppercase p-1 fw-semibold">Access your last viewed vehicle listings</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 

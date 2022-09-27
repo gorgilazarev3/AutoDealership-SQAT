@@ -26,9 +26,9 @@
             </div>
             <div class="navbar-collapse">
                 <ul class="me-auto navbar-nav my-navbar-text mb-2 mb-lg-0">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { id = "nav-home-link" })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { id = "nav-about-link" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { id = "nav-contact-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -129,20 +129,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    @section Scripts {
-        <script>
-            $(document).ready(function () {
-                if (@ViewBag.ActiveNav.Equals("Home")) {
-                    $("#nav-item-home").addClass("my-navbar-active");
-                }
-                else if (@ViewBag.ActiveNav.Equals("About")) {
-                    $("#nav-item-about").addClass("my-navbar-active");
-                }
-                else if (@ViewBag.ActiveNav.Equals("Contact")) {
-                    $("#nav-item-contact").addClass("my-navbar-active");
-                }
-            });
-        </script>
-        }
 </body>
 </html>
