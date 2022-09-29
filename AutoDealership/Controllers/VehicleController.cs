@@ -15,6 +15,7 @@ namespace AutoDealership.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Vehicle
+        [Authorize(Roles = "Editor, Administrator")]
         public ActionResult Index()
         {
             ViewBag.Brands = db.Brands.Include(b => b.Vehicles).ToList();

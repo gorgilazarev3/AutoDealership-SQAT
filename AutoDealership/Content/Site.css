@@ -58,7 +58,9 @@ li.my-navbar-active a {
 
 }
 
-a#register-Link:hover {
+
+
+a#registerLink:hover {
     color: white !important;
 }
 
@@ -77,4 +79,9 @@ ul.my-navbar-text li a::after {
 ul.my-navbar-text li a:hover::after {
     width: 100%;
     left: 0;
+}
+
+a#profile-icon::after, ul.my-navbar-account-links li a::after, li.my-navbar-active a::after, li.my-navbar-active a:hover::after {
+    width: 0%;
+    height: 0;
 }

@@ -11,6 +11,7 @@ namespace AutoDealership.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Brand")]
         public int BrandId { get; set; }
         public string Model { get; set; }
         [Display(Name = "Fuel Type")]
@@ -50,7 +51,7 @@ namespace AutoDealership.Models
         public VehicleStatus VehicleStatus { get; set; }
         public bool InStock { get; set; }
         public bool IsTestDriven { get; set; }
-
+        [Display(Name = "Vehicle Image")]
         public string CoverImageURL { get; set; }
         public string ImagesURL { get; set; }
 

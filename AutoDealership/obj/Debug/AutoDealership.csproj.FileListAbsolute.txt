@@ -314,3 +314,4 @@ F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Ad
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedTypeOfUserId.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedImagesURLTypeInVehicleModel.resources
+E:\Projects\AutoDealership\AutoDealership\bin\WebIcons.dll

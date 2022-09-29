@@ -5,26 +5,31 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="mt-lg-5 mb-lg-5 pb-3 pt-3 display-6 text-center text-bg-warning w-50 rounded m-auto">List of all vehicle listings</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table" id="vehicles-table">
-    <thead>
+@if (User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Create a new listing", "Create", null, new { @class = "btn btn-warning shadow mb-lg-5" })
+}
+
+<table class="table table-hover text-center shadow-sm" id="vehicles-table">
+    <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
         <tr>
             <th>
-                Brand
+                @Html.DisplayNameFor(model => model.CoverImageURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Model)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuelType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BodyStyle)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.FuelType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BodyStyle)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Transmission)
             </th>
@@ -34,33 +39,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Mileage)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrivetrainType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InteriorColor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuelEfficiency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Horsepower)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Torque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Engine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.DrivetrainType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InteriorColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuelEfficiency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Horsepower)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Torque)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Engine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.IsForLease)
             </th>
@@ -80,9 +82,9 @@
                 @Html.DisplayNameFor(model => model.InStock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoverImageURL)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -92,82 +94,91 @@
         {
             var brands = ViewBag.Brands as List<Brand>;
             var brand = brands.Find(b => b.Id == item.BrandId);
-            <tr>
-                <td>
-                    @brand.Name
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FuelType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BodyStyle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Transmission)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mileage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrivetrainType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InteriorColor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FuelEfficiency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Horsepower)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Torque)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Engine)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsForLease)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsForRent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MonthlyPayment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DailyPayment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InStock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoverImageURL)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <img width="250" src="@Html.DisplayFor(modelItem => item.CoverImageURL)" class="img-thumbnail" />
+            </td>
+            <td>
+                <img src="@brand.LogoURL" width="50" />
+                <br />
+                @brand.Name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.FuelType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BodyStyle)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Transmission.TransmissionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mileage) km
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.DrivetrainType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InteriorColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelEfficiency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Horsepower)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Torque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Engine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsForLease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsForRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonthlyPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)$
+            </td>
+            <td>
+                @if (User.IsInRole("Editor") || User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-secondary m-sm-2" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary m-sm-2" })
+                }
+                @if (User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-sm-2" })
+
+                }
+            </td>
+        </tr>
 
 
 
@@ -176,9 +187,9 @@
 </table>
 
 @section Scripts {
-   <script>
-       $(document).ready(function () {
-           $("#vehicles-table").DataTable();
-       });
+    <script>
+        $(document).ready(function () {
+            $("#vehicles-table").DataTable();
+        });
     </script>
 }

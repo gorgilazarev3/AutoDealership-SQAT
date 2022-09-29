@@ -28,6 +28,8 @@ namespace AutoDealership
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/dataTables.bootstrap5.css",
+                      "~/Content/all.min.css",
+                      "~/Content/fontawesome.min.css",
                       "~/Content/Site.css"));
         }
     }
