@@ -4,10 +4,11 @@
     ViewBag.Title = "AllUsers";
 }
 
-<h2>All Users</h2>
+<h2 class="mt-lg-5 mb-lg-5 pb-3 pt-3 display-6 text-center text-bg-warning w-50 rounded m-auto">List of all all users</h2>
 
-<table class="table" id="users-table">
-    <thead>
+
+<table class="table table-hover text-center shadow-sm mt-4" id="users-table">
+    <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
@@ -15,36 +16,36 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PasswordHash)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecurityStamp)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PasswordHash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecurityStamp)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccessFailedCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessFailedCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>*@
             <th></th>
         </tr>
     </thead>
@@ -59,39 +60,39 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PasswordHash)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SecurityStamp)
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PasswordHash)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SecurityStamp)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LockoutEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AccessFailedCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessFailedCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>*@
                 <td>
                     <button type="button" class="btn btn-primary update-role-btn" data-bs-target="#update-role-modal" data-bs-toggle="modal" data-user-email="@item.Email">
-                        Update Role 
+                        Update Role
                     </button>
                 </td>
             </tr>
@@ -108,7 +109,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -121,6 +122,8 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
+            $("#users-table").DataTable();
+
             $("#users-table .update-role-btn").click(function () {
                 var btn = $(this);
                 var userEmail = btn.attr("data-user-email");
@@ -136,10 +139,10 @@
                         console.log(err);
                     }
                 });
-                
+
             });
 
         });
     </script>
-           
+
 }

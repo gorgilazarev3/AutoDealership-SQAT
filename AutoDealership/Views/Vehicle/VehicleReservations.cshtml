@@ -6,56 +6,65 @@
 
 <h2>Vehicle Reservations</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Reserved by
-        </th>
-        <th>
-            Vehicle
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsTestDrive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReservedUntil)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover text-center shadow-sm mt-4" id="vehicle-reservations-table">
+    <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
+        <tr>
+            <th>
+                Reserved by
+            </th>
+            <th>
+                Vehicle
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTestDrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservedUntil)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @{
-                var users = ViewBag.Users as List<ApplicationUser>;
-                var vehicles = ViewBag.Vehicles as List<Vehicle>;
-                var user = users.Find(u => u.Id.Equals(item.UserId));
-                var vehicle = vehicles.Find(v => v.Id == item.VehicleId);
-            }
-            @user.FullName
-        </td>
-        <td>
-            @vehicle.Model
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsTestDrive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReservedUntil)
-        </td>
-        <td>
-            @Html.ActionLink("View Vehicle", "Details", new { id=item.VehicleId }, new { @class = "btn btn-primary" }) |
-            @*@Html.ActionLink("Cancel Reservation", "CancelReservation","Vehicle", new { id=item.Id }, new { @class = "btn btn-danger" })*@
-            <button id="cancel-reservation-btn" data-reservation-id="@item.Id" class="btn btn-danger">Cancel Reservation</button>
-        </td>
-    </tr>
-}
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var users = ViewBag.Users as List<ApplicationUser>;
+                        var vehicles = ViewBag.Vehicles as List<Vehicle>;
+                        var user = users.Find(u => u.Id.Equals(item.UserId));
+                        var vehicle = vehicles.Find(v => v.Id == item.VehicleId);
+                    }
+                    @user.FullName
+                </td>
+                <td>
+                    @vehicle.Model
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsTestDrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservedUntil)
+                </td>
+                <td>
+                    @Html.ActionLink("View Vehicle", "Details", new { id = item.VehicleId }, new { @class = "btn btn-primary" }) |
+                    @*@Html.ActionLink("Cancel Reservation", "CancelReservation","Vehicle", new { id=item.Id }, new { @class = "btn btn-danger" })*@
+                    <button id="cancel-reservation-btn" data-reservation-id="@item.Id" class="btn btn-danger">Cancel Reservation</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
 
 </table>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            $("#vehicle-reservations-table").DataTable();
+
             $("#cancel-reservation-btn").click(function () {
                 var btn = $(this);
                 var id = btn.attr("data-reservation-id");

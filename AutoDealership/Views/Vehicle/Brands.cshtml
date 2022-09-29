@@ -4,48 +4,56 @@
     ViewBag.Title = "Brands";
 }
 
-<h2>Brands</h2>
+<h2 class="display-6 text-center mt-3">Brands</h2>
 
 
-    @Html.ActionLink("Create New", "CreateBrand")
+@Html.ActionLink("Create New", "CreateBrand", null, new { @class = "btn btn-warning shadow m-lg-4" })
 
-<table id="brands-table" class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LogoURL)
-        </th>
-        <th>
-            Number of vehicles in brand
-        </th>
-        <th></th>
-    </tr>
+<table id="brands-table" class="table table-hover text-center shadow-sm mt-4">
+    <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoURL)
+            </th>
+            <th>
+                Number of vehicles in brand
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            <img width="50px" src="@Html.DisplayFor(modelItem => item.LogoURL)" alt="Brand Logo" />
-        </td>
-        <td>
-            @item.Vehicles.Count
-        </td>
-        <td>
-            @Html.ActionLink("View", "EditBrand", new { id=item.Id }, new { @class = "btn btn-info" }) |
-            <button data-brand-num-veh="@item.Vehicles.Count" data-brand-id="@item.Id" class="btn btn-danger delete-brand-btn shadow-lg">Delete</button>
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img width="50px" src="@Html.DisplayFor(modelItem => item.LogoURL)" alt="Brand Logo" />
+                </td>
+                <td>
+                    @item.Vehicles.Count
+                </td>
+                <td>
+                    @Html.ActionLink("View", "EditBrand", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    <button data-brand-num-veh="@item.Vehicles.Count" data-brand-id="@item.Id" class="btn btn-danger delete-brand-btn shadow-lg">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
 
 </table>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            $("#brands-table").DataTable();
+
             $("#brands-table .delete-brand-btn").click(function () {
                 var btn = $(this);
                 var id = btn.attr("data-brand-id");

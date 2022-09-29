@@ -315,3 +315,4 @@ F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Up
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.UpdatedFeaturesTypeInVehicleModel.resources
 F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedImagesURLTypeInVehicleModel.resources
 E:\Projects\AutoDealership\AutoDealership\bin\WebIcons.dll
+F:\Projects\AutoDealership\AutoDealership\bin\WebIcons.dll

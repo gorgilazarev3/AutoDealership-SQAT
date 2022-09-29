@@ -12,7 +12,7 @@
     @Html.ActionLink("Create a new listing", "Create", null, new { @class = "btn btn-warning shadow mb-lg-5" })
 }
 
-<table class="table table-hover text-center shadow-sm" id="vehicles-table">
+<table class="table table-hover text-center shadow-sm mt-4"  id="vehicles-table">
     <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
         <tr>
             <th>
@@ -99,7 +99,7 @@
                 <img width="250" src="@Html.DisplayFor(modelItem => item.CoverImageURL)" class="img-thumbnail" />
             </td>
             <td>
-                <img src="@brand.LogoURL" width="50" />
+                <img src="@brand.LogoURL" width="35" />
                 <br />
                 @brand.Name
             </td>
