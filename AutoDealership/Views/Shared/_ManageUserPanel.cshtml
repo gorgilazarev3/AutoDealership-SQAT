@@ -4,19 +4,30 @@
 <div class="container">
     <h4>Profile Information</h4>
     <hr />
+    <div class="container mb-3">
+        <div class="row">
+            <h3>Hello <b>@Model.User.FullName!</b></h3>
+        </div>
+        <div class="row">
+            <h6 class="text-muted">Here you can view and edit your profile information</h6>
+        </div>
+    </div>
 
-    <div class="row">
+    <hr />
+
+    <div class="row mb-4">
         <div class="col">
-            <strong>Email</strong>
+            <strong style="font-size: 1.5em" class="pb-sm-1 border-bottom border-warning border-3">Email</strong>
             <br />
-            <p class="lead">@User.Identity.Name</p>
+            <p class="fs-6 fw-normal mt-sm-3">@Model.User.Email</p>
+            <button class="btn btn-warning shadow">Change your email</button>
         </div>
 
         <div class="col">
-            <strong>Phone Number</strong>
+            <strong style="font-size: 1.5em" class="pb-sm-1 border-bottom border-warning border-3">Phone Number</strong>
             <br />
             <div>
-                @(Model.PhoneNumber ?? "None")
+                <p class="fs-6 fw-normal mt-sm-3">@(Model.PhoneNumber ?? "None")</p>
                 @if (Model.PhoneNumber != null)
                 {
                     <br />
@@ -29,9 +40,35 @@
                 }
                 else
                 {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")</text>
+                    <text>@Html.ActionLink("Add a phone number", "AddPhoneNumber", null, new { @class = "btn btn-warning shadow" })</text>
                 }
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            @*to fix enabling/disabling two factor*@
+            <strong style="font-size: 1.5em" class="pb-sm-1 border-bottom border-warning border-3">Two Factor Authentication</strong>
+            @if (!Model.User.TwoFactorEnabled)
+            {
+                <p class="fs-6 fw-normal text-danger mt-sm-3">Two Factor Authentication is not enabled</p>
+                @Ajax.ActionLink("Enable Two Factor Authentication", "EnableTwoFactorAuthentication", "Manage",null, new AjaxOptions { HttpMethod = "Post" }, new { @class = "btn btn-warning shadow" })
+                @*@Html.ActionLink("Enable Two Factor Authentication", "EnableTwoFactorAuthentication", "Manage", null, new { @class = "btn btn-warning shadow" })*@
+            }
+        </div>
+        <div class="col">
+            <strong style="font-size: 1.5em" class="pb-sm-1 border-bottom border-warning border-3">Password</strong>
+            @if (!Model.HasPassword)
+            {
+                <p class="fs-6 fw-normal text-danger mt-sm-3">WARNING! You haven't set a password, it is highly recommended to set a password to guarantee your account is protected!</p>
+                @Html.ActionLink("Set a password", "SetPassword", "Manage", null, new { @class = "btn btn-warning shadow" })
+            }
+            else
+            {
+                <p class="fs-6 fw-normal mt-sm-3">Your account is protected by a strong password (minimum 1 lowercase and 1 uppercase letter, 1 number and a special character)</p>
+                @Html.ActionLink("Change your password", "ChangePassword", "Manage", null, new { @class = "btn btn-warning shadow" })
+            }
         </div>
     </div>
 
