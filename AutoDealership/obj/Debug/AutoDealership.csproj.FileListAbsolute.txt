@@ -317,3 +317,4 @@ F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.Ch
 E:\Projects\AutoDealership\AutoDealership\bin\WebIcons.dll
 F:\Projects\AutoDealership\AutoDealership\bin\WebIcons.dll
 E:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedUserModel.resources
+F:\Projects\AutoDealership\AutoDealership\obj\Debug\AutoDealership.Migrations.ChangedUserModel.resources

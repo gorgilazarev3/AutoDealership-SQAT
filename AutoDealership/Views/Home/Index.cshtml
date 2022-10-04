@@ -32,6 +32,18 @@
 
 
 
+    <div class="input-group m-3" style="width: 300px">
+    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control" placeholder="Search by Brand, Model or Year">
+    <div class="input-group-append">
+        @*<button class="btn btn-outline-primary" type="button">
+                <i class="fa fa-search"></i>
+            </button>*@
+        @*@Html.ActionLink(" ", "Inventory", "Home", new { }, new { @style = "height: 2em; line-height: 1.4", @class = "btn btn-outline-primary fa fa-lg fa-search fa-align-center" })*@
+        <a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
+    </div>
+    </div>
+
+
 
 
 <!-- Carousel wrapper -->
@@ -49,11 +61,10 @@
     </div>
 </div>
 <!-- Carousel wrapper -->
-
 @*Vehicles Display*@
 
 <div class="container">
-    @Html.Partial("_Vehicles",ViewData)
+    @Html.Partial("_Vehicles", ViewData)
 </div>
 
 @*Vehicles Display*@
@@ -64,7 +75,12 @@
             $("#nav-item-about").removeClass("my-navbar-active");
             $("#nav-item-contact").removeClass("my-navbar-active");
             $("#nav-item-home").addClass("my-navbar-active");
+
+            $("#search-vehicles-btn").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("Inventory", "Home")" + "?search=" + $("#search-vehicles").val();
+            });
         });
-    </script>    
+    </script>
 }
 
