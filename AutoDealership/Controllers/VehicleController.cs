@@ -227,30 +227,61 @@ namespace AutoDealership.Controllers
             ViewBag.Vehicles = db.Vehicles.ToList();
             return View(db.VehicleReservations.ToList());
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult ReserveVehicle(VehicleReservation model)
         {
             var user = db.Users.Where(u => u.UserName.Equals(model.UserId)).FirstOrDefault();
             model.UserId = user.Id;
             var vehicle = db.Vehicles.Find(model.VehicleId);
-            vehicle.InStock = false;
-            if (model.IsTestDrive)
+            if (model.IsTestDrive) 
+            { 
                 vehicle.IsTestDriven = true;
+            }
+            else
+            {
+                user.ReservedVehicleId = vehicle.Id;
+                vehicle.InStock = false;
+            }
             db.VehicleReservations.Add(model);
             db.SaveChanges();
             return Redirect("/Vehicle/Details/" + model.VehicleId);
         }
-
+        [Authorize(Roles = "Customer, Administrator")]
         [HttpDelete]
         public ActionResult CancelReservation(int id)
         {
             var reservation = db.VehicleReservations.Find(id);
             var vehicle = db.Vehicles.Find(reservation.VehicleId);
+            var user = db.Users.Find(reservation.UserId);
             vehicle.InStock = true;
+            if (vehicle.IsTestDriven)
+                vehicle.IsTestDriven = false;
+            user.ReservedVehicleId = null;
             db.VehicleReservations.Remove(reservation);
             db.SaveChanges();
             return RedirectToAction("VehicleReservations");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyReservations() 
+        {
+            var user = db.Users.Where(u => User.Identity.Name.Equals(u.UserName)).FirstOrDefault();
+            MyReservationViewModel model = new MyReservationViewModel();
+            model.User = user;
+            model.TestDriveVehicles = new List<Vehicle>();
+            model.ReservedVehicle = db.Vehicles.Find(user.ReservedVehicleId);
+            var reservations = db.VehicleReservations.ToList();
+            foreach (VehicleReservation res in reservations) 
+            {
+                if (res.UserId.Equals(user.Id) && res.IsTestDrive) 
+                {
+                    var vehicle = db.Vehicles.Find(res.VehicleId);
+                    model.TestDriveVehicles.Add(vehicle);
+                }
+            }
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

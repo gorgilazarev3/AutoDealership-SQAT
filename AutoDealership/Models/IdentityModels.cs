@@ -15,7 +15,7 @@ namespace AutoDealership.Models
         [Display(Name ="Full Name")]
         public string FullName { get; set; }
         [Display(Name = "Reserved Vehicle")]
-        public Vehicle ReservedVehicle { get; set; }
+        public int? ReservedVehicleId { get; set; }
 
         [Display(Name = "Last viewed vehicles")]
         public ICollection<Vehicle> ViewedVehicles { get; set; }

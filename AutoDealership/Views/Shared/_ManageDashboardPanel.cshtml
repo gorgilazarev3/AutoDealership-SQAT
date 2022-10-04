@@ -44,8 +44,16 @@
 
             <div class="col">
                 <div>
-                    <button class="btn btn-block btn-outline-info">TO BE ADDED</button>
+                    @Html.ActionLink("List of brands", "Brands", "Vehicle", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
                 </div>
+            </div>
+        </div>
+    }
+    @if (User.IsInRole("Customer")) 
+    { 
+        <div class="row">
+            <div class="col">
+                @Html.ActionLink("My reservations", "MyReservations", "Vehicle", new { area = "" }, new { @class = "btn btn-block btn-outline-info" })
             </div>
         </div>
     }

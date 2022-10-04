@@ -1,0 +1,48 @@
+﻿@model AutoDealership.Models.MyReservationViewModel
+@{
+    ViewBag.Title = "MyReservations";
+}
+
+<div class="container">
+    <h2 class="display-3">My Reservations</h2>
+
+    @if (Model.ReservedVehicle == null)
+    {
+        <h4>You haven't reserved any vehicles</h4>
+    }
+    else
+    {
+        <div class="container row">
+            @{
+                var url = "/Vehicle/Details/" + Model.ReservedVehicle.Id;
+            }
+            <div class="col">
+                <a href=@url><img src="@Model.ReservedVehicle.CoverImageURL" class="img-thumbnail" /></a>
+                <p>@Model.ReservedVehicle.Year  @Model.ReservedVehicle.Model</p>
+            </div>
+        </div>
+    }
+    <div class="container row">
+        @if (Model.TestDriveVehicles.Count == 0)
+        {
+            <h4>You haven't scheduled any test drives</h4>
+        }
+        else
+        {
+            foreach (var veh in Model.TestDriveVehicles)
+            {
+                <div class="col">
+                @{
+                var url = "/Vehicle/Details/" + veh.Id;
+                }
+                    <a href=@url><img src="@veh.CoverImageURL" class="img-thumbnail" /></a>
+                    <p>@veh.Year  @veh.Model</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+
+

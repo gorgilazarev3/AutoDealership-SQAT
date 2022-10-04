@@ -51,7 +51,7 @@
                 <td>
                     @Html.ActionLink("View Vehicle", "Details", new { id = item.VehicleId }, new { @class = "btn btn-primary" }) |
                     @*@Html.ActionLink("Cancel Reservation", "CancelReservation","Vehicle", new { id=item.Id }, new { @class = "btn btn-danger" })*@
-                    <button id="cancel-reservation-btn" data-reservation-id="@item.Id" class="btn btn-danger">Cancel Reservation</button>
+                    <button data-reservation-id="@item.Id" class="cancel-reservation-btn btn btn-danger">Cancel Reservation</button>
                 </td>
             </tr>
         }
@@ -65,7 +65,7 @@
         $(document).ready(function () {
             $("#vehicle-reservations-table").DataTable();
 
-            $("#cancel-reservation-btn").click(function () {
+            $("#vehicle-reservations-table .cancel-reservation-btn").click(function () {
                 var btn = $(this);
                 var id = btn.attr("data-reservation-id");
                 bootbox.confirm({

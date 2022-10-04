@@ -1,34 +1,49 @@
 ﻿@model AutoDealership.Models.VehicleReservation
-
+@using AutoDealership.Models
+@{ 
+    var db = new ApplicationDbContext();
+    var vehicle = db.Vehicles.Find(Model.VehicleId);
+    var brand = db.Brands.Find(vehicle.BrandId);
+} 
 
 @using (Html.BeginForm("ReserveVehicle", "Vehicle"))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>VehicleReservation</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @Html.HiddenFor(model => model.UserId)
+<div class="form-horizontal">
+    @if (!Model.IsTestDrive)
+    {
+        @*<h4>Vehicle Reservation Form</h4>*@
+        <h6>You are about to reserve this vehicle for purchase. The reservation will be made using the information that you have in your account.</h6>
+    }
+    else
+    {
+        <h6>Experience what it's like behind the wheel of this @vehicle.Year @brand.Name @vehicle.Model and get all your questions answered</h6>
+    }
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    @Html.HiddenFor(model => model.UserId)
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.VehicleId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VehicleId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
-        @Html.HiddenFor(model => model.VehicleId)
+    @Html.HiddenFor(model => model.VehicleId)
 
-        <div class="form-group">
+    @Html.HiddenFor(model => model.IsTestDrive)
+
+    @*<div class="form-group">
             @Html.LabelFor(model => model.IsTestDrive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -36,17 +51,25 @@
                     @Html.ValidationMessageFor(model => model.IsTestDrive, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-                @Html.LabelFor(model => model.ReservedUntil, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ReservedUntil, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
-                    @Html.ValidationMessageFor(model => model.ReservedUntil, "", new { @class = "text-danger" })
-                </div>
-            </div>
+<div class="form-group">
+    @if (!Model.IsTestDrive)
+    {
+        <h6 class="pb-2">Please select the date and time which you would like to make your appointment by:</h6>
+    }
+    else
+    {
+        <h6 class="pb-2">Please select the date and time when you would like to test drive this vehicle. All test drives last for 1 hour.</h6>
+    }
+    @*@Html.LabelFor(model => model.ReservedUntil, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.ReservedUntil, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+        @Html.ValidationMessageFor(model => model.ReservedUntil, "", new { @class = "text-danger" })
+    </div>
+</div>
 
-        @*<div class="container">
+    @*<div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -63,18 +86,23 @@
         </div>*@
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+<div class="form-group">
+    <div class="mt-5 m-auto">
+        @if (!Model.IsTestDrive)
+        {
+            <input id="confirm-reservation-btn" type="submit" value="Confirm reservation" class="text-center btn btn-warning text-primary fw-semibold" />
+        }
+        else
+        {
+            <input id="confirm-test-drive-btn" type="submit" value="Schedule test drive" class="text-center btn btn-warning text-primary fw-semibold" />
+        }
     </div>
+</div>
+</div>
 }
 
 
-@section Scripts
-    {
-    <script type="text/javascript">
-    </script>
-}
+
+
+
 

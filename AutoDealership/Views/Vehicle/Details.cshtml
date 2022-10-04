@@ -208,8 +208,8 @@
                 </div>
                 <div class="carousel-inner">
                     @*<div class="carousel-item active">
-            <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
-        </div>*@
+                            <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
+                        </div>*@
                     @{
                         var i = 0;
                         if (Model.Vehicle.ImagesURL != null)
@@ -301,7 +301,7 @@
                                 <strong>@Html.DisplayNameFor(model => model.Vehicle.Horsepower):</strong>
                             </div>
                             <div class="col float-end" style="display: inline-block;">
-                                @Html.DisplayFor(model => model.Vehicle.Horsepower) HP (@String.Format("{0:0.00}", Model.Vehicle.Horsepower/ 1.341) KW)
+                                @Html.DisplayFor(model => model.Vehicle.Horsepower) HP (@String.Format("{0:0.00}", Model.Vehicle.Horsepower / 1.341) KW)
                             </div>
 
                             <br />
@@ -428,17 +428,17 @@
                     </div>
                 </div>
                 @*<div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Accordion Item #3
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
             </div>
 
             @*HERE STARTS THE PRICE PART*@
@@ -450,20 +450,31 @@
                         <h4>@Html.DisplayFor(model => model.Vehicle.Price)$</h4>
 
                         <div>
-                            <button data-bs-target="#reserve-vehicle-modal" data-bs-toggle="modal" class="btn btn-lg btn-primary" id="reserve-btn">Reserve</button>
+                            <button data-bs-target="#reserve-vehicle-modal" data-bs-toggle="modal" class="btn btn-lg btn-primary" id="reserve-btn">Reserve now</button>
                         </div>
 
-                        @if (Model.Vehicle.IsForLease)
-                        {
-                            <hr />
-                            <div>
-                                <h5>or</h5>
-                            </div>
 
-                            <div>
-                                <button class="btn btn-warning">Lease for @Html.DisplayFor(model => model.Vehicle.MonthlyPayment)$ monthly</button>
-                            </div>
-                        }
+                        <hr />
+                        <div>
+                            <h5>or</h5>
+                        </div>
+
+                        <div>
+                            <button id="schedule-test-drive-btn" class="btn btn-warning text-primary fw-semibold">Schedule a test drive</button>
+                        </div>
+
+
+                        @*@if (Model.Vehicle.IsForLease)
+                            {
+                                <hr />
+                                <div>
+                                    <h5>or</h5>
+                                </div>
+
+                                <div>
+                                    <button class="btn btn-warning">Lease for @Html.DisplayFor(model => model.Vehicle.MonthlyPayment)$ monthly</button>
+                                </div>
+                            }*@
 
 
                     </div>
@@ -480,9 +491,9 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-<!-- Modal -->
+<!-- Reservation Modal -->
 <div class="modal fade" id="reserve-vehicle-modal" tabindex="-1" aria-labelledby="reserve-vehicle-modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="reserve-vehicle-modalLabel">Reserve this vehicle</h5>
@@ -493,21 +504,86 @@
                     var partial_view_model = new VehicleReservation();
                     partial_view_model.UserId = User.Identity.Name;
                     partial_view_model.VehicleId = Model.Vehicle.Id;
+                    partial_view_model.IsTestDrive = false;
                 }
                 @Html.Partial("_ReserveVehicle", partial_view_model)
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                @*<button type="submit" class="btn btn-primary submit-role-btn">Save changes</button>*@
-            </div>
+            @*<div class="modal-footer justify-content-center">*@
+            @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+            @*<button type="submit" class="btn btn-primary submit-role-btn">Save changes</button>*@
+            <!--</div>-->
         </div>
     </div>
 </div>
+<!-- Reservation Modal End-->
+
+<!-- Test Drive Modal -->
+<div class="modal fade" id="test-drive-modal" tabindex="-1" aria-labelledby="test-drive-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="test-drive-modalLabel">Schedule a test drive</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @{
+                    partial_view_model = new VehicleReservation();
+                    partial_view_model.UserId = User.Identity.Name;
+                    partial_view_model.VehicleId = Model.Vehicle.Id;
+                    partial_view_model.IsTestDrive = true;
+                }
+                @Html.Partial("_ReserveVehicle", partial_view_model)
+            </div>
+            @*<div class="modal-footer justify-content-center">*@
+            @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+            @*<button type="submit" class="btn btn-primary submit-role-btn">Save changes</button>*@
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<!-- Test Drive Modal End-->
+
 @section Scripts {
     <script>
         $(document).ready(function () {
             $("#reserve-btn").click(function () {
-                $("#add-role-modal").modal('show');
+                $("#reserve-vehicle-modal").modal('show');
+            });
+
+            $("#schedule-test-drive-btn").click(function () {
+                $("#test-drive-modal").modal('show');
+            });
+            $("#confirm-reservation-btn, #confirm-test-drive-btn").click(function (e) {
+                var isLoggedIn = @User.Identity.IsAuthenticated.ToString().ToLower();
+                var returnUrl = window.location.pathname;
+                if (!isLoggedIn) {
+                    e.preventDefault();
+                    //bootbox.alert("You must be logged in to make a reservation");
+                    $("#reserve-vehicle-modal").modal('hide');
+                    window.location.href = window.location.origin + "/Account/Login?ReturnUrl=" + returnUrl;
+                    //$.ajax({
+                    //    url: '/Account/Login',
+                    //    type: 'GET',
+                    //    data: { returnUrl: returnUrl },
+                    //    async: false,
+                    //    succcess: function (data) {
+                    //        alert(data);
+                    //    },
+                    //    error: function (err) {
+                    //        alert(err);
+                    //    }
+                    //});
+                }
+                @*else if (isLoggedIn) {
+                    @{
+                    var db = new ApplicationDbContext();
+                    var user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+                    }
+                    if (@user != null && @user.ReservedVehicleId != null) {
+                    bootbox.alert("You cannot reserve a vehicle since you already have one reserved!");
+                    }
+                }*@
+
             });
         });
     </script>

@@ -21,4 +21,11 @@ namespace AutoDealership.Models
         public Brand Brand { get; set; }
     }
 
+    public class MyReservationViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public List<Vehicle> TestDriveVehicles { get; set; }
+        public Vehicle ReservedVehicle { get; set; }
+    }
+
 }
