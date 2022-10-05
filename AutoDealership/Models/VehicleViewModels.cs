@@ -28,4 +28,11 @@ namespace AutoDealership.Models
         public Vehicle ReservedVehicle { get; set; }
     }
 
+    public class InventoryViewModel
+    {
+        public List<Vehicle> Inventory { get; set; }
+        public string[] SearchQuery { get; set; }
+        public List<Brand> AllBrands { get; set; }
+    }
+
 }

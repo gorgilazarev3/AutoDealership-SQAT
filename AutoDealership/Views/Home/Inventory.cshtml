@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Inventory";
 }
 
@@ -7,11 +6,161 @@
 
 <div class="container-fluid row">
     <div class="col-sm-2">
-        FILTERS HERE
+        <div class="row">
+            <div class="bg-secondary bg-opacity-10">
+                <p class="d-inline-block p-2"><i class="fa far fa-filter p-1"></i>FILTER AND SORT</p>
+                <a href="/Home/Inventory" class="page-link text-decoration-underline fs-6">Clear filters</a>
+                @foreach (string s in Model.SearchQuery)
+                {
+                    <span class="badge rounded-pill text-bg-primary bg-opacity-100">@s.ToUpper()</span>
+                }
+            </div>
+            <hr />
+            <div>
+                <p>Sort by</p>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Brand
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                @foreach (var brand in Model.AllBrands)
+                                {
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            @brand.Name
+                                            @if (brand.Vehicles != null)
+                                            {
+                                                @Html.Raw("(" + brand.Vehicles.Count + ")")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("(0)")
+                                            }
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Price
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="slider m-auto">
+                                    <div class="range-slider">
+                                        <span class="rangeValues"></span>
+                                        <input value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
+                                        <input value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*</div>*@
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Body Style
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                @foreach (string style in Enum.GetNames(typeof(AutoDealership.Models.Types.BodyStyle)))
+                                {
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            @String.Format("{0}", style[0] + style.Substring(1).ToLower())
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                Fuel
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                @foreach (string fuel in Enum.GetNames(typeof(AutoDealership.Models.Fuel)))
+                                {
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            @String.Format("{0}", fuel[0] + fuel.Substring(1).ToLower())
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                Mileage
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>Maximum mileage</p>
+                                <input type="number" class="form-control" id="max-mileage"> <span class="fst-italic">or less</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-lg-10">
-        @Html.Partial("_Vehicles", ViewData)
+        @Html.Partial("_Vehicles" , ViewData)
     </div>
 </div>
 
+@section Scripts {
 
+    <script>
+        function getVals() {
+            // Get slider values
+            let parent = this.parentNode;
+            let slides = parent.getElementsByTagName("input");
+            let slide1 = parseFloat(slides[0].value);
+            let slide2 = parseFloat(slides[1].value);
+            // Neither slider will clip the other, so make sure we determine which is larger
+            if (slide1 > slide2) { let tmp = slide2; slide2 = slide1; slide1 = tmp; }
+
+            let displayElement = parent.getElementsByClassName("rangeValues")[0];
+            //innerHTML property allows Javascript code to manipulate a website being displayed
+            displayElement.innerHTML = "$" + slide1 + " - $" + slide2;
+        }
+
+        window.onload = function () {
+            // Initialize Sliders
+            let sliderSections = document.getElementsByClassName("range-slider");
+            for (let x = 0; x < sliderSections.length; x++) {
+                let sliders = sliderSections[x].getElementsByTagName("input");
+                for (let y = 0; y < sliders.length; y++) {
+                    if (sliders[y].type === "range") {
+                        //oninput attribute fires when the value of an <input> element is changed
+                        sliders[y].oninput = getVals;
+                        // Manually trigger event first time to display values
+                        sliders[y].oninput();
+                    }
+                }
+            }
+        }
+
+    </script>
+    
+}

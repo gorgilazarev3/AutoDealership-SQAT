@@ -12,6 +12,7 @@ namespace AutoDealership.Controllers
         public ActionResult Index()
         {
             var db = new ApplicationDbContext();
+            ViewBag.Title = "Home Page";
             ViewBag.ActiveNav = "Home";
             ViewData.Model = db.Vehicles.ToList();
             ViewData["Brands"] = db.Brands.ToList();
@@ -23,6 +24,12 @@ namespace AutoDealership.Controllers
             var db = new ApplicationDbContext();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
+            var brands = db.Brands.ToList();
+            InventoryViewModel model = new InventoryViewModel();
+            if (search != null)
+                model.SearchQuery = search.Split(' ');
+            else
+                model.SearchQuery = new string[0];
             if (!String.IsNullOrEmpty(search))
             {
                 if (search.Any(Char.IsWhiteSpace))
@@ -30,20 +37,38 @@ namespace AutoDealership.Controllers
                     string[] query = search.Split(' ');
                     foreach (string q in query)
                     {
-                        toDisplay.AddRange(vehicles.Where(v => v.Model.ToLower().Contains(q.ToLower())));
+                        int year;
+                        Int32.TryParse(q, out year);
+                        toDisplay.AddRange(vehicles.Where(v => v.Model.ToLower().Contains(q.ToLower()) || v.Year.Equals(year)));
+                        var brand = brands.Where(b => b.Name.ToLower().Contains(q.ToLower())).FirstOrDefault();
+                        if(brand != null)
+                        {
+                            toDisplay.AddRange(toDisplay.Where(v => v.BrandId.Equals(brand.Id)));
+                        }
                     }
                 }
                 else 
                 {
-                    toDisplay.AddRange(vehicles.Where(v => v.Model.ToLower().Contains(search.ToLower())));
+                    int year;
+                    Int32.TryParse(search, out year);
+                    toDisplay.AddRange(vehicles.Where(v => v.Model.ToLower().Contains(search.ToLower()) || v.Year.Equals(year)));
+                    var brand = brands.Where(b => b.Name.ToLower().Contains(search.ToLower())).FirstOrDefault();
+                    if (brand != null)
+                    {
+                        toDisplay.AddRange(vehicles.Where(v => v.BrandId.Equals(brand.Id)));
+                    }
                 }
-                ViewData.Model = toDisplay;
+                model.Inventory = toDisplay.Distinct().ToList();
             }
             else
             {
-                ViewData.Model = db.Vehicles.ToList();
+                model.Inventory = db.Vehicles.ToList();
             }
+            model.AllBrands = brands;
+            ViewData.Model = model;
             ViewData["Brands"] = db.Brands.ToList();
+            ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
+            ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
             return View();
         }
 
@@ -61,6 +86,13 @@ namespace AutoDealership.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public static string VehicleToString(Vehicle veh)
+        {
+            var db = new ApplicationDbContext();
+            Brand brand = db.Brands.Find(veh.BrandId);
+            return String.Format("{0} {1} {2}", veh.Year, brand.Name, veh.Model);
         }
     }
 }

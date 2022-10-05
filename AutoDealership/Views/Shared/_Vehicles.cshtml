@@ -1,10 +1,10 @@
-﻿@model IEnumerable<AutoDealership.Models.Vehicle>
+﻿@model AutoDealership.Models.InventoryViewModel
 @using AutoDealership.Models
 @{
     int i = 0;
 }
 <div class="row row-cols-4">
-    @foreach (var vehicle in Model)
+    @foreach (var vehicle in Model.Inventory)
     {
         var brands = ViewData["Brands"] as List<Brand>;
         var brand = brands.Find(b => b.Id == vehicle.BrandId);
