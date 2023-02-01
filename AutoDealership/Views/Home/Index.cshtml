@@ -30,21 +30,51 @@
         </div>
     </div>*@
 
-<div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div id="search-vehicles-div" class="input-group m-3">
-            <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year">
-            <div class="input-group-append">
-                @*<button class="btn btn-outline-primary" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>*@
-                @*@Html.ActionLink(" ", "Inventory", "Home", new { }, new { @style = "height: 2em; line-height: 1.4", @class = "btn btn-outline-primary fa fa-lg fa-search fa-align-center" })*@
-                <a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
+<div class="row" id="header-search-filter">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div id="search-vehicles-div" class="m-3 d-flex flex-column justify-content-center align-items-center">
+
+            <div class="logo-header-img d-block" style="margin-top: -3.5em;">
+                <img style="width: 15em;" src="~/Content/Images/test_logo (2).png" />
             </div>
+
+            <p class="text-sm-center h3" style="margin-top: -1.5em">Find your perfect car</p>
+
+            <div class="search-input-div d-block m-5 w-75">
+                <div class="input-group mb-3">
+                    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">
+                    <a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
+                </div>
+                @*<input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">*@
+                @*<div class="input-group-append">*@
+                @*<button class="btn btn-outline-primary" type="button">
+                <i class="fa fa-search"></i>
+            </button>*@
+                @*@Html.ActionLink(" ", "Inventory", "Home", new { }, new { @style = "height: 2em; line-height: 1.4", @class = "btn btn-outline-primary fa fa-lg fa-search fa-align-center" })*@
+                @*<a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>*@
+                @*</div>*@
+
+
+            </div>
+
+            <div class="text-uppercase text-light fw-bold fs-3 mb-5">
+                <span class="fa fa-terminal"></span>
+                or
+                <span class="fa fa-terminal" style="transform: rotateY(180deg)"></span>
+            </div>
+
+
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example" style="background-color: rgba(143, 143, 143, 0.81)">
+                <button type="button" class="btn btn-outline-secondary text-light border">Make / Model</button>
+                <button type="button" class="btn btn-outline-secondary text-light border">Body Style</button>
+                <button type="button" class="btn btn-outline-secondary text-light border">Price</button>
+            </div>
+
+
         </div>
     </div>
-    <div class="col"></div>
+    <div class="col-2"></div>
 </div>
 
 
