@@ -35,7 +35,25 @@
         </div>
     </nav>-->
 
-    <nav class="navbar navbar-expand-lg bg-light my-navbar">
+    <nav class="navbar navbar-expand-lg bg-light my-navbar flex-column align-items-end">
+        
+        <div style="width: 75%; height: 3.5em; margin-top: -1em;" class="float-end bg-warning d-block mb-2 text-primary fw-semibold">
+            <div id="corner-triangle"></div>
+            <div class="d-inline-flex position-relative align-items-center w-75 justify-content-around ms-4" style="top: -1em;">
+                <div class="d-inline">
+                    <a href="mailto:info@autodealership.com" class="text-decoration-none">info@autodealership.com</a>
+                </div>
+                <span>|</span>
+                <div class="d-inline">
+                    Monday to Friday: 8:00 to 17:00
+                </div>
+                <span>|</span>
+                <div class="d-inline">
+                    Skopje, Macedonia
+                </div>
+            </div>
+            
+        </div>
         <div class="container">
             @*<a class="navbar-brand" href="#">Navbar</a>*@
             @Html.ActionLink("AutoDealership", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-light" })
@@ -43,7 +61,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 my-navbar-text">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 my-navbar-text align-items-end">
                     @*<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>*@

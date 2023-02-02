@@ -13,10 +13,12 @@
                 <img src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title text-center">@vehicle.Year @brand.Name @vehicle.Model</h5>
-                    <p class="card-text">@vehicle.Description</p>
-                    <div>
-                        <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary">View</a>
-                        <p class="text-end h5 fw-semibold d-inline float-end">@vehicle.Price $</p>
+                    
+                    <div class="mt-5">
+                        <div class="d-inline-block w-75">
+                            <p class="card-text text-wrap d-inline-block">@vehicle.Description</p>
+                        </div>
+                        <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary float-end">View</a>
                     </div>
 
                 </div>

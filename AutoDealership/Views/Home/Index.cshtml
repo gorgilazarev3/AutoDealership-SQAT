@@ -89,13 +89,13 @@
             <div class="col">@bodyStyle</div>
         }
     }
-    <div class="col"></div>
 </div>
 
 <div id="browse-by-brand-div" class="row mb-5 text-center">
     <h2 class="h2 fw-semibold">Brands</h2>
     <h4 class="h4 text-secondary">We work with the most popular brands</h4>
-    @{
+    <div class="mt-5 row">
+        @{
             var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
 
             foreach (AutoDealership.Models.Brand brand in brands)
@@ -103,14 +103,15 @@
                 var linkHref = "Home/Inventory?search=" + brand.Name;
 
 
-           <div class="col">
-           
-            <a href="@linkHref"><img width="85px" src="@brand.LogoURL" /></a>
-            
-        </div>
-            
+                <div class="col">
+
+                    <a href="@linkHref"><img width="85" src="@brand.LogoURL" /></a>
+
+                </div>
+
+            }
         }
-    }
+    </div>
 </div>
 
 

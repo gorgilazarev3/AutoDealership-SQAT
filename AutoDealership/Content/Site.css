@@ -159,3 +159,39 @@ input[type=range] {
         input[type=range]:focus::-webkit-slider-runnable-track {
             background: #ccc;
         }
+
+/*div#corner-triangle {
+    display: block;*/
+    /* width: 75%; */
+    /*height: 3.5em;
+    border-style: solid;
+    border-width: 0 5em 3.5em 0;
+    border-color: transparent #ffc107 transparent transparent;
+    position: relative;
+    top: -1;*/
+    /* right: 0; */
+    /*color: white;
+    text-shadow: 0 0 25px 9px #fff;*/
+    /* -webkit-filter: drop-shadow(0 1px 9px #000000); */
+    /* filter: drop-shadow(0 1px 9px #000000); */
+    /*left: -5em;
+    width: fit-content;
+}*/
+
+div#corner-triangle {
+    display: inline-block;
+    /* width: 75%; */
+    height: 3.5em;
+    border-style: solid;
+    border-width: 0 5em 3.5em 0;
+    border-color: transparent #ffc107 transparent transparent;
+    position: relative;
+    /* top: -1em; */
+    /* right: 0; */
+    color: white;
+    text-shadow: 0 0 25px 9px #fff;
+    /* -webkit-filter: drop-shadow(0 1px 9px #000000); */
+    /* filter: drop-shadow(0 1px 9px #000000); */
+    left: -5em;
+    width: fit-content;
+}
