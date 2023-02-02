@@ -12,10 +12,22 @@
             <div class="card" style="width: 18rem;">
                 <img src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">@vehicle.Year @brand.Name @vehicle.Model</h5>
+                    <h5 class="card-title text-center">@vehicle.Year @brand.Name @vehicle.Model</h5>
                     <p class="card-text">@vehicle.Description</p>
-                    <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary">View</a>
+                    <div>
+                        <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary">View</a>
+                        <p class="text-end h5 fw-semibold d-inline float-end">@vehicle.Price $</p>
+                    </div>
+
                 </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span><i class="far fa-calendar-alt"></i> @vehicle.Year</span>
+                    <span><i class="fa fa-grip-lines-vertical"></i></span>
+                    <span><i class="fas fa-tachometer-alt"></i> @vehicle.Mileage km</span>
+                    <span><i class="fa fa-grip-lines-vertical"></i></span>
+                    <span><i class="fas fa-gas-pump"></i> @vehicle.FuelType.ToString()</span>
+                </div>
+                <div class="card-footer text-center fw-semibold fs-5">@vehicle.Price.ToString("c")</div>
             </div>
         </div>
 

@@ -43,8 +43,8 @@
 
             <div class="search-input-div d-block m-5 w-75">
                 <div class="input-group mb-3">
-                    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">
-                    <a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
+                    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0 border-dark border-opacity-75" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">
+                    <a href="#" id="search-vehicles-btn" class="btn btn-outline-dark fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
                 </div>
                 @*<input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">*@
                 @*<div class="input-group-append">*@
@@ -58,14 +58,14 @@
 
             </div>
 
-            <div class="text-uppercase text-light fw-bold fs-3 mb-5">
+            <div class="text-uppercase text-light fw-bold fs-3 mb-5" style="-webkit-text-stroke: thin black;">
                 <span class="fa fa-terminal"></span>
-                or
+                <span>or</span>
                 <span class="fa fa-terminal" style="transform: rotateY(180deg)"></span>
             </div>
 
 
-            <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example" style="background-color: rgba(143, 143, 143, 0.81)">
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example" style="background-color: rgba(143, 143, 143, 0.81);">
                 <button type="button" class="btn btn-outline-secondary text-light border">Make / Model</button>
                 <button type="button" class="btn btn-outline-secondary text-light border">Body Style</button>
                 <button type="button" class="btn btn-outline-secondary text-light border">Price</button>
@@ -77,7 +77,41 @@
     <div class="col-2"></div>
 </div>
 
+<div id="browse-body-style-div" class="row mb-5">
+    <div class="text-lg-center text-uppercase">
+        <p class="h4 text-secondary">BROWSE BY</p>
+        <span class="h2 fw-bold text-center" style="border-bottom: solid 0.2em orange; width:auto">body style</span>
+        <span style="border-bottom: solid 1px black;"></span>
+    </div>
+    @{
+        foreach (AutoDealership.Models.Types.BodyStyle bodyStyle in Enum.GetValues(typeof(AutoDealership.Models.Types.BodyStyle)))
+        {
+            <div class="col">@bodyStyle</div>
+        }
+    }
+    <div class="col"></div>
+</div>
 
+<div id="browse-by-brand-div" class="row mb-5 text-center">
+    <h2 class="h2 fw-semibold">Brands</h2>
+    <h4 class="h4 text-secondary">We work with the most popular brands</h4>
+    @{
+            var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
+
+            foreach (AutoDealership.Models.Brand brand in brands)
+            {
+                var linkHref = "Home/Inventory?search=" + brand.Name;
+
+
+           <div class="col">
+           
+            <a href="@linkHref"><img width="85px" src="@brand.LogoURL" /></a>
+            
+        </div>
+            
+        }
+    }
+</div>
 
 
 

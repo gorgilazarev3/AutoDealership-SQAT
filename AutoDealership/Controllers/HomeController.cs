@@ -67,8 +67,16 @@ namespace AutoDealership.Controllers
             model.AllBrands = brands;
             ViewData.Model = model;
             ViewData["Brands"] = db.Brands.ToList();
-            ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
-            ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+            if(model.Inventory.Count > 0)
+            {
+                ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
+                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+            }
+            else
+            {
+                ViewBag.MinPrice = 0;
+                ViewBag.MaxPrice = 10000;
+            }
             return View();
         }
 
