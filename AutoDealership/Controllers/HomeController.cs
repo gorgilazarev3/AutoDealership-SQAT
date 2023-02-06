@@ -79,6 +79,21 @@ namespace AutoDealership.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public ActionResult InventoryByBodyStyle(string search)
+        {
+            var db = new ApplicationDbContext();
+            var brands = db.Brands.ToList();
+            List<Vehicle> vehicles = db.Vehicles.ToList();
+            List<Vehicle> toDisplay = new List<Vehicle>();
+            InventoryViewModel model = new InventoryViewModel();
+            toDisplay = vehicles.Where(veh => veh.BodyStyle.ToString().ToLower().Equals(search.ToLower())).ToList();
+            model.Inventory = toDisplay;
+            model.SearchQuery = search.Split(' ');
+            model.AllBrands = brands;
+            ViewData["Brands"] = db.Brands.ToList();
+            return View("Inventory", model);
+        }
 
         public ActionResult About()
         {

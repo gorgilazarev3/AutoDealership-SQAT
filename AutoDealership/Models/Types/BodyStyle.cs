@@ -14,6 +14,7 @@ namespace AutoDealership.Models.Types
         CROSSOVER,
         TERRAIN,
         MOTORCYCLE,
-        VAN
+        VAN,
+        COUPE
     }
 }

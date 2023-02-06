@@ -30,7 +30,7 @@
         </div>
     </div>*@
 
-<div class="row" id="header-search-filter">
+<div class="row border-bottom border-dark border-5" id="header-search-filter">
     <div class="col-2"></div>
     <div class="col-8">
         <div id="search-vehicles-div" class="m-3 d-flex flex-column justify-content-center align-items-center">
@@ -43,14 +43,14 @@
 
             <div class="search-input-div d-block m-5 w-75">
                 <div class="input-group mb-3">
-                    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0 border-dark border-opacity-75" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">
+                    <input id="search-vehicles" name="search-vehicles" type="text" class="form-control border-1 border border-end-0 border-dark border-opacity-75" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">
                     <a href="#" id="search-vehicles-btn" class="btn btn-outline-dark fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>
                 </div>
                 @*<input id="search-vehicles" name="search-vehicles" type="text" class="form-control border border-end-0" placeholder="Search by Brand, Model or Year" aria-describedby="search-vehicles-btn">*@
                 @*<div class="input-group-append">*@
                 @*<button class="btn btn-outline-primary" type="button">
-                <i class="fa fa-search"></i>
-            </button>*@
+                        <i class="fa fa-search"></i>
+                    </button>*@
                 @*@Html.ActionLink(" ", "Inventory", "Home", new { }, new { @style = "height: 2em; line-height: 1.4", @class = "btn btn-outline-primary fa fa-lg fa-search fa-align-center" })*@
                 @*<a href="#" id="search-vehicles-btn" class="btn btn-outline-primary fa fa-lg fa-search fa-align-center" style="height: 2em; line-height: 1.4"></a>*@
                 @*</div>*@
@@ -66,9 +66,9 @@
 
 
             <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example" style="background-color: rgba(143, 143, 143, 0.81);">
-                <button type="button" class="btn btn-outline-secondary text-light border">Make / Model</button>
-                <button type="button" class="btn btn-outline-secondary text-light border">Body Style</button>
-                <button type="button" class="btn btn-outline-secondary text-light border">Price</button>
+                <button type="button" class="btn btn-outline-secondary text-light border border-1">Make / Model</button>
+                <a href="#browse-body-style-div" type="button" class="btn btn-outline-secondary text-light border border-1">Body Style</a>
+                <button type="button" class="btn btn-outline-secondary text-light border border-1">Price</button>
             </div>
 
 
@@ -77,18 +77,178 @@
     <div class="col-2"></div>
 </div>
 
-<div id="browse-body-style-div" class="row mb-5">
+<div id="welcome-div" class="mb-5">
+    <div class="welcome-texts text-center mt-5 mb-4 pt-3">
+        <h5 class="h5 text-uppercase my-blue-text-color">Finding your perfect vehicle has never been easier</h5>
+        <h3 class="h3 my-blue-text-color">Welcome to <span class="text-warning fw-bolder">AutoDealership</span></h3>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row welcome-sections">
+            <div class="col text-center border-2 border-end border-light p-5 me-3">
+                <div class="mb-5"><i class="fas fa-tag my-blue-text-color display-3"></i></div>
+                <div class="mb-3"><h6 class="text-uppercase h6 fw-bold">WE OFFER GREAT <br /> VEHICLE PRICES</h6></div>
+                <div class="mb-3"><p class="fs-6 text-break">We offer used and new cars at great prices. We ensure we have vehicles for every budget. Also we offer lease and financing options at very low rates</p></div>
+            </div>
+            <div class="col text-center border-2 border-end border-light p-5 me-3">
+                <div class="mb-5"><i class="fas fa-car-crash my-blue-text-color display-3"></i></div>
+                <div class="mb-3"><h6 class="text-uppercase h6 fw-bold">MULTISTEP SAFETY <br /> VEHICLE INSPECTIONS</h6></div>
+                <div class="mb-3"><p class="fs-6 text-break">Every vehicle is inspected using our multistep safety procedure, that way we know the exact condition of every vehicle and is ready to sell. Any damaged vehicles are put in the Salvage category so you won't have to worry about your potential new car having been previously damaged.</p></div>
+            </div>
+            <div class="col text-center p-5 me-3">
+                <div class="mb-5"><i class="fas fa-map-marker-alt my-blue-text-color display-3"></i></div>
+                <div class="mb-3"><h6 class="text-uppercase h6 fw-bold">MULTIPLE LOCATIONS <br /> ACROSS EUROPE</h6></div>
+                <div class="mb-3"><p class="fs-6 text-break">We have multiple locations across Europe so you can pick up your new car or view the vehicles close to you!</p></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="best-features-div" class="row mb-5">
+    <div class="col-1">
+        <p style="visibility: hidden">r</p>
+    </div>
+    <div class="col-4 rounded bg-white m-5 p-5 shadow-lg rounded-4">
+        <h3 class="h3 my-blue-text-color fw-bolder text-center mb-5">The stress-free way <br /> to buy a car</h3>
+        <div class="row">
+            <p class="fw-semibold fs-5 mb-0">
+                <i class="fas fa-check fs-5 text-primary pe-3"></i>
+                Prepare everything from your home
+            </p>
+            <p class="fw-light fs-6 text-muted ms-5">
+                Express pickup and delivery options available
+            </p>
+        </div>
+        <div class="row">
+            <p class="fw-semibold fs-5 mb-0">
+                <i class="fas fa-check fs-5 text-primary pe-3"></i>
+                Test Drives available
+            </p>
+            <p class="fw-light fs-6 text-muted ms-5">
+                Schedule multiple test drives for your dream car
+            </p>
+        </div>
+        <div class="row">
+            <p class="fw-semibold fs-5 mb-0">
+                <i class="fas fa-check fs-5 text-primary pe-3"></i>
+                If you don't like it - return it
+            </p>
+            <p class="fw-light fs-6 text-muted ms-5">
+                30-day money back guarantee (up to 1000 km.)
+            </p>
+        </div>
+        <div class="row">
+            <p class="fw-semibold fs-5 mb-0">
+                <i class="fas fa-check fs-5 text-primary pe-3"></i>
+                All major systems are covered
+            </p>
+            <p class="fw-light fs-6 text-muted ms-5">
+                Warranty lasts for 90 days or 4,000 km (whichever comes first)
+            </p>
+        </div>
+        <div class="m-4 text-center">
+            <a href="/Home/Inventory" class="p-3 w-100 text-center text-uppercase btn btn-warning my-blue-text-color fw-bold">SHOP ALL CARS</a>
+        </div>
+    </div>
+    <div class="col-3">
+        <p style="visibility: hidden">r</p>
+    </div>
+    <div class="col-2">
+        <p style="visibility: hidden">r</p>
+    </div>
+    <div class="col-2">
+        <p style="visibility: hidden">r</p>
+    </div>
+</div>
+
+<div id="browse-body-style-div" class="row mb-5 mt-3">
     <div class="text-lg-center text-uppercase">
         <p class="h4 text-secondary">BROWSE BY</p>
         <span class="h2 fw-bold text-center" style="border-bottom: solid 0.2em orange; width:auto">body style</span>
         <span style="border-bottom: solid 1px black;"></span>
     </div>
-    @{
-        foreach (AutoDealership.Models.Types.BodyStyle bodyStyle in Enum.GetValues(typeof(AutoDealership.Models.Types.BodyStyle)))
-        {
-            <div class="col">@bodyStyle</div>
-        }
-    }
+    <div class="container-fluid mt-5 mb-5">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-dark" data-bs-ride="false" style="padding-bottom: 5em">
+            <div class="carousel-inner text-center" style="max-height: 600px !important">
+                <div class="carousel-item active">
+                    @{
+                        var bodyStyles = Enum.GetValues(typeof(AutoDealership.Models.Types.BodyStyle));
+                        <div class="row">
+                            @for (int i = 0; i < 4; i++)
+                            {
+                                var bodyStyle = bodyStyles.GetValue(i);
+                                var imgPath = "/Content/Images/BodyStyles/" + bodyStyle + ".svg";
+                                var href = "/Home/InventoryByBodyStyle?search=" + bodyStyle.ToString();
+                                <div class="col rounded">
+                                    <a href="@href" class="text-decoration-none">
+                                        <img width="200" src="@imgPath" />
+                                        <p>@bodyStyle</p>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+
+                    }
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        @{
+                            for (int i = 2; i < 6; i++)
+                            {
+                                var bodyStyle = bodyStyles.GetValue(i);
+                                var imgPath = "/Content/Images/BodyStyles/" + bodyStyle + ".svg";
+                                var href = "/Home/InventoryByBodyStyle?search=" + bodyStyle.ToString();
+                                <div class="col rounded">
+                                    <a href="@href" class="text-decoration-none">
+                                        <img width="200" src="@imgPath" />
+                                        <p>@bodyStyle</p>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        @{
+                            for (int i = 5; i < 9; i++)
+                            {
+                                var bodyStyle = bodyStyles.GetValue(i);
+                                var imgPath = "/Content/Images/BodyStyles/" + bodyStyle + ".svg";
+                                var href = "/Home/InventoryByBodyStyle?search=" + bodyStyle.ToString();
+                                <div class="col rounded">
+                                    <a href="@href" class="text-decoration-none">
+                                        <img width="200" src="@imgPath" />
+                                        <p>@bodyStyle</p>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <button style="width: 2%" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button style="width: 2%" class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        @*<div class="row text-center justify-content-center d-flex">
+                @{
+                    foreach (AutoDealership.Models.Types.BodyStyle bodyStyle in Enum.GetValues(typeof(AutoDealership.Models.Types.BodyStyle)))
+                    {
+                        var imgPath = "/Content/Images/BodyStyles/" + bodyStyle + ".svg";
+                        <div class="col rounded">
+                            <img src="@imgPath" />
+                            <p>@bodyStyle</p>
+                        </div>
+                    }
+                }
+            </div>*@
+    </div>
 </div>
 
 <div id="browse-by-brand-div" class="row mb-5 text-center">
@@ -100,9 +260,7 @@
 
             foreach (AutoDealership.Models.Brand brand in brands)
             {
-                var linkHref = "Home/Inventory?search=" + brand.Name;
-
-
+                var linkHref = "/Home/Inventory?search=" + brand.Name;
                 <div class="col">
 
                     <a href="@linkHref"><img width="85" src="@brand.LogoURL" /></a>
@@ -122,6 +280,14 @@
     <div class="carousel-inner" style="max-height: 600px !important">
         <div class="carousel-item active">
             <img src="https://s3-prod.autonews.com/s3fs-public/3LamborghiniMiami-MAIN.jpg" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">
+            @*<div class="row">
+                    <a class="col" href="#browse-body-style-div">
+                        <img width="250" src="~/Content/Images/BodyStyles/HATCHBACK.svg" />
+                    </a>
+                    <a class="col" href="#browse-body-style-div">
+                        <img width="250" src="~/Content/Images/BodyStyles/SEDAN.svg" />
+                    </a>
+                </div>*@
         </div>
         <div class="carousel-item">
             <img src="https://i.insider.com/5f1b0efcf34d051e1b3f0779?width=700" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">
@@ -135,13 +301,18 @@
 @*Vehicles Display*@
 
 @*<div class="container">
-    @Html.Partial("_Vehicles", ViewData)
-</div>*@
+        @Html.Partial("_Vehicles", ViewData)
+    </div>*@
 
 @*Vehicles Display*@
 
 @section Scripts {
     <script>
+        $(document).ready(function () {
+            $('#featureCarousel').carousel({ interval: false });
+            $('#featureCarousel').carousel('pause');
+        });
+
         $(document).ready(function () {
             $("#nav-item-about").removeClass("my-navbar-active");
             $("#nav-item-contact").removeClass("my-navbar-active");
