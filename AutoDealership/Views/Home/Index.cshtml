@@ -66,9 +66,9 @@
 
 
             <div class="btn-group btn-group-lg" role="group" aria-label="Basic outlined example" style="background-color: rgba(143, 143, 143, 0.81);">
-                <button type="button" class="btn btn-outline-secondary text-light border border-1">Make / Model</button>
+                <a href="#browse-by-brand-div" type="button" class="btn btn-outline-secondary text-light border border-1">Make / Model</a>
                 <a href="#browse-body-style-div" type="button" class="btn btn-outline-secondary text-light border border-1">Body Style</a>
-                <button type="button" class="btn btn-outline-secondary text-light border border-1">Price</button>
+                <a href="#trending-searches-prices-div" type="button" class="btn btn-outline-secondary text-light border border-1">Price</a>
             </div>
 
 
@@ -109,11 +109,11 @@
         <p style="visibility: hidden">r</p>
     </div>
     <div class="col-4 rounded bg-white m-5 p-5 shadow-lg rounded-4">
-        <h3 class="h3 my-blue-text-color fw-bolder text-center mb-5">The stress-free way <br /> to buy a car</h3>
+        <h3 class="h3 my-blue-text-color fw-bolder text-center mb-5">The stress-free way <br /> to buy a vehicle</h3>
         <div class="row">
             <p class="fw-semibold fs-5 mb-0">
                 <i class="fas fa-check fs-5 text-primary pe-3"></i>
-                Prepare everything from your home
+                Bring the dealership to your doorstep
             </p>
             <p class="fw-light fs-6 text-muted ms-5">
                 Express pickup and delivery options available
@@ -125,7 +125,7 @@
                 Test Drives available
             </p>
             <p class="fw-light fs-6 text-muted ms-5">
-                Schedule multiple test drives for your dream car
+                Schedule multiple test drives for your dream vehicle
             </p>
         </div>
         <div class="row">
@@ -160,6 +160,120 @@
         <p style="visibility: hidden">r</p>
     </div>
 </div>
+
+
+<div id="browse-by-brand-div" class="row mb-5 text-center">
+    <h2 class="h2 fw-semibold">Browse by Brands</h2>
+    <h5 class="h5 text-secondary">We work with the most popular brands</h5>
+    <div class="mt-5 row">
+        @{
+                var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
+
+                foreach (AutoDealership.Models.Brand brand in brands)
+                {
+                    var linkHref = "/Home/Inventory?search=" + brand.Name;
+                <div class="col">
+
+                    <a href="@linkHref"><img width="85" src="@brand.LogoURL" /></a>
+
+                </div>
+
+            }
+        }
+    </div>
+</div>
+
+<div id="steps-div" class="row mt-5 mb-5" style="background-image: url(https://www.teahub.io/photos/full/10-104324_fall-mountain-road-wallpaper-hd-nature.jpg);">
+    <div id="steps-div-header" class="text-center m-5">
+        <h2 class="h2 fw-bolder">How AutoDealership <span class="text-warning" style="-webkit-text-stroke: gray 1px;">Works</span></h2>
+    </div>
+    <div class="row text-center mb-5">
+        <div class="col ms-5">
+            <h1 class="display-1 fw-bolder">
+                01
+                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i>
+            </h1>
+                <h5 class="h5 fw-bold">Search our inventory</h5>
+                <p class="text-break">
+                    Firstly, search our wide collection of vehicles and find your perfect vehicle. In our inventory there is a vehicle for every price point and every category.
+                </p>
+
+        </div>
+
+        <div class="col ms-5">
+            <h1 class="display-1 fw-bolder">02
+                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i></h1>
+            <h5 class="h5 fw-bold">Choose the vehicle you like</h5>
+            <p class="text-break">
+                Once you've found set your mind on the right vehicle, select it from our inventory and view all of the details about that vehicle
+            </p>
+        </div>
+
+        <div class="col ms-5">
+            <h1 class="display-1 fw-bolder">03
+                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i></h1>
+            <h5 class="h5 fw-bold">Reserve your vehicle</h5>
+            <p class="text-break">
+                After you have selected the vehicle that you like, the next step is to either reserve your vehicle for purchase or schedule a test drive
+            </p>
+        </div>
+
+        <div class="col ms-5">
+            <h1 class="display-1 fw-bolder">04</h1>
+            <h5 class="h5 fw-bold">Come to the scheduled appointment</h5>
+            <p class="text-break">
+                The last step is to come to your closest dealership at the scheduled time appointment and purchase the vehicle you have reserved and finally drive it home!
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div id="trending-searches-prices-div" class="container mb-5">
+    <div id="trending-searches-header">
+        <h2 class="hr-lines text-uppercase h2 fw-bold"> TRENDING SEARCHES </h2>
+    </div>
+
+    <div class="row mb-1">
+        <div class="col-2">
+
+        </div>
+        <div class="col-3 me-1 img-panel" style="background-image: url(https://img.autobytel.com/car-reviews/autobytel/131803-10-best-american-economy-cars/2017-Chevrolet-Sonic.jpg)">
+            <div>
+                <p class="fs-4 text-light p-2">Economy cars under <br /> $4,000</p>
+            </div>
+        </div>
+        <div class="col-5 img-panel" style="background-image: url(https://suaveignition.files.wordpress.com/2013/04/mercedes-benz-concept-gla-left-side-view.jpg)">
+            <div>
+                <p class="fs-4 text-light p-2">Popular SUVs under <br /> $20,000</p>
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+
+    <div class="row mb-1">
+        <div class="col-2">
+
+        </div>
+        <div class="col-5 me-1 img-panel" style="background-image: url(http://toyotaofcoolsprings.com/blogs/689/wp-content/uploads/2016/05/2016-Sienna.jpg)">
+            <div>
+                <p class="fs-4 text-light p-2">Family Vehicles under <br /> $5,000</p>
+            </div>
+        </div>
+        <div class="col-3 img-panel" style="background-image: url(https://www.motortrend.com/uploads/sites/11/2019/09/2019-Subaru-WRX-STI-S209-on-track.jpg?fit=around%7C875:492)">
+            <div>
+                <p class="fs-4 text-light p-2">Sporty Vehicles under <br /> $10,000</p>
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</div>
+
+
 
 <div id="browse-body-style-div" class="row mb-5 mt-3">
     <div class="text-lg-center text-uppercase">
@@ -251,26 +365,6 @@
     </div>
 </div>
 
-<div id="browse-by-brand-div" class="row mb-5 text-center">
-    <h2 class="h2 fw-semibold">Brands</h2>
-    <h4 class="h4 text-secondary">We work with the most popular brands</h4>
-    <div class="mt-5 row">
-        @{
-            var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
-
-            foreach (AutoDealership.Models.Brand brand in brands)
-            {
-                var linkHref = "/Home/Inventory?search=" + brand.Name;
-                <div class="col">
-
-                    <a href="@linkHref"><img width="85" src="@brand.LogoURL" /></a>
-
-                </div>
-
-            }
-        }
-    </div>
-</div>
 
 
 
