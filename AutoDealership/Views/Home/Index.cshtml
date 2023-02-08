@@ -35,8 +35,8 @@
     <div class="col-8">
         <div id="search-vehicles-div" class="m-3 d-flex flex-column justify-content-center align-items-center">
 
-            <div class="logo-header-img d-block" style="margin-top: -3.5em;">
-                <img style="width: 15em;" src="~/Content/Images/test_logo (2).png" />
+            <div class="logo-header-img d-block" style="margin-bottom: 2em;">
+                <img style="width: 12em;" src="~/Content/Images/new-logo.png" />
             </div>
 
             <p class="text-sm-center h3" style="margin-top: -1.5em">Find your perfect car</p>
@@ -167,11 +167,11 @@
     <h5 class="h5 text-secondary">We work with the most popular brands</h5>
     <div class="mt-5 row">
         @{
-                var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
+            var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
 
-                foreach (AutoDealership.Models.Brand brand in brands)
-                {
-                    var linkHref = "/Home/Inventory?search=" + brand.Name;
+            foreach (AutoDealership.Models.Brand brand in brands)
+            {
+                var linkHref = "/Home/Inventory?search=" + brand.Name;
                 <div class="col">
 
                     <a href="@linkHref"><img width="85" src="@brand.LogoURL" /></a>
@@ -184,7 +184,7 @@
 </div>
 
 <div id="steps-div" class="row mt-5 mb-5" style="background-image: url(https://www.teahub.io/photos/full/10-104324_fall-mountain-road-wallpaper-hd-nature.jpg);">
-    <div id="steps-div-header" class="text-center m-5">
+    <div id="steps-div-header" class="text-center mt-5 mb-5">
         <h2 class="h2 fw-bolder">How AutoDealership <span class="text-warning" style="-webkit-text-stroke: gray 1px;">Works</span></h2>
     </div>
     <div class="row text-center mb-5">
@@ -193,25 +193,29 @@
                 01
                 <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i>
             </h1>
-                <h5 class="h5 fw-bold">Search our inventory</h5>
-                <p class="text-break">
-                    Firstly, search our wide collection of vehicles and find your perfect vehicle. In our inventory there is a vehicle for every price point and every category.
-                </p>
+            <h5 class="h5 fw-bold">Search our inventory</h5>
+            <p class="text-break">
+                Firstly, search our wide collection of vehicles and find your perfect vehicle. In our inventory there is a vehicle for every price point and every category.
+            </p>
 
         </div>
 
         <div class="col ms-5">
-            <h1 class="display-1 fw-bolder">02
-                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i></h1>
+            <h1 class="display-1 fw-bolder">
+                02
+                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i>
+            </h1>
             <h5 class="h5 fw-bold">Choose the vehicle you like</h5>
             <p class="text-break">
-                Once you've found set your mind on the right vehicle, select it from our inventory and view all of the details about that vehicle
+                Once you've set your mind on the right vehicle, select it from our inventory and view all of the details about that vehicle
             </p>
         </div>
 
         <div class="col ms-5">
-            <h1 class="display-1 fw-bolder">03
-                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i></h1>
+            <h1 class="display-1 fw-bolder">
+                03
+                <i class="fas fa-ellipsis-h" style="margin-left: 0.8em;margin-right: -2em;"></i>
+            </h1>
             <h5 class="h5 fw-bold">Reserve your vehicle</h5>
             <p class="text-break">
                 After you have selected the vehicle that you like, the next step is to either reserve your vehicle for purchase or schedule a test drive
@@ -238,16 +242,19 @@
         <div class="col-2">
 
         </div>
-        <div class="col-3 me-1 img-panel" style="background-image: url(https://img.autobytel.com/car-reviews/autobytel/131803-10-best-american-economy-cars/2017-Chevrolet-Sonic.jpg)">
+
+        <div id="economy-cars-div" class="col-3 me-1 img-panel" style="background-image: url(https://img.autobytel.com/car-reviews/autobytel/131803-10-best-american-economy-cars/2017-Chevrolet-Sonic.jpg)">
             <div>
                 <p class="fs-4 text-light p-2">Economy cars under <br /> $4,000</p>
             </div>
         </div>
-        <div class="col-5 img-panel" style="background-image: url(https://suaveignition.files.wordpress.com/2013/04/mercedes-benz-concept-gla-left-side-view.jpg)">
+
+        <div id="popular-suvs-div" class="col-5 img-panel" style="background-image: url(https://suaveignition.files.wordpress.com/2013/04/mercedes-benz-concept-gla-left-side-view.jpg)">
             <div>
                 <p class="fs-4 text-light p-2">Popular SUVs under <br /> $20,000</p>
             </div>
         </div>
+
         <div class="col-2">
 
         </div>
@@ -257,17 +264,63 @@
         <div class="col-2">
 
         </div>
-        <div class="col-5 me-1 img-panel" style="background-image: url(http://toyotaofcoolsprings.com/blogs/689/wp-content/uploads/2016/05/2016-Sienna.jpg)">
+
+        <div id="family-vehicles-div" class="col-5 me-1 img-panel" style="background-image: url(http://toyotaofcoolsprings.com/blogs/689/wp-content/uploads/2016/05/2016-Sienna.jpg)">
             <div>
                 <p class="fs-4 text-light p-2">Family Vehicles under <br /> $5,000</p>
             </div>
         </div>
-        <div class="col-3 img-panel" style="background-image: url(https://www.motortrend.com/uploads/sites/11/2019/09/2019-Subaru-WRX-STI-S209-on-track.jpg?fit=around%7C875:492)">
+
+
+        <div id="sporty-vehicles-div" class="col-3 img-panel" style="background-image: url(https://www.motortrend.com/uploads/sites/11/2019/09/2019-Subaru-WRX-STI-S209-on-track.jpg?fit=around%7C875:492)">
             <div>
                 <p class="fs-4 text-light p-2">Sporty Vehicles under <br /> $10,000</p>
             </div>
         </div>
+
         <div class="col-2">
+
+        </div>
+    </div>
+
+</div>
+
+<div id="budget-search-tool-div" class="row bg-primary mt-5 mb-5">
+    <div class="row text-light">
+
+        <div class="col-2">
+
+        </div>
+
+        <div class="col-5 mt-3 mb-3">
+            <div id="budget-search-tool-header">
+                <h6 class="h6 fw-lighter fst-italic">Did the trending searches not match your pricing criteria? No problem, use the search tool below to find vehicles by budget</h6>
+                <h3 class="h3 fw-bold">Find vehicles by budget</h3>
+            </div>
+
+            <div id="budget-search-tool">
+                <div class="input-group mb-3 mt-4">
+                    <span class="input-group-text bg-warning">$</span>
+                    <input id="budget-search-input" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+
+                    <select class="form-select me-3 rounded-end" id="budget-search-type">
+                        <option selected>Choose criteria...</option>
+                        <option value="price">vehicle price</option>
+                        <option value="monthly">per month</option>
+                    </select>
+
+                    <button type="button" id="budget-search-tool-btn" class="text-center btn btn-warning rounded-pill ms-3 text-light fw-bold ps-4 pe-4">Search</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-4">
+            <img class="mt-3 ms-5" width="300" src="https://static.wixstatic.com/media/db2fb7_3ad7bc95ecee48b3b7ec1b5cdf0711f4~mv2.png/v1/fill/w_470,h_312,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SELL%20CAR.png"/>
+        </div>
+
+        <div class="col-1">
 
         </div>
     </div>
@@ -366,14 +419,38 @@
 </div>
 
 
+<div id="high-performance-div" class="row mt-5 mb-5">
+    <div class="col-1">
+
+    </div>
+    <div class="col-4">
+        <img width="425" src="~/Content/Images/speed-logo.png"/>
+    </div>
+    <div class="col-7 mt-4 mb-4">
+        <div style="background-color: rgba(0, 0, 0, 0.40)" class="p-3 rounded-2">
+            <h1 class="display-6 fw-bold text-light text-uppercase">BE SPECIAL. CHOOSE HIGH-PERFORMANCE</h1>
+            <p class="fw-semibold fs-5 text-light">Reach New Speeds of Excitement with our high-performance vehicle catalog - SPEED. Accelerate your Thrill and explore our catalog with a hand-picked selection of the most exotic and powerful cars our dealership has to offer</p>
+        </div>
+
+        <div>
+            <button id="speed-btn" type="button" class="mt-5 p-2 btn btn-lg btn-warning text-danger fw-bold text-uppercase shadow">Ready for adventure?</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="bottom-home-page" class="row" style="margin-bottom: -3rem">
+    <img class="img-fluid w-100 p-0" src="~/Content/Images/vehicle-collage.png"/>
+</div>
 
 
 
 <!-- Carousel wrapper -->
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="padding-bottom: 5em">
+<!--<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="padding-bottom: 5em">
     <div class="carousel-inner" style="max-height: 600px !important">
         <div class="carousel-item active">
-            <img src="https://s3-prod.autonews.com/s3fs-public/3LamborghiniMiami-MAIN.jpg" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">
+            <img src="https://s3-prod.autonews.com/s3fs-public/3LamborghiniMiami-MAIN.jpg" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">-->
             @*<div class="row">
                     <a class="col" href="#browse-body-style-div">
                         <img width="250" src="~/Content/Images/BodyStyles/HATCHBACK.svg" />
@@ -382,7 +459,7 @@
                         <img width="250" src="~/Content/Images/BodyStyles/SEDAN.svg" />
                     </a>
                 </div>*@
-        </div>
+        <!--</div>
         <div class="carousel-item">
             <img src="https://i.insider.com/5f1b0efcf34d051e1b3f0779?width=700" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">
         </div>
@@ -390,7 +467,7 @@
             <img src="http://cdn-ds.com/media/1159/w_1920/sz_4275638/3.jpg" style="object-fit: cover !important; object-position: center !important;" class="d-block w-100" alt="...">
         </div>
     </div>
-</div>
+</div>-->
 <!-- Carousel wrapper -->
 @*Vehicles Display*@
 
@@ -423,6 +500,39 @@
                     $('#search-vehicles-btn').trigger('click');
                 }
             });
+
+            $("#economy-cars-div").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("InventoryByPrice", "Home")" + "?price=" + 4000 + "&category=economy";
+            });
+
+            $("#popular-suvs-div").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("InventoryByPrice", "Home")" + "?price=" + 20000 + "&category=suvs";
+            });
+
+            $("#family-vehicles-div").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("InventoryByPrice", "Home")" + "?price=" + 5000 + "&category=family";
+            });
+
+
+            $("#sporty-vehicles-div").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("InventoryByPrice", "Home")" + "?price=" + 10000 + "&category=sporty";
+            });
+
+            $("#budget-search-tool-btn").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("InventoryByPrice", "Home")" + "?price=" + $("#budget-search-input").val() + "&category=" + $("#budget-search-type").val().toLowerCase();
+            });
+
+            $("#speed-btn").click(function (e) {
+                e.preventDefault();
+                window.location.href = "@Url.Action("SpeedInventory", "Home")";
+            });
+
+
         });
     </script>
 }

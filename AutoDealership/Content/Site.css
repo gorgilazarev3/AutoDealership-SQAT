@@ -275,3 +275,12 @@ div#corner-triangle {
     background-blend-mode: screen;
     background-position-y: center;
 }
+
+#high-performance-div {
+    background-image: url(/Content/Images/high-perf.jpg);
+    background-position-y: center;
+    /*    background-size: contain;*/
+    background-repeat: no-repeat;
+    background-color: rgb(0 0 0 / 30%);
+    background-blend-mode: darken;
+}

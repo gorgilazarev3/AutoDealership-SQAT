@@ -95,6 +95,59 @@ namespace AutoDealership.Controllers
             return View("Inventory", model);
         }
 
+        [HttpGet]
+        public ActionResult InventoryByPrice(int price, string category)
+        {
+            var db = new ApplicationDbContext();
+            var brands = db.Brands.ToList();
+            List<Vehicle> vehicles = db.Vehicles.ToList();
+            List<Vehicle> toDisplay = new List<Vehicle>();
+            InventoryViewModel model = new InventoryViewModel();
+            if(category == null || (category != null && !category.ToLower().Equals("monthly")))
+                toDisplay = vehicles.Where(veh => veh.Price < price).ToList();
+
+            if(category != null && category.ToLower().Equals("family"))
+            {
+                toDisplay = toDisplay.Where(veh => veh.BodyStyle.ToString().ToLower().Equals("hatchback") || veh.BodyStyle.ToString().ToLower().Equals("sedan") || veh.BodyStyle.ToString().ToLower().Equals("van") || veh.BodyStyle.ToString().ToLower().Equals("suv")).ToList();
+            }
+            else if(category != null && category.ToLower().Equals("sporty"))
+            {
+                toDisplay = toDisplay.Where(veh => veh.Horsepower >= 250).ToList();
+            }
+            else if (category != null && category.ToLower().Equals("suvs"))
+            {
+                toDisplay = toDisplay.Where(veh => veh.BodyStyle.ToString().ToLower().Equals("suv")).ToList();
+            }
+            else if (category != null && category.ToLower().Equals("economy"))
+            {
+                toDisplay = toDisplay.Where(veh => veh.FuelEfficiency <= 6).ToList();
+            }
+            else if (category != null && category.ToLower().Equals("monthly"))
+            {
+                toDisplay = vehicles.Where(veh => veh.MonthlyPayment < price && veh.IsForLease).ToList();
+            }
+            model.Inventory = toDisplay;
+            model.SearchQuery = category.Split(' ');
+            model.AllBrands = brands;
+            ViewData["Brands"] = db.Brands.ToList();
+            return View("Inventory", model);
+        }
+
+        [HttpGet]
+        public ActionResult SpeedInventory()
+        {
+            var db = new ApplicationDbContext();
+            var brands = db.Brands.ToList();
+            List<Vehicle> vehicles = db.Vehicles.ToList();
+            List<Vehicle> toDisplay = vehicles.Where(veh => veh.Horsepower >= 550).ToList();
+            InventoryViewModel model = new InventoryViewModel();
+            model.Inventory = toDisplay;
+            model.SearchQuery = new string[] { "High-Performance", "Power", "Speed", "Exotic" };
+            model.AllBrands = brands;
+            ViewData["Brands"] = db.Brands.ToList();
+            return View("Inventory", model);
+        }
+
         public ActionResult About()
         {
             ViewBag.ActiveNav = "About";
