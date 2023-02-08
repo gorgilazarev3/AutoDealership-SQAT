@@ -21,6 +21,7 @@ namespace AutoDealership.Controllers
 
         public ActionResult Inventory(string search)
         {
+            ViewBag.ActiveNav = "Inventory";
             var db = new ApplicationDbContext();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
@@ -82,6 +83,7 @@ namespace AutoDealership.Controllers
         [HttpGet]
         public ActionResult InventoryByBodyStyle(string search)
         {
+            ViewBag.ActiveNav = "Inventory";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
@@ -98,6 +100,7 @@ namespace AutoDealership.Controllers
         [HttpGet]
         public ActionResult InventoryByPrice(int price, string category)
         {
+            ViewBag.ActiveNav = "Inventory";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
@@ -136,6 +139,7 @@ namespace AutoDealership.Controllers
         [HttpGet]
         public ActionResult SpeedInventory()
         {
+            ViewBag.ActiveNav = "Inventory";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();

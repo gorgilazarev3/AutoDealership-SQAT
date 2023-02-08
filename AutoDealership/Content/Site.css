@@ -208,6 +208,18 @@ div#corner-triangle {
     color: var(--my-blue) !important;
 }
 
+.my-blue-background-color {
+    background-color: var(--my-blue) !important;
+}
+
+.my-orange-text-color {
+    color: var(--my-orange) !important;
+}
+
+.my-orange-background-color {
+    background-color: var(--my-orange) !important;
+}
+
 #inventory-header {
     background-image: url("https://dealerinspire1.s3.amazonaws.com/JjS-QtB9qWTRpgqQPDs3%2B9E%3D/CDy2BvBgoiXPo024IA%3D%3D/Vm3pWw%3D%3D/h-8crRiwnY--PQ%3D%3D/header.jpg");
     background-repeat: no-repeat;

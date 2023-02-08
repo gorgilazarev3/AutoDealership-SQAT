@@ -4,17 +4,21 @@
 
 <div class="text-center m-5" id="inventory-header">
     <div class="p-5">
-        <h2 class="h2 text-white">Inventory</h2>
+        <h2 class="h2 text-white fw-bold">Inventory</h2>
         <h5 class="h5 text-white">Home > Inventory</h5>
     </div>
 </div>
 
 <div class="container-fluid row">
-    <div class="col-sm-2 bg-light" style="height: fit-content;">
+    <div class="col-2 bg-light" style="height: fit-content;">
         <div class="row">
+            <div class="my-blue-background-color fw-bold text-light text-uppercase text-center">
+                <div class="text-start"><i class="fas fa-caret-left fs-1" style="rotate: 45deg;"></i></div>
+                <p class="p-4">SEARCH OPTIONS</p>
+            </div>
             <div class="bg-secondary bg-opacity-10 pb-2">
                 <p class="d-inline-block p-2">
-                    <i class="fa far fa-filter p-1"></i>FILTER AND SORT
+                    <i class="fa far fa-filter p-1"></i>TAGS
                 </p>
                 <a href="/Home/Inventory" class="page-link text-decoration-underline fs-6">Clear filters</a>
                 @foreach (string s in Model.SearchQuery)
@@ -25,113 +29,218 @@
             <hr />
             <div class="mb-5">
                 <p>Sort by</p>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Brand
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                @foreach (var brand in Model.AllBrands)
-                                {
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            @brand.Name
-                                            @if (brand.Vehicles != null)
-                                            {
-                                                @Html.Raw("(" + brand.Vehicles.Count + ")")
-                                            }
-                                            else
-                                            {
-                                                @Html.Raw("(0)")
-                                            }
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    </div>
-                                }
-                            </div>
+
+                @*NEW STYLE SEARCH OPTIONS*@
+
+                <div id="search-options-brand" class="text-center mb-5">
+                    <p class="text-dark fw-bold text-uppercase pb-3">By brand</p>
+
+                    <select class="form-select" name="search-brand" id="search-brand">
+                        <option value="" selected>All brands</option>
+                        @foreach (var brand in Model.AllBrands)
+                        {
+                            if (brand.Vehicles != null)
+                            {
+                                <option value="@brand.Id">@Html.Raw(brand.Name + " (" + brand.Vehicles.Count + ")")</option>
+                            }
+                            else
+                            {
+                                <option value="@brand.Id">@Html.Raw(brand.Name + " (0)")</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <hr />
+
+                <div id="search-options-price" class="text-center mb-5">
+                    <p class="text-dark fw-bold text-uppercase pb-3">Price range</p>
+
+                    <div class="slider m-auto">
+                        <div class="range-slider">
+                            <span class="rangeValues"></span>
+                            <input value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
+                            <input value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Price
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <div class="slider m-auto">
-                                    <div class="range-slider">
-                                        <span class="rangeValues"></span>
-                                        <input value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
-                                        <input value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
-                                    </div>
-                                </div>
+                </div>
+
+                <hr />
+
+                <div id="search-options-bodystyle" class="text-center mb-5">
+                    <p class="text-dark fw-bold text-uppercase pb-3">vehicle body type</p>
+
+                    <div class="row row-cols-2">
+                        @foreach (string style in Enum.GetNames(typeof(AutoDealership.Models.Types.BodyStyle)))
+                        {
+                            string id = "btn-check-" + style.ToLower();
+                            var imgPath = "/Content/Images/BodyStyles/" + style + ".svg";
+                            <div class="col mb-2">
+                                <input type="checkbox" class="btn-check" id="@id" autocomplete="off">
+                                <label class="btn-sm btn bg-white text-dark fw-semibold small" for="@id">
+                                    <img width="60" src="@imgPath" />
+                                    @style
+                                </label>
                             </div>
-                        </div>
+                        }
                     </div>
-                    @*</div>*@
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Body Style
-                            </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                @foreach (string style in Enum.GetNames(typeof(AutoDealership.Models.Types.BodyStyle)))
-                                {
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            @String.Format("{0}", style[0] + style.Substring(1).ToLower())
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                </div>
+
+                <hr />
+
+                <div id="search-options-fueltype" class="text-center mb-5">
+                    <p class="text-dark fw-bold text-uppercase pb-3">Fuel Type</p>
+
+                    <select class="form-select" name="search-fueltype" id="search-fueltype">
+                        <option value="" selected>All fuel types</option>
+                        @foreach (string fuel in Enum.GetNames(typeof(AutoDealership.Models.Fuel)))
+                        {
+                            <option value="@fuel">@fuel</option>
+                        }
+                    </select>
+
+                </div>
+
+                <hr />
+
+                <div id="search-options-mileage" class="text-center mb-5">
+                    <p class="text-dark fw-bold text-uppercase pb-3">Maximum mileage</p>
+
+                    <input type="number" class="form-control" id="max-mileage">
+                    <span class="fst-italic">or less</span>
+
+                </div>
+
+                <hr />
+
+                <div class="text-center"><button class="text-uppercase btn btn-warning text-light fw-bold text-center">RESET FILTER</button></div>
+
+
+                @*NEW STYLE SEARCH OPTIONS*@
+
+
+                <!--<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Brand
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                @foreach (var brand in Model.AllBrands)
+                {
+                    <div class="form-check">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            @brand.Name
+                            @if (brand.Vehicles != null)
+                            {
+                                @Html.Raw("(" + brand.Vehicles.Count + ")")
+                            }
+                            else
+                            {
+                                @Html.Raw("(0)")
+                            }
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingFour">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                Fuel
-                            </button>
-                        </h2>
-                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                @foreach (string fuel in Enum.GetNames(typeof(AutoDealership.Models.Fuel)))
-                                {
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            @String.Format("{0}", fuel[0] + fuel.Substring(1).ToLower())
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingFive">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                                Mileage
-                            </button>
-                        </h2>
-                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <p>Maximum mileage</p>
-                                <input type="number" class="form-control" id="max-mileage">
-                                <span class="fst-italic">or less</span>
-                            </div>
-                        </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Price
+            </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="slider m-auto">
+                    <div class="range-slider">
+                        <span class="rangeValues"></span>
+                        <input value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
+                        <input value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
                     </div>
                 </div>
             </div>
         </div>
+    </div>-->
+                @*</div>*@
+                <!--<div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Body Style
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    @foreach (string style in Enum.GetNames(typeof(AutoDealership.Models.Types.BodyStyle)))
+                    {
+                        <div class="form-check">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                @String.Format("{0}", style[0] + style.Substring(1).ToLower())
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Fuel
+                </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    @foreach (string fuel in Enum.GetNames(typeof(AutoDealership.Models.Fuel)))
+                    {
+                        <div class="form-check">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                @String.Format("{0}", fuel[0] + fuel.Substring(1).ToLower())
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    Mileage
+                </button>
+            </h2>
+            <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <p>Maximum mileage</p>
+                    <input type="number" class="form-control" id="max-mileage">
+                    <span class="fst-italic">or less</span>
+                </div>
+            </div>
+        </div>
+    </div>-->
+            </div>
+        </div>
     </div>
-    <div class="col-lg-10">
+    <div class="col-10">
+
+        <div class="container mb-5">
+            <select style="width: fit-content;" class="form-select float-start" name="num-cols-inventory" id="num-cols-inventory">
+                <option value="4">4 Columns</option>
+                <option value="3">3 Columns</option>
+            </select>
+
+            <select style="width: fit-content;" class="form-select float-end" name="orderby-inventory" id="orderby-inventory">
+                <option value="ascending">Sort by Cheapest First</option>
+                <option value="descending">Sort by Most Expensive First</option>
+            </select>
+
+        </div>
+
+        <hr />
         @Html.Partial("_Vehicles", ViewData)
     </div>
 </div>
@@ -168,6 +277,13 @@
                 }
             }
         }
+
+        $(document).ready(function () {
+            $("#nav-item-home").removeClass("my-navbar-active");
+            $("#nav-item-contact").removeClass("my-navbar-active");
+            $("#nav-item-about").removeClass("my-navbar-active");
+            $("#nav-item-inventory").addClass("my-navbar-active");
+        });
 
     </script>
 
