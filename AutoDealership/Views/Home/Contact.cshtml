@@ -1,7 +1,151 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
+
+<div class="row mb-5">
+    <div class="text-center" id="contact-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">Contact</h2>
+            <h5 class="h5 text-white">Home > Contact</h5>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row row-cols-4 gap-5">
+        <div class="col bg-light" style="width: 20%">
+            <div class="row mb-3">
+                <div class="col">
+
+                </div>
+                <div class="text-center bg-dark col" style="margin-top: -2em;">
+                    <i class="fs-5 p-3 text-white fas fa-map-marker-alt"></i>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="fs-5 fw-semibold">
+                    Head Office
+                </p>
+                <p class="fs-6">
+                    Skopje, Macedonia
+                </p>
+            </div>
+        </div>
+
+        <div class="col bg-light" style="width: 20%">
+            <div class="row mb-3">
+                <div class="col">
+
+                </div>
+                <div class="text-center my-blue-background-color col" style="margin-top: -2em;">
+                    <i class="text-light fs-5 p-3 fas fa-phone"></i>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="fs-5 fw-semibold">
+                    Phone
+                </p>
+                <p class="fs-6">
+                    +389 2 7834241
+                </p>
+                <p class="fs-6">
+                    Sales Dept. +389 2 1234567
+                </p>
+            </div>
+        </div>
+
+        <div class="col bg-light" style="width: 20%">
+            <div class="row mb-3">
+                <div class="col">
+
+                </div>
+                <div class="text-center bg-dark col" style="margin-top: -2em;">
+                    <i class="text-light fs-5 p-3 far fa-envelope"></i>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="fs-5 fw-semibold">
+                    Email
+                </p>
+                <p class="fs-6">
+                    info@autodealership.com
+                </p>
+                <p class="fs-6">
+                    support@autodealership.com
+                </p>
+            </div>
+        </div>
+
+        <div class="col bg-light" style="width: 20%">
+            <div class="row mb-3">
+                <div class="col">
+
+                </div>
+                <div class="text-center my-blue-background-color col" style="margin-top: -2em;">
+                    <i class="text-light fs-5 p-3 fas fa-map-marked"></i>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="fs-5 fw-semibold">
+                    Showroom
+                </p>
+                <p class="fs-6">
+                    Multiple locations   
+                </p>
+                <p class="fs-6">
+                    Main location - Skopje, Macedonia
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col" id="contact-map">
+            <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Skopje+(AutoDealership)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>
+        </div>
+
+        <div class="col">
+            <h4 class="h4 fw-bold pb-3">Send a <span class="my-orange-text-color fw-bold">Message</span></h4>
+            <p class="h6">Fill in the form below to send us a message and we will answer all of your questions to the mail you provide in the shortest time possible.</p>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Your name..." aria-label="Your name">
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Your email..." aria-label="Your email">
+            </div>
+
+            <div class="input-group mb-3">
+                <textarea rows="13" class="form-control" placeholder="Message" aria-label="With textarea"></textarea>
+            </div>
+
+            <button class="btn my-blue-background-color text-white">Send Message</button>
+            
+        </div>
+
+    </div>
+</div>
+
+@*<h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <address>
@@ -14,7 +158,7 @@
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+</address>*@
 
 @section Scripts {
     <script>

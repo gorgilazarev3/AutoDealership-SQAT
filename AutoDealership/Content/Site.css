@@ -229,6 +229,16 @@ div#corner-triangle {
     /*filter: grayscale(200%);*/
 }
 
+#contact-header {
+    background-image: url("https://www.freewebheaders.com/wp-content/gallery/cars/porsche-911-silver-color-top-speed-car-web-header.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(5, 39, 90, 0.85);
+    background-blend-mode: multiply;
+    background-position: center;
+    /*filter: grayscale(200%);*/
+}
+
 #best-features-div {
     background-image: url("https://image-renderer.sinclairstoryline.com/prod/image-renderer/16x9/full/1015/center/80/9dd2c7f7-4d75-4358-a4cc-d982756d9379-large16x9_GettyImages1030960660.jpg");
     background-repeat: no-repeat;

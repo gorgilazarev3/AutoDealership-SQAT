@@ -113,7 +113,7 @@
 
                 <hr />
 
-                <div class="text-center"><button class="text-uppercase btn btn-warning text-light fw-bold text-center">RESET FILTER</button></div>
+                <div class="text-center"><a href="/Home/Inventory" class="text-uppercase btn btn-warning text-light fw-bold text-center">RESET FILTER</a></div>
 
 
                 @*NEW STYLE SEARCH OPTIONS*@
@@ -234,6 +234,7 @@
             </select>
 
             <select style="width: fit-content;" class="form-select float-end" name="orderby-inventory" id="orderby-inventory">
+                <option value="">Sort by Date Added</option>
                 <option value="ascending">Sort by Cheapest First</option>
                 <option value="descending">Sort by Most Expensive First</option>
             </select>
@@ -248,6 +249,12 @@
 @section Scripts {
 
     <script>
+
+        @*$(document).ready(function () {
+            $("#num-cols-inventory").change(function () {
+                @Model.Searc         });
+        });*@
+
         function getVals() {
             // Get slider values
             let parent = this.parentNode;
