@@ -33,6 +33,8 @@ namespace AutoDealership.Models
         public List<Vehicle> Inventory { get; set; }
         public string[] SearchQuery { get; set; }
         public List<Brand> AllBrands { get; set; }
+        public int NumCols { get; set; }
+        public string SortOrder { get; set; }
     }
 
 }

@@ -1,28 +1,36 @@
-﻿@{
+﻿@using AutoDealership.Models
+@model AutoDealership.Models.InventoryViewModel
+@{
     ViewBag.Title = "Inventory";
 }
 
-@if (ViewData["ActiveNav"].ToString().ToLower().Contains("speed"))
-{
-    @:<div class="text-center m-5" id="inventory-header" style="background-image: url(https://d1i1eo6qmdfmdv.cloudfront.net/upload/site/pages/exotics_racing_LA/DSC0112s4j-2.jpg); background-position-y: center;">
-}
-else
-{
-    @:<div class="text-center m-5" id="inventory-header">
-}
+<div class="row mb-5">
+
+    @if (ViewData["ActiveNav"].ToString().ToLower().Contains("speed"))
+    {
+        @:<div class="text-center" id="inventory-header" style="background-image: url(https://d1i1eo6qmdfmdv.cloudfront.net/upload/site/pages/exotics_racing_LA/DSC0112s4j-2.jpg); background-position-y: center;">
+        }
+        else
+        {
+        @:<div class="text-center" id="inventory-header">
+        }
 
 
-        <div class="p-5">
-            <h2 class="h2 text-white fw-bold">@ViewData["ActiveNav"]</h2>
-            <h5 class="h5 text-white">Home > @ViewData["ActiveNav"]</h5>
-        </div>
-    </div>
+                <div class="p-5">
+                    <h2 class="h2 text-white fw-bold">@ViewData["ActiveNav"]</h2>
+                    <h5 class="h5 text-white">Home > @ViewData["ActiveNav"]</h5>
+                </div>
+           </div>
+
+</div>
 
 <div class="container-fluid row">
     <div class="col-2 bg-light" style="height: fit-content;">
         <div class="row">
             <div class="my-blue-background-color fw-bold text-light text-uppercase text-center">
-                <div class="text-start"><i class="fas fa-caret-left fs-1" style="rotate: 45deg;"></i></div>
+                <div class="text-start">
+                    <i class="fas fa-caret-left fs-1" style="rotate: 45deg;"></i>
+                </div>
                 <p class="p-4">SEARCH OPTIONS</p>
             </div>
             <div class="bg-secondary bg-opacity-10 pb-2">
@@ -45,8 +53,8 @@ else
                     <p class="text-dark fw-bold text-uppercase pb-3">By brand</p>
 
                     <select class="form-select" multiple name="search-brand" id="search-brand">
-                        <option value="" selected>All brands</option>
-                        @foreach (var brand in Model.AllBrands)
+                        <option value="-1" selected>All brands</option>
+                        @foreach (Brand brand in Model.AllBrands)
                         {
                             if (brand.Vehicles != null)
                             {
@@ -67,9 +75,9 @@ else
 
                     <div class="slider m-auto">
                         <div class="range-slider">
-                            <span class="rangeValues"></span>
-                            <input value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
-                            <input value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="500" type="range">
+                            <span class="rangeValues fw-semibold"></span>
+                            <input id="min-price-input" value="@ViewBag.MinPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="100" type="range">
+                            <input id="max-price-input" value="@ViewBag.MaxPrice" min="@ViewBag.MinPrice" max="@ViewBag.MaxPrice" step="100" type="range">
                         </div>
                     </div>
                 </div>
@@ -85,7 +93,7 @@ else
                             string id = "btn-check-" + style.ToLower();
                             var imgPath = "/Content/Images/BodyStyles/" + style + ".svg";
                             <div class="col mb-2">
-                                <input type="checkbox" class="btn-check" id="@id" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="bodystyle-buttons" id="@id" autocomplete="off" value="@style" onclick="inventoryFilter()">
                                 <label class="btn-sm btn bg-white text-dark fw-semibold small" for="@id">
                                     <img width="60" src="@imgPath" />
                                     @style
@@ -115,14 +123,16 @@ else
                 <div id="search-options-mileage" class="text-center mb-5">
                     <p class="text-dark fw-bold text-uppercase pb-3">Maximum mileage</p>
 
-                    <input type="number" class="form-control" id="max-mileage">
+                    <input type="number" class="form-control" id="max-mileage" oninput="inventoryFilter()">
                     <span class="fst-italic">or less</span>
 
                 </div>
 
                 <hr />
 
-                <div class="text-center"><a href="/Home/Inventory" class="text-uppercase btn btn-warning text-light fw-bold text-center">RESET FILTER</a></div>
+                <div class="text-center">
+                    <a href="/Home/Inventory" class="text-uppercase btn btn-warning text-light fw-bold text-center">RESET FILTER</a>
+                </div>
 
 
                 @*NEW STYLE SEARCH OPTIONS*@
@@ -251,7 +261,9 @@ else
         </div>
 
         <hr />
-        @Html.Partial("_Vehicles", ViewData)
+        <div id="vehicles-partial-div">
+            @Html.Partial("_Vehicles", ViewData)
+        </div>
     </div>
 </div>
 
@@ -294,12 +306,71 @@ else
             }
         }
 
+        function inventoryFilter() {
+                var sortOrder = $("#orderby-inventory").val();
+                var cols = $("#num-cols-inventory").val();
+                var brands = $("#search-brand").val();
+                var minPrice = $("#min-price-input").val();
+                var maxPrice = $("#max-price-input").val();
+                var fuelType = $("#search-fueltype").val();
+                var maxMileage = $("#max-mileage").val();
+                var bodyStyles = [];
+
+            console.log(maxMileage);
+
+                var bodyStylesChecks = document.getElementsByName("bodystyle-buttons");
+                for (var i = 0; i < bodyStylesChecks.length; i++) {
+                    if (bodyStylesChecks[i].checked) {
+                        bodyStyles.push(bodyStylesChecks[i].value);
+                    }
+                }
+                @*@Model.NumCols = (cols == null || cols == 4) ? 4 : 3;*@
+
+                @*var partialView = `@Html.Partial("_Vehicles", Model)`;*@
+                var model = {
+                    "Inventory": @Html.Raw(Json.Encode(Model.Inventory)),
+                    "SearchQuery": @Html.Raw(Json.Encode(Model.SearchQuery)),
+                    "NumCols": (cols == null || cols == 4) ? 4 : 3,
+                    "SortOrder": (!sortOrder) ? "" : sortOrder,
+                    "Brands": brands,
+                    "MinPrice": minPrice,
+                    "MaxPrice": maxPrice,
+                    "BodyStyles": bodyStyles,
+                    "FuelType": fuelType,
+                    "MaxMileage": maxMileage
+                };
+                //$("#vehicles-partial-div").html(partialView);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("InventoryFilter", "Home")',
+                    data: { Inventory: model.Inventory, SearchQuery: model.SearchQuery, NumCols: model.NumCols, SortOrder: model.SortOrder, Brands: model.Brands, MinPrice: model.MinPrice, MaxPrice: model.MaxPrice, BodyStyles: model.BodyStyles, FuelType: model.FuelType, MaxMileage: model.MaxMileage },
+                    cache: false,
+                    success: function (partialView) {
+                        $("#vehicles-partial-div").html(partialView);
+                    },
+                    error: function (error) {
+                        console.log('Exception:', error.responseText);
+                    }
+                });
+        }
+
         $(document).ready(function () {
             $("#nav-item-home").removeClass("my-navbar-active");
             $("#nav-item-contact").removeClass("my-navbar-active");
             $("#nav-item-about").removeClass("my-navbar-active");
             $("#nav-item-inventory").addClass("my-navbar-active");
+
+            //$("orderby-inventory").change(function () {
+            //    var sortOrder = $("#orderby-inventory").val();
+            //    var cols = $("#num-cols-inventory").val();
+            //});
+
+            $("#num-cols-inventory,#orderby-inventory,#search-brand,#min-price-input,#max-price-input,#search-fueltype").change(function () {
+                inventoryFilter();
+            });
         });
+
+
 
     </script>
 

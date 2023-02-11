@@ -69,10 +69,11 @@ namespace AutoDealership.Controllers
             model.AllBrands = brands;
             ViewData.Model = model;
             ViewData["Brands"] = db.Brands.ToList();
-            if(model.Inventory.Count > 0)
+            model.NumCols = 4;
+            if (model.Inventory.Count > 0)
             {
                 ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
-                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max() + 100;
             }
             else
             {
@@ -96,6 +97,17 @@ namespace AutoDealership.Controllers
             model.SearchQuery = search.Split(' ');
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
+            model.NumCols = 4;
+            if (model.Inventory.Count > 0)
+            {
+                ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
+                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+            }
+            else
+            {
+                ViewBag.MinPrice = 0;
+                ViewBag.MaxPrice = 10000;
+            }
             return View("Inventory", model);
         }
 
@@ -136,6 +148,17 @@ namespace AutoDealership.Controllers
             model.SearchQuery = category.Split(' ');
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
+            model.NumCols = 4;
+            if (model.Inventory.Count > 0)
+            {
+                ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
+                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+            }
+            else
+            {
+                ViewBag.MinPrice = 0;
+                ViewBag.MaxPrice = 10000;
+            }
             return View("Inventory", model);
         }
 
@@ -153,7 +176,65 @@ namespace AutoDealership.Controllers
             model.SearchQuery = new string[] { "High-Performance", "Power", "Speed", "Exotic" };
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
+            model.NumCols = 4;
+            if (model.Inventory.Count > 0)
+            {
+                ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
+                ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+            }
+            else
+            {
+                ViewBag.MinPrice = 0;
+                ViewBag.MaxPrice = 10000;
+            }
             return View("Inventory", model);
+        }
+
+        [HttpPost]
+        public ActionResult InventoryFilter([System.Web.Http.FromBody] List<Vehicle> Inventory, [System.Web.Http.FromBody] string[] SearchQuery, [System.Web.Http.FromBody] int NumCols, [System.Web.Http.FromBody] string SortOrder, [System.Web.Http.FromBody] int[] Brands, [System.Web.Http.FromBody] int MinPrice, [System.Web.Http.FromBody] int MaxPrice, [System.Web.Http.FromBody] string[] BodyStyles, [System.Web.Http.FromBody] string FuelType, [System.Web.Http.FromBody] int? MaxMileage)
+        {
+            var db = new ApplicationDbContext();
+            InventoryViewModel model = new InventoryViewModel();
+            if(!String.IsNullOrEmpty(SortOrder))
+            {
+                if(SortOrder.ToLower().Equals("ascending"))
+                {
+                    model.Inventory = Inventory.OrderBy(veh => veh.Price).ToList();
+                }
+                else if (SortOrder.ToLower().Equals("descending"))
+                {
+                    model.Inventory = Inventory.OrderByDescending(veh => veh.Price).ToList();
+                }
+            }
+            else
+                model.Inventory = Inventory;
+
+            if (!String.IsNullOrEmpty(FuelType))
+            {
+                model.Inventory = model.Inventory.Where(veh => veh.FuelType.ToString().Equals(FuelType)).ToList();
+            }
+            else
+                model.Inventory = Inventory;
+
+            if(MaxMileage != null && model.Inventory != null)
+            {
+                model.Inventory = model.Inventory.Where(veh => veh.Mileage <= MaxMileage).ToList();
+            }
+
+            if (!Brands.Contains(-1) && model.Inventory != null)
+            {
+                model.Inventory = model.Inventory.Where(veh => Brands.Contains(veh.BrandId)).ToList();
+            }
+            if(BodyStyles != null && BodyStyles.Length > 0 && model.Inventory != null)
+            {
+                model.Inventory = model.Inventory.Where(veh => BodyStyles.Contains(veh.BodyStyle.ToString())).ToList();
+            }
+
+            model.Inventory = model.Inventory.Where(veh => veh.Price >= MinPrice && veh.Price <= MaxPrice).ToList();
+            model.NumCols = NumCols;
+            model.SearchQuery = SearchQuery;
+            model.AllBrands = db.Brands.ToList();
+            return PartialView("_Vehicles", model);
         }
 
         public ActionResult About()
