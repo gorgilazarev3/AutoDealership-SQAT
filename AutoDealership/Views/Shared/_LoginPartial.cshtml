@@ -5,19 +5,20 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right my-navbar-text">
+    <ul class="nav navbar-nav navbar-right my-navbar-text gap-3 align-items-center align-content-center">
         <li class="nav-item">
-            <a class="p-3" style="margin-top: 0.1em" id="profile-icon" href="/Manage/Index"><i class="fa fa-user fa-2x"></i></a>
+            <a class="p-3" style="margin-top: 0.1em" id="profile-icon" href="/Manage/Index"><i class="far fa-user-circle fs-4"></i></a>
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link", area = "" })*@
         </li>
-        <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li class="nav-item"><a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()"><i class="far fa-sign-out-alt fs-4"></i> </a></li>
     </ul>
     }
 }
 else
 {
-<ul class="nav navbar-nav navbar-right my-navbar-text my-navbar-account-links">
-    <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link btn text-light", area = "" })</li>
+<ul class="nav navbar-nav navbar-right my-navbar-text my-navbar-account-links align-items-center gap-2">
+    <li class="nav-item"><a class="text-decoration-none" href="/Account/Login"><i class="far fa-sign-in-alt"></i> Log In</a></li>
+    @*<li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link btn text-light", area = "" })</li>*@
     <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link btn btn-warning rounded-pill", area = "" })</li>
 </ul>
 }

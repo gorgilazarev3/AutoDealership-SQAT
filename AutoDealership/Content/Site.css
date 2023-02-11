@@ -229,7 +229,7 @@ div#corner-triangle {
     /*filter: grayscale(200%);*/
 }
 
-#contact-header {
+#contact-header, #about-header {
     background-image: url("https://www.freewebheaders.com/wp-content/gallery/cars/porsche-911-silver-color-top-speed-car-web-header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -237,6 +237,14 @@ div#corner-triangle {
     background-blend-mode: multiply;
     background-position: center;
     /*filter: grayscale(200%);*/
+}
+
+#contact-header > div.p-5, #about-header > div.p-5, #inventory-header > div.p-5 {
+    width: fit-content;
+    margin: auto;
+    background-color: #00000047;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 #best-features-div {
@@ -305,4 +313,15 @@ div#corner-triangle {
     background-repeat: no-repeat;
     background-color: rgb(0 0 0 / 30%);
     background-blend-mode: darken;
+}
+
+#most-freq-questions.accordion {
+    --bs-accordion-active-bg: white;
+    --bs-accordion-active-color: var(--my-blue);
+}
+
+a.dashboard-panel:hover {
+    box-shadow: -1px 1px 15px 0px rgba(95,95,95,0.76) !important;
+    -webkit-box-shadow: -1px 1px 15px 0px rgba(95,95,95,0.76) !important;
+    -moz-box-shadow: -1px 1px 15px 0px rgba(95,95,95,0.76) !important;
 }

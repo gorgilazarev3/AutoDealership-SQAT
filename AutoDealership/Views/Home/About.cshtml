@@ -1,18 +1,139 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@{ ViewBag.Title = "About"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Home > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
 
-<p>Use this area to provide additional information.</p>
+<div class="row bg-light row-cols-3 gap-5 justify-content-around text-center">
+    <div class="col-auto mt-5 mb-5" style="max-width: 25em;">
+        <div class="w-auto bg-white" style="min-height: 23em;">
+            <div class="mb-3 pt-3">
+                <i class="fas fa-car my-blue-text-color display-3"></i>
+                <i class="fas fa-hand-holding-usd my-blue-text-color display-5" style="margin-left: -0.3em; rotate: -15deg;"></i>
+            </div>
+
+            <div class="p-3">
+                <h5 class="h5 pb-3">Easy Financing</h5>
+                <p class="fs6 fw-semibold text-break">
+                    With our leasing option, financing is super easy - low monthly rates and low APR for the first years. We have tons of vehicles that offer a leasing option, use our budget search tool in our homepage and set it to monthly price in order to see the vehicles we offer with leasing option adjusted to your budget.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto mt-5 mb-5" style="max-width: 25em;">
+        <div class="w-auto my-blue-background-color" style="min-height: 23em;">
+            <div class="mb-3 pt-3">
+                <i class="fas fa-warehouse text-white display-5"></i>
+            </div>
+
+            <div class="p-3 text-white">
+                <h5 class="h5 pb-3">Striving for excellence</h5>
+                <p class="fs6 fw-semibold text-break">
+                    Our motto is striving for excellence, our mission is to make the purchase of your perfect vehicle easy and stress-free. Prepare everything online and schedule your appointment, on the scheduled date and time come to see the vehicle in person and take it home!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto mt-5 mb-5" style="max-width: 25em;">
+        <div class="w-auto bg-white" style="min-height: 23em;">
+            <div class="mb-3 pt-3">
+                <i class="fas fa-tire my-blue-text-color display-5"></i>
+            </div>
+
+            <div class="p-3">
+                <h5 class="h5 pb-3">All Common Brands</h5>
+                <p class="fs6 fw-semibold text-break">
+                    Our vehicle catalog contains vehicles from all the well known common brands, as well as some exclusive high-performance and luxury vehicles.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container row m-5">
+    <div class="col-1">
+
+    </div>
+    <div class="col-5">
+        <div>
+            <h2 class="h2 fw-bold pb-3">
+                Most Frequent <span class="my-orange-text-color">Questions</span>
+            </h2>
+
+            <hr />
+
+            <div class="accordion accordion-flush" id="most-freq-questions">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            How can I reserve a vehicle for an appointment / test drive?
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            In order to reserve a vehicle you have to be logged in first. If you do not have an account, create one <a class="text-decoration-none" href="/Account/Register">here</a>. After creating your account, you need to choose your vehicle, go to the details and press the button Reserve (if you want to reserve the vehicle for an appointment) or Schedule a Test Drive (if you want to schedule a test drive). In the pop up that appears you can set your time and date for the appointment.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            Is there a warranty for all purchased vehicles?
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body">
+                            Yes, all purchased vehicles receive a Warranty that lasts for 120 days or 5,000 km (whichever comes first) with the option to buy an Extended Warranty.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            How do I know that the actual condition of the vehicle is the one that is listed on the website?
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            We have the paperwork for all maintenance done for every vehicle and also all safety inspection checks. When you come to your appointment to view the vehicle, upon request these documents can be shown to you and also before purchasing the vehicle a free history inspection is given to the buyer to verify the condition of the vehicle along with all of the mentioned documents.                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-5 ms-5">
+        <div>
+            <h2 class="h2 fw-bold pb-3">
+                What customers <span class="my-orange-text-color">say</span>
+            </h2>
+        </div>
+        <div style="background-image: url(/Content/Images/textbox.png); background-repeat: no-repeat; background-size: cover; margin-top: -4em;">
+            <p class="text-break ps-5 pe-5 fw-semibold fst-italic mt-5 mb-5" style="padding-top: 7em; padding-bottom: 11em;">This is the best website I have used for purchasing a vehicle. It is so easy because you can do all the research upfront from home without having to go dealer to dealer... And also you don't have to worry about the condition of the vehicles since everything is as stated, I have verified that myself. We have bought 2 cars from here and would recommend anyone who is looking for a vehicle to use this website. 10/10 experience</p>
+        </div>
+
+        <div>
+            <p class="fw-bold fs-5">John Smith</p>
+            <p class="fs-6">Mercedes E Class and Skoda Superb Owner (thru AutoDealership)</p>
+        </div>
+    </div>
+    <div class="col-1">
+
+    </div>
+</div>
+
 
 @section Scripts {
     <script>
+
         $(document).ready(function () {
             $("#nav-item-home").removeClass("my-navbar-active");
             $("#nav-item-contact").removeClass("my-navbar-active");
             $("#nav-item-inventory").removeClass("my-navbar-active");
             $("#nav-item-about").addClass("my-navbar-active");
         });
-    </script>    
+    </script>
 }

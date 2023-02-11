@@ -22,6 +22,7 @@ namespace AutoDealership.Controllers
         public ActionResult Inventory(string search)
         {
             ViewBag.ActiveNav = "Inventory";
+            ViewData["ActiveNav"] = "Inventory";
             var db = new ApplicationDbContext();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
@@ -84,6 +85,7 @@ namespace AutoDealership.Controllers
         public ActionResult InventoryByBodyStyle(string search)
         {
             ViewBag.ActiveNav = "Inventory";
+            ViewData["ActiveNav"] = "Inventory";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
@@ -101,6 +103,7 @@ namespace AutoDealership.Controllers
         public ActionResult InventoryByPrice(int price, string category)
         {
             ViewBag.ActiveNav = "Inventory";
+            ViewData["ActiveNav"] = "Inventory";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
@@ -140,6 +143,7 @@ namespace AutoDealership.Controllers
         public ActionResult SpeedInventory()
         {
             ViewBag.ActiveNav = "Inventory";
+            ViewData["ActiveNav"] = "Speed - High-Performance Catalog";
             var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
@@ -156,7 +160,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "About";
             ViewBag.Message = "Your application description page.";
-
+            ViewData["ActiveNav"] = "About";
             return View();
         }
 
@@ -164,7 +168,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "Contact";
             ViewBag.Message = "Your contact page.";
-
+            ViewData["ActiveNav"] = "Contact";
             return View();
         }
 

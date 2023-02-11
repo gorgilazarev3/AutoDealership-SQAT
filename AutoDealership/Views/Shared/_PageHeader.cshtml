@@ -1,0 +1,12 @@
+﻿<div class="row mb-5">
+        @if (ViewData["ActiveNav"].ToString().ToLower().Contains("speed"))
+        {
+        <div class="text-center" id="contact-header" style="background-image: url(https://www.greatamericandays.com/sites/default/files/styles/product_page_main_image/public/product_images/Supercars-Page-Header.jpg?itok=O61ZJeX9)">
+        }
+
+            <div class="p-5">
+                <h2 class="h2 text-white fw-bold">@ViewData["ActiveNav"]</h2>
+                <h5 class="h5 text-white">Home > @ViewData["ActiveNav"]</h5>
+            </div>
+        </div>
+</div>
