@@ -12,17 +12,40 @@
     }
     else
     {
-        <div class="container row">
+        <div class="container row justify-content-between gap-5">
             @{
                 var url = "/Vehicle/Details/" + Model.ReservedVehicle.Id;
             }
             <div class="col">
                 <a href=@url><img src="@Model.ReservedVehicle.CoverImageURL" class="img-thumbnail" /></a>
-                <p>@Model.ReservedVehicle.Year  @Model.ReservedVehicle.Model</p>
+                
+            </div>
+            <div class="col">
+                <h4 class="h4 fw-bold pb-3">@Model.ReservedVehicle.Model</h4>
+                <p>@Model.ReservedVehicle.Description</p>
+                <div class="row fw-semibold">
+                    <div class="col">
+                        <p>Year: @Model.ReservedVehicle.Year</p>
+                        <p>Fuel: @Model.ReservedVehicle.FuelType</p>
+                        <p>Horsepower: @Model.ReservedVehicle.Horsepower</p>
+                        <p>Color: @Model.ReservedVehicle.Color</p>
+                    </div>
+                    <div class="col">
+                        <p>Mileage: @Model.ReservedVehicle.Mileage</p>
+                        <p>Engine: @Model.ReservedVehicle.Engine</p>
+                        <p>Fuel Efficiency: @Model.ReservedVehicle.FuelEfficiency l/100km</p>
+                        <p>Condition: @Model.ReservedVehicle.VehicleStatus</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn my-orange-background-color text-light">@Model.ReservedVehicle.Price $</button>
             </div>
         </div>
-    }
-    <div class="container row">
+                }
+
+    <hr />
+    <div class="container row justify-content-between gap-5">
         @if (Model.TestDriveVehicles.Count == 0)
         {
             <h4>You haven't scheduled any test drives</h4>
@@ -31,13 +54,33 @@
         {
             foreach (var veh in Model.TestDriveVehicles)
             {
-                <div class="col">
-                @{
-                var url = "/Vehicle/Details/" + veh.Id;
-                }
-                    <a href=@url><img src="@veh.CoverImageURL" class="img-thumbnail" /></a>
-                    <p>@veh.Year  @veh.Model</p>
+               var url = "/Vehicle/Details/" + veh.Id;
+
+            <div class="col">
+                <a href=@url><img src="@veh.CoverImageURL" class="img-thumbnail" /></a>
+                
+            </div>
+                        <div class="col">
+                <h4 class="h4 fw-bold pb-3">@veh.Model</h4>
+                <p>@veh.Description</p>
+                <div class="row fw-semibold">
+                    <div class="col">
+                        <p>Year: @veh.Year</p>
+                        <p>Fuel: @veh.FuelType</p>
+                        <p>Horsepower: @veh.Horsepower</p>
+                        <p>Color: @veh.Color</p>
+                    </div>
+                    <div class="col">
+                        <p>Mileage: @veh.Mileage</p>
+                        <p>Engine: @veh.Engine</p>
+                        <p>Fuel Efficiency: @veh.FuelEfficiency l/100km</p>
+                        <p>Condition: @veh.VehicleStatus</p>
+                    </div>
                 </div>
+            </div>
+            <div class="col">
+                <button class="btn my-orange-background-color text-light">@veh.Price $</button>
+            </div>
             }
         }
     </div>

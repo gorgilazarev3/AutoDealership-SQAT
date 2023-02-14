@@ -252,9 +252,14 @@ namespace AutoDealership.Controllers
         public ActionResult CancelReservation(int id)
         {
             var reservation = db.VehicleReservations.Find(id);
+            if (User.IsInRole("Customer") && !User.Identity.Name.Equals(reservation.UserId))
+            {
+                return HttpNotFound();
+            }
             var vehicle = db.Vehicles.Find(reservation.VehicleId);
             var user = db.Users.Find(reservation.UserId);
             vehicle.InStock = true;
+            
             if (vehicle.IsTestDriven)
                 vehicle.IsTestDriven = false;
             user.ReservedVehicleId = null;
