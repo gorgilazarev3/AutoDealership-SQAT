@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="form-group pb-lg-4">
-                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label w-100" })
                             <div class="col-md-10">
                                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                             </div>
@@ -55,7 +55,7 @@
                     <div class="p-sm-3">
                         <i class=""></i>
                         <p class="form-text d-inline">Already have an account?</p> 
-                        @Html.ActionLink("Login","Account",null,new { @class = "page-link link-warning d-inline" })
+                        @Html.ActionLink("Login","Login","Account",null,new { @class = "page-link link-warning d-inline" })
                     </div>
 
                 </div>

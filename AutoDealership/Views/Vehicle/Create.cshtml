@@ -1,179 +1,550 @@
 ﻿@model AutoDealership.Models.CreateVehicleViewModel
 
-@{
-    ViewBag.Title = "Create";
-}
+@{ ViewBag.Title = "Create";
+    ViewBag.ActiveNav = "Post a new listing"; }
 
-<h2 class="display-6 text-center pt-4">Post a new listing</h2>
+<div class="row mb-5">
+    <div class="text-center" id="contact-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Vehicles > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
 
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
-<div class="form-horizontal m-auto">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.Vehicle.Vehicle.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vehicle.Brand, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                <div class="ms-5 me-5 row justify-content-center">
+                    <div class="col">
+                        <div>
+                            <h3 class="h3">
+                                Basic Vehicle Information
+                            </h3>
 
-<div class="form-group mb-3">
-    <div class="d-inline">
-        <p class="lead">Select the brand of the vehicle</p>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Vehicle.BrandId, new SelectList(Model.Brands, "Id", "Name"), new { @class = "form-select" })
-            @*@Html.HiddenFor(model => model.Vehicle.Brand.Name)
-                @Html.HiddenFor(model => model.Vehicle.Brand.LogoURL)
-                @Html.HiddenFor(model => model.Vehicle.Brand.Vehicles)
-                @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })*@
-        </div>
-    </div>
-    <div class="form-group" id="brand-div">
-        @*<button type="button" id="add-brand-btn" class="btn btn-info">Add brand</button>*@
-        <p class="text-muted">Do not see your brand? Add a new one</p>
-        @Html.ActionLink("Add a new brand", "CreateBrand", "Vehicle", new { @class = "btn btn-info" })
-    </div>
+                            <hr />
 
+                            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                            <div class="form-group mb-3">
+                                <div class="d-inline">
+                                    <p class="lead fw-semibold">1. Select the brand of the vehicle</p>
+                                    <div class="col-md-10 form-floating">
+                                        @Html.DropDownListFor(model => model.Vehicle.BrandId, new SelectList(Model.Brands, "Id", "Name"), new { @class = "form-select", @id = "floatingSelectBrand" })
+                                        <label for="floatingSelectBrand">Brand</label>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="brand-div">
+                                    <p class="text-muted d-inline">Do not see your brand? </p>
+                                    @Html.ActionLink("Add a new brand", "CreateBrand", "Vehicle", new { @class = "btn my-blue-background-color text-white m-2" })
+                                </div>
+
+                            </div>
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">2. Type in the @Html.LabelFor(model => model.Vehicle.Model, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10">
+                                    <div class="form-floating">
+                                        @Html.EditorFor(model => model.Vehicle.Model, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputModel", @placeholder = "ex. E Class" } })
+                                        <label for="floatingInputModel" class="text-muted">Model (ex. E250 CDI)</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Model, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    3. Type in the @Html.LabelFor(model => model.Vehicle.Year, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10">
+                                    <div class="form-floating">
+                                        @Html.EditorFor(model => model.Vehicle.Year, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputYear", @placeholder = "ex. 2019" } })
+                                        <label for="floatingInputYear" class="text-muted">Year (ex. 2019)</label>
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Year, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">4. Select the @Html.LabelFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EnumDropDownListFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "form-select", @id = "floatingSelectBodystyle" })
+                                    <label for="floatingSelectBodystyle">Body Style</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.BodyStyle, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">5. Select the status of the vehicle</p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EnumDropDownListFor(model => model.Vehicle.VehicleStatus, htmlAttributes: new { @class = "form-select", @id = "floatingSelectStatus" })
+                                    <label for="floatingSelectStatus">Vehicle status</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.VehicleStatus, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">6. Type in the @Html.LabelFor(model => model.Vehicle.Mileage, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10">
+                                    <div class="form-floating input-group">
+                                        @Html.EditorFor(model => model.Vehicle.Mileage, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputMileage", @placeholder = "ex. 10000 km", @aria_describedby = "basic-addon-km" } })
+                                        <span class="input-group-text" id="basic-addon-km">km</span>
+                                        <label for="floatingInputMileage" class="text-muted">Mileage (ex. 10000 km)</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Mileage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    7. Type in the @Html.LabelFor(model => model.Vehicle.Color, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EditorFor(model => model.Vehicle.Color, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputExtColor", @placeholder = "ex. Blue" } })
+                                    <label for="floatingInputExtColor" class="text-muted">Exterior Color (ex. Gray)</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Color, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    8. Type in the @Html.LabelFor(model => model.Vehicle.InteriorColor, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EditorFor(model => model.Vehicle.InteriorColor, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputInteriorColor", @placeholder = "ex. White" } })
+                                    <label for="floatingInputInteriorColor" class="text-muted">Interior Color (ex. White)</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.InteriorColor, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div>
+                            <h3 class="h3">
+                                Technical Vehicle Information
+                            </h3>
+
+                            <hr />
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    9. Select the @Html.LabelFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EnumDropDownListFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "form-select", @id = "floatingSelectFuel" })
+                                    <label for="floatingSelectFuel">Fuel type</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.FuelType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">10. Type in the @Html.LabelFor(model => model.Vehicle.FuelEfficiency, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10">
+                                    <div class="form-floating input-group">
+                                        @Html.EditorFor(model => model.Vehicle.FuelEfficiency, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputEfficiency", @placeholder = "ex. 5 l / 100 km", @aria_describedby = "basic-addon-eff" } })
+                                        <span class="input-group-text" id="basic-addon-eff">l / 100 km</span>
+                                        <label for="floatingInputEfficiency" class="text-muted">Fuel Efficiency (ex. 5 l / 100 km)</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.FuelEfficiency, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    11. Select the @Html.LabelFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EnumDropDownListFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "form-select", @id = "floatingSelectDrivetrain" })
+                                    <label for="floatingSelectDrivetrain">Drive train</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.DrivetrainType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    12. Select the @Html.LabelFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EnumDropDownListFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "form-select", @id = "floatingSelectTType" })
+                                    <label for="floatingSelectTType">Transmission type</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Transmission.TransmissionType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    13. Type in the @Html.LabelFor(model => model.Vehicle.Transmission.NumberSpeeds, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EditorFor(model => model.Vehicle.Transmission.NumberSpeeds, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputNSpeeds", @placeholder = "ex. 5" } })
+                                    <label for="floatingInputNSpeeds" class="text-muted">Number of speeds (ex. 5)</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Transmission.NumberSpeeds, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <p class="text-muted">Please fill in the Engine Information below</p>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">
+                                    14. Type in the @Html.LabelFor(model => model.Vehicle.Engine, htmlAttributes: new { @class = "form-label" }) of the vehicle
+                                </p>
+                                <div class="col-md-10 form-floating">
+                                    @Html.EditorFor(model => model.Vehicle.Engine, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputEngine", @placeholder = "ex. 1.9 TDI" } })
+                                    <label for="floatingInputEngine" class="text-muted">Engine of the vehicle (ex. 1.9 TDI)</label>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Engine, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">15. Type in the @Html.LabelFor(model => model.Vehicle.Horsepower, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10">
+                                    <div class="form-floating input-group">
+                                        @Html.EditorFor(model => model.Vehicle.Horsepower, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputHorsepower", @placeholder = "ex. 90 HP", @aria_describedby = "basic-addon-hp" } })
+                                        <span class="input-group-text" id="basic-addon-hp">HP</span>
+                                        <label for="floatingInputHorsepower" class="text-muted">Power (measured in Horsepower, ex. 90 HP)</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Horsepower, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <p class="lead fw-semibold">16. Type in the @Html.LabelFor(model => model.Vehicle.Torque, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                                <div class="col-md-10">
+                                    <div class="form-floating input-group">
+                                        @Html.EditorFor(model => model.Vehicle.Torque, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputTorque", @placeholder = "ex. 300 nm", @aria_describedby = "basic-addon-nm" } })
+                                        <span class="input-group-text" id="basic-addon-nm">nm</span>
+                                        <label for="floatingInputTorque" class="text-muted">Torque (measured in Newton-meters, ex. 300 nm)</label>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Vehicle.Torque, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                                <div class="form-horizontal m-auto">
+                                    <hr class="mb-5 mt-5" />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="form-group mb-3 ms-5">
+                                        <p class="lead fw-semibold">17. Short description of the vehicle</p>
+                                        @*@Html.LabelFor(model => model.Vehicle.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-10 form-floating">
+                                            @Html.TextAreaFor(model => model.Vehicle.Description, new { @class = "form-control", @placeholder = "Here write a short description that summarizes the vehicle", @id = "floatingTextarea2" })
+                                            <label for="floatingTextarea2" class="text-muted">Here write a short description that summarizes the vehicle</label>
+                                            @Html.ValidationMessageFor(model => model.Vehicle.Description, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3 ms-5">
+                                        <p class="lead fw-semibold">18. Features are typed in the text area below, each feature in a seperate line - in the views they are displayed as a bulleted list</p>
+                                        @Html.LabelFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-label" })
+                                        <div class="col-md-10 form-floating">
+
+                                            @Html.TextAreaFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-control", @placeholder = "Highlighted Features - write each feature in a separate line", @id = "floatingTextarea1" })
+                                            <label for="floatingTextarea1" class="text-muted">Highlighted Features - write each feature in a separate line</label>
+                                        </div>
+                                    </div>
+                                    <hr class="mb-5 mt-5" />
+
+                                    <h3 class="fw-bold h3 text-center mb-5 border-warning border-bottom border-3 ms-auto me-auto" style="width:fit-content;">Pricing Options</h3>
+
+                                    <div class="gap-2 row row-cols-3">
+                                        <div class="col-auto">
+                                            <div class="form-group mb-3">
+                                                @*@Html.LabelFor(model => model.Vehicle.InStock, htmlAttributes: new { @class = "form-label col-md-2" })*@
+                                                <div class="form-check form-switch">
+                                                    @Html.CheckBoxFor(model => model.Vehicle.IsForLease, new { @class = "form-check-input", @type = "checkbox" })
+                                                    @*@Html.EditorFor(model => model.Vehicle.InStock, new { @class = "form-check-input", @type="checkbox" })*@
+                                                    <label class="form-check-label text-break fw-semibold" for="Vehicle_IsForLease">Leasing offer available for this vehicle?</label>
+                                                    @Html.ValidationMessageFor(model => model.Vehicle.IsForLease, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <p class="lead fw-semibold fs-6">
+                                                    @Html.LabelFor(model => model.Vehicle.MonthlyPayment, htmlAttributes: new { @class = "form-label" }) (enter if vehicle is for lease, otherwise put 0 )
+                                                </p>
+                                                <div class="form-floating input-group">
+                                                    @Html.EditorFor(model => model.Vehicle.MonthlyPayment, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputMonthly", @placeholder = "ex. 500 $", @aria_describedby = "basic-addon-usd" } })
+                                                    <span class="input-group-text" id="basic-addon-usd">$</span>
+                                                    <label for="floatingInputMonthly" class="text-muted">Monthly Payment (in USD, ex. 500 $)</label>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Vehicle.MonthlyPayment, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group mb-3">
+                                                @*@Html.LabelFor(model => model.Vehicle.InStock, htmlAttributes: new { @class = "form-label col-md-2" })*@
+                                                <div class="form-check form-switch">
+                                                    @Html.CheckBoxFor(model => model.Vehicle.InStock, new { @class = "form-check-input", @type = "checkbox", @checked = true })
+                                                    @*@Html.EditorFor(model => model.Vehicle.InStock, new { @class = "form-check-input", @type="checkbox" })*@
+                                                    <label class="form-check-label text-break fw-semibold" for="Vehicle_InStock">Available for reservation after posting listing?</label>
+                                                    @Html.ValidationMessageFor(model => model.Vehicle.InStock, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <p class="lead fw-semibold fs-6">
+                                                    @Html.LabelFor(model => model.Vehicle.Price, htmlAttributes: new { @class = "form-label col-md-2" })
+                                                </p>
+                                                <div class="form-floating input-group">
+                                                    @Html.EditorFor(model => model.Vehicle.Price, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputPrice", @placeholder = "ex. 5000 $", @aria_describedby = "basic-addon-usd" } })
+                                                    <span class="input-group-text" id="basic-addon-usd">$</span>
+                                                    <label for="floatingInputPrice" class="text-muted">Price (in USD, ex. 5000 $)</label>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Vehicle.Price, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group mb-3">
+                                                @*@Html.LabelFor(model => model.Vehicle.InStock, htmlAttributes: new { @class = "form-label col-md-2" })*@
+                                                <div class="form-check form-switch">
+                                                    @Html.CheckBoxFor(model => model.Vehicle.IsForRent, new { @class = "form-check-input", @type = "checkbox" })
+                                                    @*@Html.EditorFor(model => model.Vehicle.InStock, new { @class = "form-check-input", @type="checkbox" })*@
+                                                    <label class="form-check-label text-break fw-semibold" for="Vehicle_IsForRent">Is vehicle for rent?</label>
+                                                    @Html.ValidationMessageFor(model => model.Vehicle.IsForRent, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <p class="lead fw-semibold fs-6">
+                                                    @Html.LabelFor(model => model.Vehicle.DailyPayment, htmlAttributes: new { @class = "form-label" }) (Fill in only if vehicle is for rent)
+                                                </p>
+                                                <div class="form-floating input-group">
+                                                    @Html.EditorFor(model => model.Vehicle.DailyPayment, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputDaily", @placeholder = "ex. 50 $", @aria_describedby = "basic-addon-usd" } })
+                                                    <span class="input-group-text" id="basic-addon-usd">$</span>
+                                                    <label for="floatingInputDaily" class="text-muted">Daily Payment (in USD, ex. 50 $)</label>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Vehicle.DailyPayment, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mb-5 mt-5" />
+
+                                    <h3 class="fw-bold h3 text-center mb-5 border-warning border-bottom border-3 ms-auto me-auto" style="width:fit-content;">Image Gallery for the vehicle</h3>
+
+
+                                    <div>
+                                        <div class="row row-cols-2 justify-content-evenly">
+                                            <div class="col-auto">
+                                                <p class="lead fw-semibold">
+                                                    Cover Image Preview:
+                                                </p>
+                                                <img width="400" class="img-thumbnail" id="preview-img" />
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="form-group">
+                                                    <p class="fs-6 fw-semibold">
+                                                        Enter the URL for the cover image here:<br />
+                                                        (preview of the image shown in section left)
+                                                    </p>
+                                                    @*@Html.LabelFor(model => model.Vehicle.CoverImageURL, htmlAttributes: new { @class = "form-label" })*@
+                                                    <div class="col-md-10 form-floating">
+                                                        @Html.EditorFor(model => model.Vehicle.CoverImageURL, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputCover", @placeholder = "https://url.com/img.png", @oninput = "changePreviewImage()" } })
+                                                        <label for="floatingInputCover" class="text-muted">Cover Image URL</label>
+                                                        @Html.ValidationMessageFor(model => model.Vehicle.CoverImageURL, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-5 mt-5" />
+                                        <div class="row mt-5">
+                                            <div class="col-2">
+
+                                            </div>
+                                            <div class="form-group mb-3 col-9">
+                                                <p class="lead fw-semibold">This is the list of images for the vehicle. URL's are pasted into this text area, each URL in a seperate line</p>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Vehicle.ImagesURL, htmlAttributes: new { @class = "form-control", @cols = "10", @rows = "20" })
+                                                </div>
+                                            </div>
+                                            <div class="col-1">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <div class="col">
+                                            <input id="create-veh-btn" type="submit" value="Create listing" class="btn btn-lg my-blue-background-color text-white ps-5 pe-5 pt-2 pb-2" />
+                                        </div>
+                                    </div>
+                                </div>}
+
+<div>
+    @Html.ActionLink("Back to list of all vehicle listings", "Index", null, new { @class="btn my-blue-background-color text-white" })
 </div>
 
 
+@*//OLD CREATE PAGE*@
 
+@*<div class="form-group">
+        @Html.LabelFor(model => model.Vehicle.Vehicle.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vehicle.Brand, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+<!--<div class="form-group mb-3">
+<div class="d-inline">
+    <p class="lead">Select the brand of the vehicle</p>
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Vehicle.BrandId, new SelectList(Model.Brands, "Id", "Name"), new { @class = "form-select" })-->
+@*@Html.HiddenFor(model => model.Vehicle.Brand.Name)
+    @Html.HiddenFor(model => model.Vehicle.Brand.LogoURL)
+    @Html.HiddenFor(model => model.Vehicle.Brand.Vehicles)
+    @Html.ValidationMessageFor(model => model.Vehicle.Brand, "", new { @class = "text-danger" })*@
+<!--</div>
+</div>
+<div class="form-group" id="brand-div">-->
+@*<button type="button" id="add-brand-btn" class="btn btn-info">Add brand</button>*@
+<!--<p class="text-muted">Do not see your brand? Add a new one</p>
+        @Html.ActionLink("Add a new brand", "CreateBrand", "Vehicle", new { @class = "btn btn-info" })
+    </div>
+
+</div>-->
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Model, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Model, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Model, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.Vehicle.FuelType, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Vehicle.FuelType, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.Vehicle.BodyStyle, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Vehicle.BodyStyle, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.Transmission.NumberSpeeds, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Transmission.NumberSpeeds, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Transmission.NumberSpeeds, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.Vehicle.Transmission.TransmissionType, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Vehicle.Transmission.TransmissionType, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.Year, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Year, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Year, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Mileage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Mileage, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Mileage, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.Vehicle.DrivetrainType, htmlAttributes: new { @class = "form-select" })
             @Html.ValidationMessageFor(model => model.Vehicle.DrivetrainType, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Color, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Color, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Color, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.InteriorColor, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.InteriorColor, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.InteriorColor, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.FuelEfficiency, htmlAttributes: new { @class = "control-label col-md-2 w-auto" }) (the fuel efficiency is saved as l/100km)
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.FuelEfficiency, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.FuelEfficiency, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Horsepower, htmlAttributes: new { @class = "control-label col-md-2 w-auto" }) (measured in Horsepower)
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Horsepower, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Horsepower, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Torque, htmlAttributes: new { @class = "control-label col-md-2 w-auto" }) (measured in Newton-metres)
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Torque, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Torque, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Engine, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Engine, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Engine, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
-        <p class="lead">Short description of the vehicle</p>
-        @*@Html.LabelFor(model => model.Vehicle.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Vehicle.Description, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Vehicle.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group mb-3">
+<!--<div class="form-group mb-3">
+<p class="lead">Short description of the vehicle</p>-->
+@*@Html.LabelFor(model => model.Vehicle.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
+<!--<div class="col-md-10 form-floating">
+    @Html.TextAreaFor(model => model.Vehicle.Description, new { @class = "form-control", @placeholder = "Here write a short description that summarizes the vehicle", @id = "floatingTextarea2" })
+    <label for="floatingTextarea2" class="text-muted">Here write a short description that summarizes the vehicle</label>
+    @Html.ValidationMessageFor(model => model.Vehicle.Description, "", new { @class = "text-danger" })
+</div>
+</div>-->
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Price, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.Price, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.Price, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.IsForLease, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
@@ -181,9 +552,9 @@
                 @Html.ValidationMessageFor(model => model.Vehicle.IsForLease, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.IsForRent, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
@@ -191,34 +562,34 @@
                 @Html.ValidationMessageFor(model => model.Vehicle.IsForRent, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.MonthlyPayment, htmlAttributes: new { @class = "control-label col-md-2 w-auto" }) - enter if vehicle is for lease, otherwise put 0
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.MonthlyPayment, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.MonthlyPayment, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.DailyPayment, htmlAttributes: new { @class = "control-label col-md-2 w-auto" }) - enter if vehicle is for rent, otherwise put 0
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.DailyPayment, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.DailyPayment, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.VehicleStatus, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.Vehicle.VehicleStatus, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Vehicle.VehicleStatus, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.InStock, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
@@ -226,43 +597,32 @@
                 @Html.ValidationMessageFor(model => model.Vehicle.InStock, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group">
+@*<div class="form-group">
         @Html.LabelFor(model => model.Vehicle.CoverImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Vehicle.CoverImageURL, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Vehicle.CoverImageURL, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "control-label col-md-2" })
         <p>Features are typed in the text area below, each feature in a seperate line - in the views they are displayed as a bulleted list</p>
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-control" } )
+            @Html.TextAreaFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-control" })
         </div>
-    </div>
+    </div>*@
 
-    <div class="form-group mb-3">
+@*<div class="form-group mb-3">
         @Html.LabelFor(model => model.Vehicle.ImagesURL, htmlAttributes: new { @class = "control-label col-md-2" })
         <p>This is the list of images for the vehicle. URL's are pasted into this text area, each URL in a seperate line</p>
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Vehicle.ImagesURL, htmlAttributes: new { @class = "form-control", @cols = "10", @rows = "30" } )
+            @Html.TextAreaFor(model => model.Vehicle.ImagesURL, htmlAttributes: new { @class = "form-control", @cols = "10", @rows = "30" })
         </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input id="create-veh-btn" type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </div>*@
+@*OLD CREATE PAGE END*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -289,7 +649,7 @@
                     //        var partialDiv = $("#brand-partial-div");
                     //        div.children("#brand-partial-div").remove();
                     //    }
-                        
+
                     //}
                     success: function () {
                     },
@@ -329,22 +689,26 @@
         //});
         function test() {
             //$("#create-brand-btn").click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '/Vehicle/CreateBrand',
-                    success: function (data) {
-                        alert("WORKS");
-                    },
-                    error: function (result) {
-                        alert("ERROR:" + result);
-                    }
-                })
+            $.ajax({
+                type: 'POST',
+                url: '/Vehicle/CreateBrand',
+                success: function (data) {
+                    alert("WORKS");
+                },
+                error: function (result) {
+                    alert("ERROR:" + result);
+                }
+            })
             //})
+        }
+
+        function changePreviewImage() {
+            $('#preview-img').attr('src', $("#floatingInputCover").val());
         }
 
         $("#create-veh-btn").click(function () {
             var features = $("#features-area").val();
-            
+
         });
 
     </script>

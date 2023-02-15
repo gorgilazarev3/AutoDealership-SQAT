@@ -201,11 +201,11 @@
     <div class="row">
         <div class="col-lg-8" style="padding-right: 10em">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                <div class="carousel-indicators">
+                @*<div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
+                </div>*@
                 <div class="carousel-inner">
                     @*<div class="carousel-item active">
                             <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
@@ -486,10 +486,10 @@
     </div>
 </div>
 
-<p>
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Vehicle.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
 
 <!-- Reservation Modal -->
 <div class="modal fade" id="reserve-vehicle-modal" tabindex="-1" aria-labelledby="reserve-vehicle-modalLabel" aria-hidden="true">

@@ -155,6 +155,7 @@ namespace AutoDealership.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Vehicle vehicle = db.Vehicles.Find(id);
+            ViewData["Brands"] = db.Brands.ToList();
             if (vehicle == null)
             {
                 return HttpNotFound();

@@ -88,7 +88,14 @@
         @*OLD FOOTER*@
 
         @*<hr />*@
-        <footer class="my-blue-background-color row mt-5 text-light" style="position: relative; bottom: 0;">
+        @if (ViewBag.ActiveNav != null && ViewBag.ActiveNav.Equals("ManageIndex"))
+        {
+            @:<footer class="my-blue-background-color row text-light" style="position: relative; bottom: 0;">
+        }
+        else
+        {
+            @:<footer class="my-blue-background-color row mt-5 text-light" style="position: relative; bottom: 0;">
+        }
             <div class="container mt-3">
                 <div class="row text-center justify-content-center">
                     <div>
@@ -156,7 +163,7 @@
                             <p style="color:lightgray">Get our weekly newsletter for latest car news, exclusive offers and deals and more!</p>
                         </div>
                         <div>
-                            <input type="email" class="form-control rounded-0 mb-3" placeholder="Your Email*"/>
+                            <input type="email" class="form-control rounded-0 mb-3" placeholder="Your Email*" />
                             <button class="btn btn-warning text-light fw-bold p-2">SUBSCRIBE</button>
                         </div>
                     </div>
@@ -172,42 +179,42 @@
 
         @*<footer class="container-fluid my-blue-background-color row row-cols-5 border-top mt-5 p-0 w-100" style="max-height: 15em; width: 100%; bottom: 0">
 
-                <div class="container row w-100">
+            <div class="container row w-100">
 
-                    <div class="col">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                        </ul>
-                    </div>
+                <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
                 </div>
-            </footer>*@
+
+                <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>*@
 
 
     </div>

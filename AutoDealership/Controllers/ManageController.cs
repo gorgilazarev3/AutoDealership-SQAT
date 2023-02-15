@@ -63,6 +63,8 @@ namespace AutoDealership.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+            ViewBag.ActiveNav = "ManageIndex";
+
 
             if(ViewBag.ActiveBtn == null)
                 ViewBag.ActiveBtn = "profile";

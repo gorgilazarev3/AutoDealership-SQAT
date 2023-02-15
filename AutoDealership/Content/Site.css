@@ -327,3 +327,13 @@ a.dashboard-panel:hover {
     -webkit-box-shadow: -1px 1px 15px 0px rgba(95,95,95,0.76) !important;
     -moz-box-shadow: -1px 1px 15px 0px rgba(95,95,95,0.76) !important;
 }
+
+.logged-in-links a:hover {
+    color: var(--my-orange) !important;
+    text-shadow: 0px 2px 0px 0px black;
+    font-weight: 500;
+}
+
+.form-floating > label {
+    z-index: 1000;
+}
