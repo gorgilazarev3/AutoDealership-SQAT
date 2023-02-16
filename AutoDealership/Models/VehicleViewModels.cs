@@ -33,10 +33,13 @@ namespace AutoDealership.Models
     public class InventoryViewModel
     {
         public List<Vehicle> Inventory { get; set; }
+        public List<Vehicle> FullInventory { get; set; }
         public string[] SearchQuery { get; set; }
         public List<Brand> AllBrands { get; set; }
         public int NumCols { get; set; }
         public string SortOrder { get; set; }
+        public int Pages { get; set; }
+        public int ActivePage { get; set; }
     }
 
 }

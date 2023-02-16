@@ -70,10 +70,15 @@ namespace AutoDealership.Controllers
             ViewData.Model = model;
             ViewData["Brands"] = db.Brands.ToList();
             model.NumCols = 4;
+            model.Pages = (int)Math.Ceiling(model.Inventory.Count / 12.0);
+            model.ActivePage = 0;
             if (model.Inventory.Count > 0)
             {
                 ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
                 ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max() + 100;
+                int skip = (int)Math.Floor(model.Inventory.Count / 12.0);
+                model.FullInventory = model.Inventory;
+                model.Inventory = model.Inventory.Take(12).ToList();
             }
             else
             {
@@ -98,10 +103,14 @@ namespace AutoDealership.Controllers
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
             model.NumCols = 4;
+            model.Pages = (int)Math.Ceiling(model.Inventory.Count / 12.0);
+            model.ActivePage = 0;
             if (model.Inventory.Count > 0)
             {
                 ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
                 ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+                model.FullInventory = model.Inventory;
+                model.Inventory = model.Inventory.Take(12).ToList();
             }
             else
             {
@@ -130,7 +139,7 @@ namespace AutoDealership.Controllers
             }
             else if(category != null && category.ToLower().Equals("sporty"))
             {
-                toDisplay = toDisplay.Where(veh => veh.Horsepower >= 250).ToList();
+                toDisplay = toDisplay.Where(veh => veh.Horsepower >= 200).ToList();
             }
             else if (category != null && category.ToLower().Equals("suvs"))
             {
@@ -149,10 +158,14 @@ namespace AutoDealership.Controllers
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
             model.NumCols = 4;
+            model.Pages = (int)Math.Ceiling(model.Inventory.Count / 12.0);
+            model.ActivePage = 0;
             if (model.Inventory.Count > 0)
             {
                 ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
                 ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+                model.FullInventory = model.Inventory;
+                model.Inventory = model.Inventory.Take(12).ToList();
             }
             else
             {
@@ -177,10 +190,14 @@ namespace AutoDealership.Controllers
             model.AllBrands = brands;
             ViewData["Brands"] = db.Brands.ToList();
             model.NumCols = 4;
+            model.Pages = (int)Math.Ceiling(model.Inventory.Count / 12.0);
+            model.ActivePage = 0;
             if (model.Inventory.Count > 0)
             {
                 ViewBag.MinPrice = model.Inventory.Select(v => v.Price).Min();
                 ViewBag.MaxPrice = model.Inventory.Select(v => v.Price).Max();
+                model.FullInventory = model.Inventory;
+                model.Inventory = model.Inventory.Take(12).ToList();
             }
             else
             {
@@ -191,7 +208,7 @@ namespace AutoDealership.Controllers
         }
 
         [HttpPost]
-        public ActionResult InventoryFilter([System.Web.Http.FromBody] List<Vehicle> Inventory, [System.Web.Http.FromBody] string[] SearchQuery, [System.Web.Http.FromBody] int NumCols, [System.Web.Http.FromBody] string SortOrder, [System.Web.Http.FromBody] int[] Brands, [System.Web.Http.FromBody] int MinPrice, [System.Web.Http.FromBody] int MaxPrice, [System.Web.Http.FromBody] string[] BodyStyles, [System.Web.Http.FromBody] string FuelType, [System.Web.Http.FromBody] int? MaxMileage)
+        public ActionResult InventoryFilter([System.Web.Http.FromBody] List<Vehicle> Inventory, [System.Web.Http.FromBody] List<Vehicle> FullInventory, [System.Web.Http.FromBody] string[] SearchQuery, [System.Web.Http.FromBody] int NumCols, [System.Web.Http.FromBody] string SortOrder, [System.Web.Http.FromBody] int[] Brands, [System.Web.Http.FromBody] int MinPrice, [System.Web.Http.FromBody] int MaxPrice, [System.Web.Http.FromBody] string[] BodyStyles, [System.Web.Http.FromBody] string FuelType, [System.Web.Http.FromBody] int? MaxMileage, [System.Web.Http.FromBody] int? Page, [System.Web.Http.FromBody] int? ActivePage)
         {
             var db = new ApplicationDbContext();
             InventoryViewModel model = new InventoryViewModel();
@@ -199,22 +216,22 @@ namespace AutoDealership.Controllers
             {
                 if(SortOrder.ToLower().Equals("ascending"))
                 {
-                    model.Inventory = Inventory.OrderBy(veh => veh.Price).ToList();
+                    model.Inventory = FullInventory.OrderBy(veh => veh.Price).ToList();
                 }
                 else if (SortOrder.ToLower().Equals("descending"))
                 {
-                    model.Inventory = Inventory.OrderByDescending(veh => veh.Price).ToList();
+                    model.Inventory = FullInventory.OrderByDescending(veh => veh.Price).ToList();
                 }
             }
             else
-                model.Inventory = Inventory;
+                model.Inventory = FullInventory;
 
             if (!String.IsNullOrEmpty(FuelType))
             {
                 model.Inventory = model.Inventory.Where(veh => veh.FuelType.ToString().Equals(FuelType)).ToList();
             }
-            else
-                model.Inventory = Inventory;
+            //else
+            //    model.Inventory = FullInventory;
 
             if(MaxMileage != null && model.Inventory != null)
             {
@@ -229,8 +246,14 @@ namespace AutoDealership.Controllers
             {
                 model.Inventory = model.Inventory.Where(veh => BodyStyles.Contains(veh.BodyStyle.ToString())).ToList();
             }
-
+            model.FullInventory = model.Inventory;
             model.Inventory = model.Inventory.Where(veh => veh.Price >= MinPrice && veh.Price <= MaxPrice).ToList();
+            model.Pages = (int)Math.Ceiling(model.Inventory.Count / 12.0);
+            if (ActivePage == null) ActivePage = 0;
+            model.ActivePage = (int)ActivePage;
+            if (Page == null) Page = 1;
+            int skip = (int)((Page - 1) * 12);
+            model.Inventory = model.Inventory.Skip(skip).Take(12).ToList();
             model.NumCols = NumCols;
             model.SearchQuery = SearchQuery;
             model.AllBrands = db.Brands.ToList();

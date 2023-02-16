@@ -10,8 +10,8 @@
     {
         @:<div class="text-center" id="inventory-header" style="background-image: url(https://d1i1eo6qmdfmdv.cloudfront.net/upload/site/pages/exotics_racing_LA/DSC0112s4j-2.jpg); background-position-y: center;">
         }
-        else
-        {
+    else
+    {
         @:<div class="text-center" id="inventory-header">
         }
 
@@ -57,7 +57,7 @@
                         {
                             if (brand.Vehicles != null)
                             {
-                                <option class="my-blue-text-color" value="@brand.Id">@Html.Raw(brand.Name + " (" + brand.Vehicles.Count + ")")</option>
+                                <option class="my-blue-text-color" value="@brand.Id">@Html.Raw(brand.Name + " (" + brand.Vehicles.Where(veh => Model.FullInventory.Contains(veh)).ToList().Count + ")")</option>
                             }
                             else
                             {
@@ -243,7 +243,7 @@
             </div>
         </div>
     </div>
-    <div class="col-10">
+    <div class="col-10 position-relative">
 
         <div class="container mb-5">
             <select style="width: fit-content;" class="form-select float-start" name="num-cols-inventory" id="num-cols-inventory">
@@ -263,6 +263,8 @@
         <div id="vehicles-partial-div">
             @Html.Partial("_Vehicles", ViewData)
         </div>
+
+
     </div>
 </div>
 
@@ -313,8 +315,8 @@
                 var maxPrice = $("#max-price-input").val();
                 var fuelType = $("#search-fueltype").val();
                 var maxMileage = $("#max-mileage").val();
+                var pages = $("#inventory-pagination .page-item.active").attr("data-page-num");
                 var bodyStyles = [];
-
 
                 var bodyStylesChecks = document.getElementsByName("bodystyle-buttons");
                 for (var i = 0; i < bodyStylesChecks.length; i++) {
@@ -322,11 +324,15 @@
                         bodyStyles.push(bodyStylesChecks[i].value);
                     }
                 }
+
+
+
                 @*@Model.NumCols = (cols == null || cols == 4) ? 4 : 3;*@
 
                 @*var partialView = `@Html.Partial("_Vehicles", Model)`;*@
                 var model = {
                     "Inventory": @Html.Raw(Json.Encode(Model.Inventory)),
+                    "FullInventory": @Html.Raw(Json.Encode(Model.FullInventory)),
                     "SearchQuery": @Html.Raw(Json.Encode(Model.SearchQuery)),
                     "NumCols": (cols == null || cols == 4) ? 4 : 3,
                     "SortOrder": (!sortOrder) ? "" : sortOrder,
@@ -335,16 +341,19 @@
                     "MaxPrice": maxPrice,
                     "BodyStyles": bodyStyles,
                     "FuelType": fuelType,
-                    "MaxMileage": maxMileage
+                    "MaxMileage": maxMileage,
+                    "Page": pages,
+                    "ActivePage": @Html.Raw(Json.Encode(Model.ActivePage))
                 };
                 //$("#vehicles-partial-div").html(partialView);
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("InventoryFilter", "Home")',
-                    data: { Inventory: model.Inventory, SearchQuery: model.SearchQuery, NumCols: model.NumCols, SortOrder: model.SortOrder, Brands: model.Brands, MinPrice: model.MinPrice, MaxPrice: model.MaxPrice, BodyStyles: model.BodyStyles, FuelType: model.FuelType, MaxMileage: model.MaxMileage },
+                    data: { Inventory: model.Inventory, FullInventory: model.FullInventory, SearchQuery: model.SearchQuery, NumCols: model.NumCols, SortOrder: model.SortOrder, Brands: model.Brands, MinPrice: model.MinPrice, MaxPrice: model.MaxPrice, BodyStyles: model.BodyStyles, FuelType: model.FuelType, MaxMileage: model.MaxMileage, Page: model.Page, ActivePage: model.Page-1 },
                     cache: false,
                     success: function (partialView) {
                         $("#vehicles-partial-div").html(partialView);
+                        //$("#inventory-pagination").load(location.href + " #inventory-pagination>*", "");
                     },
                     error: function (error) {
                         console.log('Exception:', error.responseText);
@@ -370,7 +379,23 @@
             $("#num-cols-inventory,#orderby-inventory,#search-brand,#min-price-input,#max-price-input,#search-fueltype").change(function () {
                 inventoryFilter();
             });
+
+
         });
+
+        $(document).on('click', '#inventory-pagination .page-item', function () {
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+            var pageNum = $(this).attr("data-page-num");
+            inventoryFilter();
+        });
+
+        //$("#inventory-pagination .page-item").click(function () {
+        //    $(this).addClass("active");
+        //    $(this).siblings().removeClass("active");
+        //    var pageNum = $(this).attr("data-page-num");
+        //    inventoryFilter();
+        //});
 
         function openVehicleDetails(id) {
             window.location.href = "/Vehicle/Details/" + id;

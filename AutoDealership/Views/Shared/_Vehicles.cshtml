@@ -6,54 +6,73 @@
 @if (Model.NumCols == 3)
 {
     @:<div class="row row-cols-3 ms-5">
-        }
-        else
-        {
+    }
+    else
+    {
         @:<div class="row row-cols-4">
-            }
+        }
 
 
-            @foreach (var vehicle in Model.Inventory)
-            {
-                var brands = Model.AllBrands as List<Brand>;
-                var brand = brands.Find(b => b.Id == vehicle.BrandId);
-                <div class="col" style="padding-bottom: 2em">
-                    <div class="vehicle-card" style="width:fit-content;" onclick="openVehicleDetails(@vehicle.Id)">
-                        <div class="card" style="width: 18rem;">
-                            <div class="vehicle-card-image card-img-top">
-                                <img style="mix-blend-mode: multiply" src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="Image of @brand.Name @vehicle.Model">
+@foreach (var vehicle in Model.Inventory)
+{
+    var brands = Model.AllBrands as List<Brand>;
+    var brand = brands.Find(b => b.Id == vehicle.BrandId);
+    <div class="col" style="padding-bottom: 2em">
+        <div class="vehicle-card" style="width:fit-content;" onclick="openVehicleDetails(@vehicle.Id)">
+            <div class="card" style="width: 18rem;">
+                <div class="vehicle-card-image card-img-top">
+                    <img style="mix-blend-mode: multiply" src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="Image of @brand.Name @vehicle.Model">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@brand.Name @vehicle.Model</h5>
+
+                    @*<div class="mt-5">
+                            <div class="d-inline-block w-75">
+                                <p class="card-text text-wrap d-inline-block">@vehicle.Description</p>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title text-center">@brand.Name @vehicle.Model</h5>
+                            <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary float-end">View</a>
+                        </div>*@
+                    <div class="d-flex justify-content-between pt-3 pb-3 my-blue-text-color">
+                        @*<i class="far fa-calendar-alt my-blue-text-color"></i>*@
+                        <span><i class="fal fa-calendar-alt my-blue-text-color"></i> @vehicle.Year</span>
 
-                                @*<div class="mt-5">
-                                        <div class="d-inline-block w-75">
-                                            <p class="card-text text-wrap d-inline-block">@vehicle.Description</p>
-                                        </div>
-                                        <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary float-end">View</a>
-                                    </div>*@
-                                <div class="d-flex justify-content-between pt-3 pb-3 my-blue-text-color">
-                                    @*<i class="far fa-calendar-alt my-blue-text-color"></i>*@
-                                    <span><i class="fal fa-calendar-alt my-blue-text-color"></i> @vehicle.Year</span>
+                        @*<i class="fa fa-grip-lines-vertical opacity-50"></i>*@
+                        <span class="my-blue-text-color">|</span>
+                        @*<i class="fas fa-tachometer-alt my-blue-text-color opacity-75"></i>*@
 
-                                    @*<i class="fa fa-grip-lines-vertical opacity-50"></i>*@
-                                    <span class="my-blue-text-color">|</span>
-                                    @*<i class="fas fa-tachometer-alt my-blue-text-color opacity-75"></i>*@
+                        <span><i class="fal fa-tachometer-alt-fast my-blue-text-color"></i> @vehicle.Mileage km</span>
+                        <span class="my-blue-text-color">|</span>
+                        @*<span><i class="fad fa-grip-lines-vertical" style="rotate: 180deg;"></i></span>*@
 
-                                    <span><i class="fal fa-tachometer-alt-fast my-blue-text-color"></i> @vehicle.Mileage km</span>
-                                    <span class="my-blue-text-color">|</span>
-                                    @*<span><i class="fad fa-grip-lines-vertical" style="rotate: 180deg;"></i></span>*@
-
-                                    @*<i class="fas fa-gas-pump my-blue-text-color opacity-75"></i>*@
-                                    <span><i class="fal fa-gas-pump my-blue-text-color"></i> @vehicle.FuelType.ToString()</span>
-                                </div>
-                            </div>
-
-                            <div class="card-footer text-center fw-semibold fs-5 my-blue-text-color">@vehicle.Price.ToString("c")</div>
-                        </div>
+                        @*<i class="fas fa-gas-pump my-blue-text-color opacity-75"></i>*@
+                        <span><i class="fal fa-gas-pump my-blue-text-color"></i> @vehicle.FuelType.ToString()</span>
                     </div>
                 </div>
 
-                i++;
-            }
+                <div class="card-footer text-center fw-semibold fs-5 my-blue-text-color">@vehicle.Price.ToString("c")</div>
+            </div>
         </div>
+    </div>
+
+    i++;
+}
+</div>
+
+<nav aria-label="Page navigation">
+    <ul id="inventory-pagination" class="pagination justify-content-end position-absolute end-0" style="bottom: -2em">
+        <li class="page-item"><button class="page-link">Previous</button></li>
+        @for (i = 0; i < Model.Pages; i++)
+        {
+            if (i == Model.ActivePage)
+            {
+                <li class="page-item active" data-page-num="@(i+1)"><button class="page-link">@(i+1)</button></li>
+            }
+            else
+            {
+                <li class="page-item" data-page-num="@(i+1)"><button class="page-link">@(i+1)</button></li>
+            }
+        }
+        <li class="page-item"><button class="page-link">Next</button></li>
+    </ul>
+</nav>
+

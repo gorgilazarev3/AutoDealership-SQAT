@@ -235,9 +235,9 @@
                                     <div class="form-group mb-3 ms-5">
                                         <p class="lead fw-semibold">17. Short description of the vehicle</p>
                                         @*@Html.LabelFor(model => model.Vehicle.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                        <div class="col-md-10 form-floating">
-                                            @Html.TextAreaFor(model => model.Vehicle.Description, new { @class = "form-control", @placeholder = "Here write a short description that summarizes the vehicle", @id = "floatingTextarea2" })
-                                            <label for="floatingTextarea2" class="text-muted">Here write a short description that summarizes the vehicle</label>
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(model => model.Vehicle.Description, new { @class = "form-control", @placeholder = "Here write a short description that summarizes the vehicle", @id = "floatingTextarea2", @rows=3 })
+                                            @*<label for="floatingTextarea2" class="text-muted">Here write a short description that summarizes the vehicle</label>*@
                                             @Html.ValidationMessageFor(model => model.Vehicle.Description, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -245,10 +245,10 @@
                                     <div class="form-group mb-3 ms-5">
                                         <p class="lead fw-semibold">18. Features are typed in the text area below, each feature in a seperate line - in the views they are displayed as a bulleted list</p>
                                         @Html.LabelFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-label" })
-                                        <div class="col-md-10 form-floating">
+                                        <div class="col-md-10">
 
                                             @Html.TextAreaFor(model => model.Vehicle.Features, htmlAttributes: new { @class = "form-control", @placeholder = "Highlighted Features - write each feature in a separate line", @id = "floatingTextarea1" })
-                                            <label for="floatingTextarea1" class="text-muted">Highlighted Features - write each feature in a separate line</label>
+                                            @*<label for="floatingTextarea1" class="text-muted">Highlighted Features - write each feature in a separate line</label>*@
                                         </div>
                                     </div>
                                     <hr class="mb-5 mt-5" />
