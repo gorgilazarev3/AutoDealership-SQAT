@@ -49,12 +49,15 @@
             </div>
         </div>
     }
-    @if (User.IsInRole("Customer")) 
+    @if (User.Identity.IsAuthenticated) 
     { 
-        <div class="row">
-            <div class="col">
-                @Html.ActionLink("My reservations", "MyReservations", "Vehicle", new { area = "" }, new { @class = "my-blue-background-color text-white btn-lg btn p-5 rounded-1 m-3 dashboard-panel" })
-            </div>
-        </div>
+<div class="row">
+    <div class="col">
+        @Html.ActionLink("My reservations", "MyReservations", "Vehicle", new { area = "" }, new { @class = "my-blue-background-color text-white btn-lg btn p-5 rounded-1 m-3 dashboard-panel" })
+    </div>
+    <div class="col">
+        @Html.ActionLink("Last viewed listings", "MyViewedVehicles", "Vehicle", new { area = "" }, new { @class = "my-blue-background-color text-white btn-lg btn p-5 rounded-1 m-3 dashboard-panel" })
+    </div>
+</div>
     }
 </div>

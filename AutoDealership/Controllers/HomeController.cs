@@ -84,6 +84,7 @@ namespace AutoDealership.Controllers
             {
                 ViewBag.MinPrice = 0;
                 ViewBag.MaxPrice = 10000;
+                model.FullInventory = new List<Vehicle>();
             }
             return View();
         }
@@ -116,6 +117,7 @@ namespace AutoDealership.Controllers
             {
                 ViewBag.MinPrice = 0;
                 ViewBag.MaxPrice = 10000;
+                model.FullInventory = new List<Vehicle>();
             }
             return View("Inventory", model);
         }
@@ -171,6 +173,7 @@ namespace AutoDealership.Controllers
             {
                 ViewBag.MinPrice = 0;
                 ViewBag.MaxPrice = 10000;
+                model.FullInventory = new List<Vehicle>();
             }
             return View("Inventory", model);
         }
@@ -203,6 +206,7 @@ namespace AutoDealership.Controllers
             {
                 ViewBag.MinPrice = 0;
                 ViewBag.MaxPrice = 10000;
+                model.FullInventory = new List<Vehicle>();
             }
             return View("Inventory", model);
         }

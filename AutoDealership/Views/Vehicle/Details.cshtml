@@ -201,8 +201,8 @@
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-inner">
                     @*<div class="carousel-item active">
-                            <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
-                        </div>*@
+                        <img src="@Html.DisplayFor(model => model.Vehicle.CoverImageURL)" class="d-block w-100 img-thumbnail" alt="...">
+                    </div>*@
                     @{ var i = 0;
                         if (Model.Vehicle.ImagesURL != null)
                         {
@@ -216,9 +216,9 @@
             </div> }
         else
         {
-<div class="carousel-item">
-    <img src="@image" class="d-block w-100" alt="Vehicle Image">
-</div> }
+    <div class="carousel-item">
+        <img src="@image" class="d-block w-100" alt="Vehicle Image">
+    </div> }
 i++;
 }
 } }
@@ -251,7 +251,7 @@ i++;
                 } }
 
                 @*<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>*@
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>*@
             </div>
             <div class="container mt-5 mb-5">
                 <h4 class="h4 fw-bold mt-4 mb-4">Vehicle Overview</h4>
@@ -267,9 +267,9 @@ i++;
             <div class="col">
                 @for (int j = 0; j < half; j++)
                 {
-<div>
-    <i class="far fa-check my-blue-text-color p-2"></i> @features[j]
-</div>}
+    <div>
+        <i class="far fa-check my-blue-text-color p-2"></i> @features[j]
+    </div>}
             </div>
 
                             <div class="col">
@@ -279,10 +279,12 @@ i++;
                     <i class="far fa-check my-blue-text-color p-2"></i> @features[j]
                 </div>}
                             </div> @*foreach (var feature in features)
-                                {
-                                    <li>@feature</li>
-                                }*@ } }
+                            {
+                                <li>@feature</li>
+                            }*@ } }
                 </div>
+
+
             </div>
 
             @*<img src="@Url.Content(Model.Vehicle.CoverImageURL)" />*@
@@ -451,61 +453,61 @@ i++;
                     </div>
                 </div>
                 @*<div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             </div>
 
             @*HERE STARTS THE PRICE PART*@
 
             @if (Model.Vehicle.InStock)
             {
-        <div class="text-center mt-5 rounded pb-1" style="background-color: #f1f4f9">
-            <div class="text-start rounded my-blue-background-color fw-bold text-light text-uppercase mb-3">
-                <div class="text-start">
-                    <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
-                </div>
-                <p class="ps-4 p-3 fs-5 text-center">PRICING</p>
+    <div class="text-center mt-5 rounded pb-1" style="background-color: #f1f4f9">
+        <div class="text-start rounded my-blue-background-color fw-bold text-light text-uppercase mb-3">
+            <div class="text-start">
+                <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
             </div>
-            @*<div class="alert alert-secondary" role="alert">*@
+            <p class="ps-4 p-3 fs-5 text-center">PRICING</p>
+        </div>
+        @*<div class="alert alert-secondary" role="alert">*@
 
 
-            <div class="row row-cols-2">
-                <div class="col">
-                    <h4 class="h4 fw-lighter">Seller Price</h4>
-                </div>
-                <div class="col"><h4 class="h4 fw-bold">@Html.DisplayFor(model => model.Vehicle.Price)$</h4></div>
+        <div class="row row-cols-2">
+            <div class="col">
+                <h4 class="h4 fw-lighter">Seller Price</h4>
             </div>
+            <div class="col"><h4 class="h4 fw-bold">@Html.DisplayFor(model => model.Vehicle.Price)$</h4></div>
+        </div>
 
 
-            <div class="mt-5">
-                <button data-bs-target="#reserve-vehicle-modal" data-bs-toggle="modal" class="w-75 ps-5 pe-5 btn btn-lg my-blue-background-color text-white" id="reserve-btn">Reserve now</button>
-            </div>
+        <div class="mt-5">
+            <button data-bs-target="#reserve-vehicle-modal" data-bs-toggle="modal" class="w-75 ps-5 pe-5 btn btn-lg my-blue-background-color text-white" id="reserve-btn">Reserve now</button>
+        </div>
 
-            <div>
-                <h5>or</h5>
-            </div>
+        <div>
+            <h5>or</h5>
+        </div>
 
-            <div class="mb-5">
-                <button id="schedule-test-drive-btn" class="btn btn-warning text-primary fw-semibold w-75"><i class="fas fa-steering-wheel"></i> Schedule a test drive</button>
-            </div>
-
-
-            @*<hr />*@
+        <div class="mb-5">
+            <button id="schedule-test-drive-btn" class="btn btn-warning text-primary fw-semibold w-75"><i class="fas fa-steering-wheel"></i> Schedule a test drive</button>
+        </div>
 
 
+        @*<hr />*@
 
 
 
-            @*@if (Model.Vehicle.IsForLease)
+
+
+        @*@if (Model.Vehicle.IsForLease)
         {
             <hr />
             <div>
@@ -518,55 +520,112 @@ i++;
         }*@
 
 
-            @*</div>*@
-        </div> }
-    else
-    {
-        <div class="mt-5 rounded" style="background-color: #f1f4f9">
-            <div class="rounded my-blue-background-color fw-bold text-light text-uppercase">
-                <div class="text-start d-inline">
-                    <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
+        @*</div>*@
+    </div> }
+else
+{
+    <div class="mt-5 rounded" style="background-color: #f1f4f9">
+        <div class="rounded my-blue-background-color fw-bold text-light text-uppercase">
+            <div class="text-start d-inline">
+                <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
+            </div>
+            <p class="ps-4 p-3 fs-5 text-center">PRICING</p>
+        </div>
+
+        <div>
+            <p class="fs-5 fw-semibold p-3">Sorry, this vehicle is currently unavailable</p>
+        </div>
+    </div>}
+
+
+            <div class="text-center mt-5 rounded pb-1" style="background-color: #f1f4f9">
+                <div class="text-start rounded my-blue-background-color fw-bold text-light text-uppercase mb-3">
+                    <div class="text-start">
+                        <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
+                    </div>
+                    <p class="ps-4 p-3 fs-5 text-center">MESSAGE SELLER</p>
                 </div>
-                <p class="ps-4 p-3 fs-5 text-center">PRICING</p>
-            </div>
+                @*<div class="alert alert-secondary" role="alert">*@
 
-            <div>
-                <p class="fs-5 fw-semibold p-3">Sorry, this vehicle is currently unavailable</p>
-            </div>
-        </div>      }
-
-
-        <div class="text-center mt-5 rounded pb-1" style="background-color: #f1f4f9">
-            <div class="text-start rounded my-blue-background-color fw-bold text-light text-uppercase mb-3">
-                <div class="text-start">
-                    <i class="fas fa-caret-left fs-1 ps-3" style="rotate: 45deg;"></i>
+                <div class="mb-3">
+                    <input type="text" class="form-control w-75 ms-auto me-auto" id="exampleFormControlInput1" placeholder="Your name (required)">
                 </div>
-                <p class="ps-4 p-3 fs-5 text-center">MESSAGE SELLER</p>
-            </div>
-            @*<div class="alert alert-secondary" role="alert">*@
 
-            <div class="mb-3">
-                <input type="text" class="form-control w-75 ms-auto me-auto" id="exampleFormControlInput1" placeholder="Your name (required)">
+                <div class="mb-3">
+                    <input type="email" class="form-control w-75 ms-auto me-auto" id="exampleFormControlInput1" placeholder="Your email (required)">
+                </div>
+
+                <div class="mb-3">
+                    <textarea rows="3" class="form-control w-75 ms-auto me-auto" placeholder="Your message"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn my-blue-background-color text-white w-75" value="Send Message">Send Message</button>
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <input type="email" class="form-control w-75 ms-auto me-auto" id="exampleFormControlInput1" placeholder="Your email (required)">
-            </div>
 
-            <div class="mb-3">
-                <textarea rows="3" class="form-control w-75 ms-auto me-auto" placeholder="Your message"></textarea>
-            </div>
 
-            <div class="mb-3">
-                <button class="btn my-blue-background-color text-white w-75" value="Send Message">Send Message</button>
-            </div>
 
         </div>
 
+        @if (ViewData["CurrentUser"] != null)
+        {
+            var user = ViewData["CurrentUser"] as ApplicationUser;
+            var brands = ViewData["Brands"] as List<Brand>;
+            
+    <div class="row">
+        <h4 class="h4 fw-semibold">Also viewed by you...</h4>
 
+        <div class="row row-cols-5 gap-5">
+            @foreach (var vehicle in user.ViewedVehicles)
+            {
+                var brand = brands.Find(b => b.Id == vehicle.BrandId);
+        <div class="col" style="padding-bottom: 2em">
+            <div class="vehicle-card" style="width:fit-content;" onclick="openVehicleDetails(@vehicle.Id)">
+                <div class="card" style="width: 18rem;">
+                    <div class="vehicle-card-image card-img-top">
+                        <img style="mix-blend-mode: multiply" src="@Url.Content(vehicle.CoverImageURL)" class="card-img-top" alt="Image of @brand.Name @vehicle.Model">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@brand.Name @vehicle.Model</h5>
 
+                        @*<div class="mt-5">
+                        <div class="d-inline-block w-75">
+                            <p class="card-text text-wrap d-inline-block">@vehicle.Description</p>
+                        </div>
+                        <a href="/Vehicle/Details/@vehicle.Id" class="btn btn-primary float-end">View</a>
+                    </div>*@
+                        <div class="d-flex justify-content-between pt-3 pb-3 my-blue-text-color">
+                            @*<i class="far fa-calendar-alt my-blue-text-color"></i>*@
+                            <span><i class="fal fa-calendar-alt my-blue-text-color"></i> @vehicle.Year</span>
 
+                            @*<i class="fa fa-grip-lines-vertical opacity-50"></i>*@
+                            <span class="my-blue-text-color">|</span>
+                            @*<i class="fas fa-tachometer-alt my-blue-text-color opacity-75"></i>*@
+
+                            <span><i class="fal fa-tachometer-alt-fast my-blue-text-color"></i> @vehicle.Mileage km</span>
+                            <span class="my-blue-text-color">|</span>
+                            @*<span><i class="fad fa-grip-lines-vertical" style="rotate: 180deg;"></i></span>*@
+
+                            @*<i class="fas fa-gas-pump my-blue-text-color opacity-75"></i>*@
+                            <span><i class="fal fa-gas-pump my-blue-text-color"></i> @vehicle.FuelType.ToString()</span>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-center fw-semibold fs-5 my-blue-text-color">@vehicle.Price.ToString("c")</div>
+                </div>
+            </div>
+        </div>}
         </div>
+
+
+    </div>
+        }
+
+
+
     </div>
 </div>
 

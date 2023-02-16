@@ -1,0 +1,56 @@
+﻿@model AutoDealership.Models.ApplicationUser
+@{ ViewBag.Title = "Last viewed listings";
+    ViewBag.ActiveNav = "Last viewed listings"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">User Dashboard > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ms-0 me-0 pe-0 ps-0">
+    <div class="container">
+        @{ int i = 0;
+                        foreach (var veh in Model.ViewedVehicles)
+                        {
+
+                            var url = "/Vehicle/Details/" + veh.Id;
+            @:<div class="container row justify-content-between gap-5">
+                <div class="col">
+                    <a href=@url><img src="@veh.CoverImageURL" class="img-thumbnail" /></a>
+
+                </div>
+                                <div class="col">
+                                    @{ int maxLength = veh.Description.Length > 50 ? 50 : veh.Description.Length; }
+                                    <h4 class="h4 fw-bold pb-3">@veh.Model</h4>
+                                    <p class="text-truncate">@veh.Description.Substring(0, maxLength) ...</p>
+                                    <div class="row fw-semibold">
+                                        <div class="col">
+                                            <p>Year: @veh.Year</p>
+                                            <p>Fuel: @veh.FuelType</p>
+                                            <p>Horsepower: @veh.Horsepower</p>
+                                            <p>Color: @veh.Color</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <p>Mileage: @veh.Mileage</p>
+                                            <p>Engine: @veh.Engine</p>
+                                            <p>Fuel Efficiency: @veh.FuelEfficiency l/100km</p>
+                                            <p>Condition: @veh.VehicleStatus</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                                <div class="col d-flex flex-column justify-content-between flex-wrap align-items-center">
+                                                    <button class="btn my-orange-background-color text-light position-relative top-0" style="height: max-content; width: max-content;">@veh.Price $</button>
+                                                    <a href="/Vehicle/Details/@veh.Id" class="btn my-blue-background-color text-light position-relative bottom-0 text-decoration-none" style="height: max-content; width: max-content;">View listing</a>
+                                                </div>
+                                                                <hr /> i++;
+                                                                            } }
+    </div>
+
+</div>
+</div>
+
+
+

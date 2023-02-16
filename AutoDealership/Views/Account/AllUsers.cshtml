@@ -98,11 +98,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>*@
-                <td>
-                    <button type="button" class="btn btn-primary update-role-btn" data-bs-target="#update-role-modal" data-bs-toggle="modal" data-user-email="@item.Email">
-                        Update Role
-                    </button>
-                </td>
+            <td>
+                @{
+                    var role = item.Roles.Count > 0 ? item.Roles.ElementAt(item.Roles.Count - 1).RoleId : "Customer";
+                }
+                <button type="button" class="btn btn-primary update-role-btn" data-bs-target="#update-role-modal" data-bs-toggle="modal" data-user-email="@item.Email" data-user-role="@role">
+                    Update Role
+                </button>
+            </td>
             </tr>
         }
     </tbody>
@@ -135,11 +138,12 @@
             $("#users-table .update-role-btn").click(function () {
                 var btn = $(this);
                 var userEmail = btn.attr("data-user-email");
+                var userRole = btn.attr("data-user-role");
                 $("#update-role-modal").modal('show');
                 $.ajax({
                     url: "/Account/GetRoleToUser",
                     type: "GET",
-                    data: { "userEmail": userEmail },
+                    data: { "userEmail": userEmail, "userRole": userRole},
                     success: function (data) {
                         $("#update-role-modal .modal-body").html(data);
                     },

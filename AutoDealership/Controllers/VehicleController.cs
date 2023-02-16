@@ -39,6 +39,19 @@ namespace AutoDealership.Controllers
             {
                 return HttpNotFound();
             }
+            if(User.Identity.IsAuthenticated)
+            {
+                ApplicationUser user = db.Users.Include("ViewedVehicles").FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                if (user.ViewedVehicles == null) user.ViewedVehicles = new List<Vehicle>();
+                if (user.ViewedVehicles.Count >= 4)
+                {
+                    user.ViewedVehicles = user.ViewedVehicles.Reverse().Take(3).Reverse().ToList();
+                }
+                user.ViewedVehicles.Add(vehicle);
+                db.SaveChanges();
+                ViewData["CurrentUser"] = user;
+                ViewData["Brands"] = db.Brands.ToList();
+            }
             return View(model);
         }
         [Authorize(Roles = "Editor, Administrator")]
@@ -292,6 +305,17 @@ namespace AutoDealership.Controllers
                 }
             }
             return View(model);
+        }
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyViewedVehicles()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ApplicationUser user = db.Users.Include("ViewedVehicles").FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                return View("MyViewedVehicles", user);
+            }
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)
