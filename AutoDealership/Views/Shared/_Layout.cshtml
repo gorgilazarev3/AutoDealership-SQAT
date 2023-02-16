@@ -37,18 +37,21 @@
 
     <nav class="navbar navbar-expand-lg bg-light my-navbar flex-column align-items-end">
 
-        <div style="width: 75%; height: 3.5em; margin-top: -1em;" class="float-end bg-warning d-block mb-2 text-primary fw-semibold">
+        <div style="width: 75%; height: 3.5em; margin-top: -1em;" class="float-end bg-white d-block mb-2 my-blue-text-color fw-semibold">
             <div id="corner-triangle"></div>
             <div class="d-inline-flex position-relative align-items-center w-75 justify-content-around ms-4" style="top: -1em;">
                 <div class="d-inline">
-                    <a href="mailto:info@autodealership.com" class="text-decoration-none">info@autodealership.com</a>
+                    <i class="far fa-envelope pe-2"></i>
+                    <a href="mailto:info@autodealership.com" class="text-decoration-none my-blue-text-color">info@autodealership.com</a>
                 </div>
                 <span>|</span>
                 <div class="d-inline">
+                    <i class="far fa-clock pe-2"></i>
                     Monday to Friday: 8:00 to 17:00
                 </div>
                 <span>|</span>
                 <div class="d-inline">
+                    <i class="far fa-map-marker-alt pe-2"></i>
                     Skopje, Macedonia
                 </div>
             </div>
@@ -56,7 +59,8 @@
         </div>
         <div class="container">
             @*<a class="navbar-brand" href="#">Navbar</a>*@
-            @Html.ActionLink("AutoDealership", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-light" })
+            @*@Html.ActionLink("AutoDealership", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-light" })*@
+            <a href="/Home/Index" class="text-decoration-none navbar-brand text-light me-5"><img width="150" style="margin-bottom: -1em; margin-left: 4em;margin-top:-2em" src="~/Content/Images/new-logo-white.png" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -99,7 +103,7 @@
             <div class="container mt-3">
                 <div class="row text-center justify-content-center">
                     <div>
-                        <img width="150" src="~/Content/Images/new-logo.png" />
+                        <img width="150" src="~/Content/Images/new-logo-white.png" />
                     </div>
                     <div class="row row-cols-auto justify-content-center">
                         <div class="col">

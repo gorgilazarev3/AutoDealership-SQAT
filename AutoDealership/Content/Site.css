@@ -186,7 +186,7 @@ div#corner-triangle {
     height: 3.5em;
     border-style: solid;
     border-width: 0 5em 3.5em 0;
-    border-color: transparent #ffc107 transparent transparent;
+    border-color: transparent white transparent transparent;
     position: relative;
     /* top: -1em; */
     /* right: 0; */
@@ -337,3 +337,22 @@ a.dashboard-panel:hover {
 .form-floating > label {
     z-index: 1000;
 }
+
+.vehicle-card .card:hover {
+    cursor: pointer;
+    border: 1px solid var(--my-blue);
+}
+.vehicle-card-inner:hover {
+    pointer-events: auto;
+    box-shadow: 63px 0px 17px -3px rgba(0,0,0,0.22) inset, -63px 0px 17px -3px rgba(0,0,0,0.22) inset !important;
+    -webkit-box-shadow: 63px 0px 17px -3px rgba(0,0,0,0.22) inset, -63px 0px 17px -3px rgba(0,0,0,0.22) inset !important;
+    -moz-box-shadow: 63px 0px 17px -3px rgba(0,0,0,0.22) inset, -63px 0px 17px -3px rgba(0,0,0,0.22) inset !important;
+}
+
+#accordionExample.accordion {
+    --bs-accordion-active-bg: var(--my-blue);
+    --bs-accordion-active-color: white !important;
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-bg: #0533611f;
+}
+

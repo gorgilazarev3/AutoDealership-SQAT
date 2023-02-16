@@ -15,7 +15,7 @@ namespace AutoDealership.Controllers
             ViewBag.Title = "Home Page";
             ViewBag.ActiveNav = "Home";
             ViewData.Model = db.Vehicles.ToList();
-            ViewData["Brands"] = db.Brands.ToList();
+            ViewData["Brands"] = db.Brands.Include("Vehicles").ToList().OrderByDescending(brand => brand.Vehicles.Count).Take(5).ToList();
             return View();
         }
 

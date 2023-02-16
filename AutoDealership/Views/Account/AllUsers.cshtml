@@ -2,9 +2,17 @@
 
 @{
     ViewBag.Title = "AllUsers";
+    ViewBag.ActiveNav = "List of all users";
 }
-
-<h2 class="mt-lg-5 mb-lg-5 pb-3 pt-3 display-6 text-center text-bg-warning w-50 rounded m-auto">List of all all users</h2>
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Admin Dashboard > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
+@*<h2 class="mt-lg-5 mb-lg-5 pb-3 pt-3 display-6 text-center text-bg-warning w-50 rounded m-auto">List of all all users</h2>*@
 
 
 <table class="table table-hover text-center shadow-sm mt-4" id="users-table">
@@ -25,9 +33,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.SecurityStamp)
                 </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
                 </th>

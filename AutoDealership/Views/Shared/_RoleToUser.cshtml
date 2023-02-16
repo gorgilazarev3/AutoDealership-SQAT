@@ -4,11 +4,13 @@
 {
     @Html.HiddenFor(model => model.UserEmail)
     @Html.HiddenFor(model => model.Roles)
-    <h5 class="display-5">Select Role for User</h5>
+    <h5 class="h5 mb-3">Change Role for User: <strong>@Model.UserEmail</strong></h5>
 
-    <h6 class="display-6"><strong>User: </strong> @Model.UserEmail</h6>
+    <h6 class="h6 mb-5">Current Role: <span class="badge bg-dark">@Model.CurrentRole</span></h6>
 
-    @Html.DropDownListFor(model => model.SelectedRole, new SelectList(Model.Roles))
+    @*<h6 class="display-6"><strong>User: </strong> @Model.UserEmail</h6>*@
+
+    @Html.DropDownListFor(model => model.SelectedRole, new SelectList(Model.Roles), new { @class="form-select w-50 d-inline me-3" })
 
     <button type="submit" class="btn btn-dark">Save Changes</button>
 

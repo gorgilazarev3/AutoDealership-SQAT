@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<AutoDealership.Models.VehicleReservation>
 @using AutoDealership.Models
-@{
-    ViewBag.Title = "VehicleReservations";
-}
+@{ ViewBag.Title = "Vehicle Reservations";
+    ViewBag.ActiveNav = "All vehicle reservations"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Admin Dashboard > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
 
-<h2>Vehicle Reservations</h2>
+@*<h2>Vehicle Reservations</h2>*@
 
 <table class="table table-hover text-center shadow-sm mt-4" id="vehicle-reservations-table">
     <thead class="text-light border-bottom-0 border-light" style="background-color: rgba(2,92,173,1);">
@@ -29,32 +36,29 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @{
-                        var users = ViewBag.Users as List<ApplicationUser>;
-                        var vehicles = ViewBag.Vehicles as List<Vehicle>;
-                        var user = users.Find(u => u.Id.Equals(item.UserId));
-                        var vehicle = vehicles.Find(v => v.Id == item.VehicleId);
-                    }
-                    @user.FullName
-                </td>
-                <td>
-                    @vehicle.Model
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsTestDrive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReservedUntil)
-                </td>
-                <td>
-                    @Html.ActionLink("View Vehicle", "Details", new { id = item.VehicleId }, new { @class = "btn btn-primary" }) |
-                    @*@Html.ActionLink("Cancel Reservation", "CancelReservation","Vehicle", new { id=item.Id }, new { @class = "btn btn-danger" })*@
-                    <button data-reservation-id="@item.Id" class="cancel-reservation-btn btn btn-danger">Cancel Reservation</button>
-                </td>
-            </tr>
-        }
+<tr>
+    <td>
+        @{ var users = ViewBag.Users as List<ApplicationUser>;
+                            var vehicles = ViewBag.Vehicles as List<Vehicle>;
+                            var user = users.Find(u => u.Id.Equals(item.UserId));
+                            var vehicle = vehicles.Find(v => v.Id == item.VehicleId); }
+        @user.FullName
+    </td>
+    <td>
+        @vehicle.Model
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsTestDrive)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReservedUntil)
+    </td>
+    <td>
+        @Html.ActionLink("View Vehicle", "Details", new { id = item.VehicleId }, new { @class = "btn btn-primary" }) |
+        @*@Html.ActionLink("Cancel Reservation", "CancelReservation","Vehicle", new { id=item.Id }, new { @class = "btn btn-danger" })*@
+        <button data-reservation-id="@item.Id" class="cancel-reservation-btn btn btn-danger">Cancel Reservation</button>
+    </td>
+</tr>}
     </tbody>
 
 
@@ -91,7 +95,7 @@
                                 error: function (err) {
                                     console.log(err);
                                 }
-                            }); 
+                            });
                         }
                     }
                 });

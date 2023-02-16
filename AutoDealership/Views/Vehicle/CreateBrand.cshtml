@@ -1,48 +1,105 @@
 ﻿@model AutoDealership.Models.CreateVehicleViewModel
 
-@{
-    ViewBag.Title = "CreateBrand";
-}
-
-<h2>CreateBrand</h2>
-
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Brand</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NewBrand.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NewBrand.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NewBrand.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NewBrand.LogoURL, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NewBrand.LogoURL, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NewBrand.LogoURL, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+@{ ViewBag.Title = "Create brand";
+    ViewBag.ActiveNav = "Create a new brand"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Admin Dashboard > @ViewBag.ActiveNav</h5>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Brands")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h3 class="h3 text-center">Brand Information</h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row justify-content-around mb-5">
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <p class="fs-6 fw-semibold">Type in the @Html.LabelFor(model => model.NewBrand.Name, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                <div class="col-md-10">
+                    <div class="form-floating">
+                        @Html.EditorFor(model => model.NewBrand.Name, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputName", @placeholder = "ex. Mercedes" } })
+                        <label for="floatingInputName" class="text-muted">Brand Name (ex. Mercedes)</label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.NewBrand.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="fs-6 fw-semibold">
+                    Enter the URL for the logo image here:<br />
+                    (preview of the image shown in section right)
+                </p>
+                @*@Html.LabelFor(model => model.Vehicle.CoverImageURL, htmlAttributes: new { @class = "form-label" })*@
+                <div class="col-md-10 form-floating">
+                    @Html.EditorFor(model => model.NewBrand.LogoURL, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputLogo", @placeholder = "https://url.com/img.png", @oninput = "changePreviewImage()" } })
+                    <label for="floatingInputLogo" class="text-muted">Logo Image URL</label>
+                    @Html.ValidationMessageFor(model => model.NewBrand.LogoURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <p class="lead fw-semibold">
+                Logo Preview:
+            </p>
+            <img width="400" class="img-thumbnail" id="logo-preview-img" />
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <div class="col">
+            <input type="submit" value="Create brand" class="btn btn-lg my-blue-background-color text-white ps-5 pe-5 pt-2 pb-2" />
+        </div>
+    </div>
+
+    @*<h4>Brand</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewBrand.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NewBrand.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewBrand.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewBrand.LogoURL, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NewBrand.LogoURL, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewBrand.LogoURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>*@
+        </div>
+    }
+
+    @if (User.IsInRole("Administrator"))
+    {
+<div>
+    @Html.ActionLink("Back to list of all brands", "Brands", null, new { @class = "btn my-orange-background-color text-white" })
+</div>}
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            function changePreviewImage() {
+                $('#logo-preview-img').attr('src', $("#floatingInputLogo").val());
+            }
+        </script>
+    }

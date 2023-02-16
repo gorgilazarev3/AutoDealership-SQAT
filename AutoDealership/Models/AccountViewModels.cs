@@ -119,6 +119,7 @@ namespace AutoDealership.Models
     {
         public string UserEmail { get; set; }
         public IEnumerable<string> Roles { get; set; }
+        public string CurrentRole { get; set; }
         public string SelectedRole { get; set; }
     }
 

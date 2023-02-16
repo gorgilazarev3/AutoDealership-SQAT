@@ -154,6 +154,7 @@ namespace AutoDealership.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "Customer");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -418,8 +419,11 @@ namespace AutoDealership.Controllers
             var db = new ApplicationDbContext();
             UserRoleViewModel model = new UserRoleViewModel();
             model.UserEmail = userEmail;
+            var user = UserManager.FindByEmail(model.UserEmail);
+            var userRole = UserManager.GetRoles(user.Id).ToArray()[0];
             var roleStore = new RoleStore<IdentityRole>(db);
             var roleMngr = new RoleManager<IdentityRole>(roleStore);
+            model.CurrentRole = userRole;
             model.Roles = roleMngr.Roles.Select(role => role.Name).ToList();
             return PartialView("_RoleToUser", model);
         }

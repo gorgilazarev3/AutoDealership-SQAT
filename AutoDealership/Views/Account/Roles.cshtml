@@ -1,10 +1,16 @@
 ﻿@model AutoDealership.Models.RolesViewModel
 
-@{
-    ViewBag.Title = "Roles";
-}
-
-<h2 class="display-2 text-center">Roles</h2>
+@{ ViewBag.Title = "Roles";
+    ViewBag.ActiveNav = "All roles"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Admin Dashboard > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
+@*<h2 class="display-2 text-center">Roles</h2>*@
 
 <div class="container">
     <table id="roles-table" class="table-bordered table">
@@ -17,12 +23,11 @@
         <tbody>
             @foreach (var role in Model.Roles)
             {
-                <tr>
-                    <td>@role.Name</td>
-                    <td>@role.Users.Count</td>
-                    <td><button class="delete-role-btn btn btn-danger" data-role-name="@role.Name">Delete role</button></td>
-                </tr>
-            }
+<tr>
+    <td>@role.Name</td>
+    <td>@role.Users.Count</td>
+    <td><button class="delete-role-btn btn btn-danger" data-role-name="@role.Name">Delete role</button></td>
+</tr>            }
         </tbody>
         <tfoot>
             <tr>
@@ -45,12 +50,11 @@
             <div class="modal-body text-center">
                 @using (Html.BeginForm("Roles", "Account"))
                 {
-                    @Html.HiddenFor(model => model.Roles)
-                    @Html.EditorFor(model => model.NewRole, null, new { @class = "form-control" })
-                    <br />
-                    <button type="submit" class="btn btn-dark mt-4">Save Changes</button>
-
-                }
+    @Html.HiddenFor(model => model.Roles)
+                    
+                    @Html.TextBoxFor(model => model.NewRole, new { @class = "form-control w-75 ms-auto me-auto", @placeholder = "Enter the name of the new role" })
+                                    <br />
+                                                    <button type="submit" class="btn btn-dark mt-4">Save Changes</button>}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -91,14 +95,14 @@
                                 data: { 'role': roleName },
                                 success: function (res) {
                                     btn.parent().parent().remove();
-                                }, 
+                                },
                                 error: function (err) {
                                     console.log(err);
                                 }
                             });
                         }
                     }
-                });   
+                });
             });
 
         });

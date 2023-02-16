@@ -1,91 +1,138 @@
 ﻿@model AutoDealership.Models.Brand
 
-@{
-    ViewBag.Title = "EditBrand";
-}
+@{ ViewBag.Title = "Edit brand";
+    ViewBag.ActiveNav = "Edit a brand"; }
+<div class="row mb-5">
+    <div class="text-center" id="about-header">
+        <div class="p-5">
+            <h2 class="h2 text-white fw-bold">@ViewBag.ActiveNav</h2>
+            <h5 class="h5 text-white">Admin Dashboard > @ViewBag.ActiveNav</h5>
+        </div>
+    </div>
+</div>
 
-<h2>EditBrand</h2>
+@*<h2>EditBrand</h2>*@
 
-@using (Html.BeginForm("EditBrand","Vehicle"))
+@using (Html.BeginForm("EditBrand", "Vehicle"))
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Brand</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+@Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="form-horizontal">
+    <h3 class="h3 text-center">Brand Information</h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row justify-content-around">
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <p class="fs-6 fw-semibold">Type in the @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" }) of the vehicle</p>
+                <div class="col-md-10">
+                    <div class="form-floating">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputName", @placeholder = "ex. Mercedes" } })
+                        <label for="floatingInputName" class="text-muted">Brand Name (ex. Mercedes)</label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="fs-6 fw-semibold">
+                    Enter the URL for the logo image here:<br />
+                    (preview of the image shown in section right)
+                </p>
+                @*@Html.LabelFor(model => model.Vehicle.CoverImageURL, htmlAttributes: new { @class = "form-label" })*@
+                <div class="col-md-10 form-floating">
+                    @Html.EditorFor(model => model.LogoURL, new { htmlAttributes = new { @class = "form-control", @id = "floatingInputLogo", @placeholder = "https://url.com/img.png", @oninput = "changePreviewImage()" } })
+                    <label for="floatingInputLogo" class="text-muted">Logo Image URL</label>
+                    @Html.ValidationMessageFor(model => model.LogoURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <p class="lead fw-semibold">
+                Logo Preview:
+            </p>
+            <img width="400" class="img-thumbnail" id="logo-preview-img" />
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LogoURL, htmlAttributes: new { @class = "control-label col-md-2" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.LogoURL, htmlAttributes: new { @class = "form-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LogoURL, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LogoURL, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <h4 class="display-4">List of vehicles under this brand</h4>
+    <h4 class="display-6 text-center mt-5 mb-5">List of vehicles under this brand</h4>
 
-        <table id="brand-vehicles-table" class="table table-bordered">
-            <thead>
-                <tr>
-                        <th>Model</th>
-                        <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var vehicle in Model.Vehicles)
-                {
-                    <tr>
-                        <td>
-                            @vehicle.Year  @vehicle.Model
-                        </td>
-                        <td>
-                                @Html.ActionLink("Edit Vehicle", "Edit", new { id=vehicle.Id }, new { @class = "btn btn-info" })
-                                | 
-                                <button data-veh-id="@vehicle.Id" class="brands-delete-veh-btn btn btn-danger">Delete vehicle</button>
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>Model</td>
-                    <td>
-                        <button data-brand-id="@Model.Id" class="btn btn-lg btn-danger delete-all-veh-btn">Delete All Vehicles</button>
-                        @Html.ActionLink("Add a new vehicle","Create", new { }, new { @class= "btn btn-lg btn-success" })
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="edit-brand-btn" type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    <table id="brand-vehicles-table" class="table table-bordered w-75 ms-auto me-auto">
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model.Vehicles)
+            {
+<tr>
+    <td>
+        @vehicle.Year  @vehicle.Model
+    </td>
+    <td class="text-center">
+        <img src="@vehicle.CoverImageURL" class="img-thumbnail" width="175" />
+    </td>
+    <td class="align-middle">
+        @Html.ActionLink("Edit Vehicle", "Edit", new { id = vehicle.Id }, new { @class = "btn my-blue-background-color text-white me-3" })
+        
+        <button data-veh-id="@vehicle.Id" class="brands-delete-veh-btn btn btn-danger">Delete vehicle</button>
+    </td>
+</tr>
 }
 
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="fw-bold">Model</td>
+                <td class="fw-bold">Image</td>
+                <td>
+                    <button data-brand-id="@Model.Id" class="btn btn-danger delete-all-veh-btn">Delete All Vehicles</button>
+                    @Html.ActionLink("Add a new vehicle", "Create", new { }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="form-group text-center">
+        <div class="col">
+            <input id="edit-brand-btn" type="submit" value="Save brand" class="btn btn-lg my-blue-background-color text-white ps-5 pe-5 pt-2 pb-2" />
+        </div>
+    </div>
+</div>}
+
+@if (User.IsInRole("Administrator"))
+{
 <div>
-    @Html.ActionLink("Back to List", "Brands")
-</div>
+    @Html.ActionLink("Back to list of all brands", "Brands", null, new { @class = "btn my-orange-background-color text-white" })
+</div>}
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             //$("#edit-brand-btn").click(function () {
             //    $("form").submit();
-            //}); 
+            //});
 
             $("#brand-vehicles-table .brands-delete-veh-btn").click(function (e) {
                 e.preventDefault();
@@ -155,5 +202,11 @@
                 });
             });
         });
-    </script>    
+
+        window.onload(changePreviewImage());
+
+        function changePreviewImage() {
+            $('#logo-preview-img').attr('src', $("#floatingInputLogo").val());
+        }
+    </script>
 }

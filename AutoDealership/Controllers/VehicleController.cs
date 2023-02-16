@@ -96,6 +96,7 @@ namespace AutoDealership.Controllers
         [HttpPost]
         public ActionResult CreateBrand(CreateVehicleViewModel model)
         {
+            model.NewBrand.Vehicles = new List<Vehicle>();
             db.Brands.Add(model.NewBrand);
             db.SaveChanges();
             return RedirectToAction("Create");
@@ -250,10 +251,10 @@ namespace AutoDealership.Controllers
         }
         [Authorize(Roles = "Customer, Administrator")]
         [HttpDelete]
-        public ActionResult CancelReservation(int id)
+        public ActionResult CancelReservation(int id, string userEmail)
         {
             var reservation = db.VehicleReservations.Find(id);
-            if (User.IsInRole("Customer") && !User.Identity.Name.Equals(reservation.UserId))
+            if (User.IsInRole("Customer") && !User.Identity.Name.Equals(userEmail))
             {
                 return HttpNotFound();
             }
@@ -277,14 +278,17 @@ namespace AutoDealership.Controllers
             MyReservationViewModel model = new MyReservationViewModel();
             model.User = user;
             model.TestDriveVehicles = new List<Vehicle>();
+            model.TestDrivesDetails = new List<VehicleReservation>();
             model.ReservedVehicle = db.Vehicles.Find(user.ReservedVehicleId);
             var reservations = db.VehicleReservations.ToList();
+            model.ReservationDetails = reservations.Where(res => res.UserId.Equals(user.Id) && res.VehicleId == user.ReservedVehicleId).FirstOrDefault();
             foreach (VehicleReservation res in reservations) 
             {
                 if (res.UserId.Equals(user.Id) && res.IsTestDrive) 
                 {
                     var vehicle = db.Vehicles.Find(res.VehicleId);
                     model.TestDriveVehicles.Add(vehicle);
+                    model.TestDrivesDetails.Add(res);
                 }
             }
             return View(model);

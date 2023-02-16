@@ -35,11 +35,11 @@
     <div class="col-8">
         <div id="search-vehicles-div" class="m-3 d-flex flex-column justify-content-center align-items-center">
 
-            <div class="logo-header-img d-block" style="margin-bottom: 2em;">
-                <img style="width: 12em;" src="~/Content/Images/new-logo.png" />
+            <div class="logo-header-img d-block">
+                <img style="width: 16em;" src="~/Content/Images/alternative-logo.png" />
             </div>
 
-            <p class="text-sm-center h3" style="margin-top: -1.5em">Find your perfect car</p>
+            <p class="text-sm-center h3 text-uppercase my-blue-text-color" style="margin-top: -1.5em">Find your perfect car</p>
 
             <div class="search-input-div d-block m-5 w-75">
                 <div class="input-group mb-3">
@@ -59,9 +59,11 @@
             </div>
 
             <div class="text-uppercase text-light fw-bold fs-3 mb-5" style="-webkit-text-stroke: thin black;">
-                <span class="fa fa-terminal"></span>
+                @*<span class="fa fa-terminal"></span>*@
+                <i class="far fa-horizontal-rule"></i>
                 <span>or</span>
-                <span class="fa fa-terminal" style="transform: rotateY(180deg)"></span>
+                @*<span class="fa fa-terminal" style="transform: rotateY(180deg)"></span>*@
+                <i class="far fa-horizontal-rule"></i>
             </div>
 
 
@@ -166,6 +168,7 @@
     <h2 class="h2 fw-semibold">Browse by Brands</h2>
     <h5 class="h5 text-secondary">We work with the most popular brands</h5>
     <div class="mt-5 row">
+
         @{
             var brands = ViewData["Brands"] as List<AutoDealership.Models.Brand>;
 

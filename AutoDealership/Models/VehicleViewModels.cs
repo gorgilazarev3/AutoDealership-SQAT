@@ -26,6 +26,8 @@ namespace AutoDealership.Models
         public ApplicationUser User { get; set; }
         public List<Vehicle> TestDriveVehicles { get; set; }
         public Vehicle ReservedVehicle { get; set; }
+        public VehicleReservation ReservationDetails { get; set; }
+        public List<VehicleReservation> TestDrivesDetails { get; set; }
     }
 
     public class InventoryViewModel

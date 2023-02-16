@@ -589,10 +589,21 @@
                                                                                         </div>
                                                                                     </div>*@}
 
+@if (User.IsInRole("Administrator"))
+{
 <div>
     @Html.ActionLink("Back to list of all vehicle listings", "Index", null, new { @class = "btn my-blue-background-color text-white" })
-</div>
+</div>}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        window.onload(changePreviewImage());
+
+        function changePreviewImage() {
+            $('#preview-img').attr('src', $("#floatingInputCover").val());
+        }
+    </script>
 }
