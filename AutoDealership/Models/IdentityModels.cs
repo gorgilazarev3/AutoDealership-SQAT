@@ -40,9 +40,9 @@ namespace AutoDealership.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<AutoDealership.Models.Vehicle> Vehicles { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<VehicleReservation> VehicleReservations { get; set; }
+        public virtual System.Data.Entity.DbSet<AutoDealership.Models.Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<VehicleReservation> VehicleReservations { get; set; }
 
     }
 }

@@ -12,7 +12,12 @@ namespace AutoDealership.Controllers
 {
     public class VehicleController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+
+        public VehicleController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
         // GET: Vehicle
         [Authorize(Roles = "Editor, Administrator")]
@@ -39,18 +44,21 @@ namespace AutoDealership.Controllers
             {
                 return HttpNotFound();
             }
-            if(User.Identity.IsAuthenticated)
+            if(User != null)
             {
-                ApplicationUser user = db.Users.Include("ViewedVehicles").FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
-                if (user.ViewedVehicles == null) user.ViewedVehicles = new List<Vehicle>();
-                if (user.ViewedVehicles.Count >= 4)
+                if (User.Identity.IsAuthenticated)
                 {
-                    user.ViewedVehicles = user.ViewedVehicles.Reverse().Take(3).Reverse().ToList();
+                    ApplicationUser user = db.Users.Include("ViewedVehicles").FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                    if (user.ViewedVehicles == null) user.ViewedVehicles = new List<Vehicle>();
+                    if (user.ViewedVehicles.Count >= 4)
+                    {
+                        user.ViewedVehicles = user.ViewedVehicles.Reverse().Take(3).Reverse().ToList();
+                    }
+                    user.ViewedVehicles.Add(vehicle);
+                    db.SaveChanges();
+                    ViewData["CurrentUser"] = user;
+                    ViewData["Brands"] = db.Brands.ToList();
                 }
-                user.ViewedVehicles.Add(vehicle);
-                db.SaveChanges();
-                ViewData["CurrentUser"] = user;
-                ViewData["Brands"] = db.Brands.ToList();
             }
             return View(model);
         }

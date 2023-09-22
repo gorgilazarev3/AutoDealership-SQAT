@@ -58,7 +58,7 @@ namespace AutoDealership.Models
 
         public double GetMPG()
         {
-            return FuelEfficiency * 235.214583;
+            return 235.214583 / FuelEfficiency;
         }  
     }
 }

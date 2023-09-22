@@ -9,9 +9,17 @@ namespace AutoDealership.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext db;
+
+        public HomeController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
+
         public ActionResult Index()
         {
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             ViewBag.Title = "Home Page";
             ViewBag.ActiveNav = "Home";
             ViewData.Model = db.Vehicles.ToList();
@@ -23,7 +31,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "Inventory";
             ViewData["ActiveNav"] = "Inventory";
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
             var brands = db.Brands.ToList();
@@ -93,7 +101,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "Inventory";
             ViewData["ActiveNav"] = "Inventory";
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
@@ -127,7 +135,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "Inventory";
             ViewData["ActiveNav"] = "Inventory";
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = new List<Vehicle>();
@@ -183,7 +191,7 @@ namespace AutoDealership.Controllers
         {
             ViewBag.ActiveNav = "Inventory";
             ViewData["ActiveNav"] = "Speed - High-Performance Catalog";
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             var brands = db.Brands.ToList();
             List<Vehicle> vehicles = db.Vehicles.ToList();
             List<Vehicle> toDisplay = vehicles.Where(veh => veh.Horsepower >= 550).ToList();
@@ -214,7 +222,7 @@ namespace AutoDealership.Controllers
         [HttpPost]
         public ActionResult InventoryFilter([System.Web.Http.FromBody] List<Vehicle> Inventory, [System.Web.Http.FromBody] List<Vehicle> FullInventory, [System.Web.Http.FromBody] string[] SearchQuery, [System.Web.Http.FromBody] int NumCols, [System.Web.Http.FromBody] string SortOrder, [System.Web.Http.FromBody] int[] Brands, [System.Web.Http.FromBody] int MinPrice, [System.Web.Http.FromBody] int MaxPrice, [System.Web.Http.FromBody] string[] BodyStyles, [System.Web.Http.FromBody] string FuelType, [System.Web.Http.FromBody] int? MaxMileage, [System.Web.Http.FromBody] int? Page, [System.Web.Http.FromBody] int? ActivePage)
         {
-            var db = new ApplicationDbContext();
+            //var db = new ApplicationDbContext();
             InventoryViewModel model = new InventoryViewModel();
             if(!String.IsNullOrEmpty(SortOrder))
             {
@@ -286,5 +294,13 @@ namespace AutoDealership.Controllers
             Brand brand = db.Brands.Find(veh.BrandId);
             return String.Format("{0} {1} {2}", veh.Year, brand.Name, veh.Model);
         }
+
+        public static string VehicleToStringWithContext(Vehicle veh, ApplicationDbContext db)
+        {
+            //var db = new ApplicationDbContext();
+            Brand brand = db.Brands.Find(veh.BrandId);
+            return String.Format("{0} {1} {2}", veh.Year, brand.Name, veh.Model);
+        }
+
     }
 }
