@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "Uz2PNF4aSclzwFe11G3wDfpd8hTri3nl2iG2UBB/fvjQxWr0BrrJYVTIg932SRbk0siGKqLjDc3X7jdg9b3EGQ==",
+  "success": true,
+  "projectFilePath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.PerformanceTests\\AutoDealership.PerformanceTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pc\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\nbench\\2.0.1\\nbench.2.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
