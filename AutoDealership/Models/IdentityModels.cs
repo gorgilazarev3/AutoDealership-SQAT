@@ -35,9 +35,18 @@ namespace AutoDealership.Models
         {
         }
 
+        public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public static ApplicationDbContext Create(string nameOrConnectionString)
+        {
+            return new ApplicationDbContext(nameOrConnectionString);
         }
 
         public virtual System.Data.Entity.DbSet<AutoDealership.Models.Vehicle> Vehicles { get; set; }

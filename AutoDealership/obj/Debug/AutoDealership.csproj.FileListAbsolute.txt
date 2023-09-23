@@ -568,3 +568,5 @@ E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\Au
 E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership\obj\Debug\AutoDealership.csproj.CopyComplete
 E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership\obj\Debug\AutoDealership.dll
 E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership\obj\Debug\AutoDealership.pdb
+E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership\bin\Microsoft.Owin.Host.HttpListener.dll
+E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership\bin\Microsoft.Owin.Host.HttpListener.xml

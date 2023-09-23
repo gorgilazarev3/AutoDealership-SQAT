@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDealership.Tests", "Aut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDealership.PerformanceTests", "AutoDealership.PerformanceTests\AutoDealership.PerformanceTests.csproj", "{7F60BF4F-29E1-4F02-98A1-6AD4A4E8097A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealership.SeleniumTests", "AutoDealership.SeleniumTests\AutoDealership.SeleniumTests.csproj", "{79E6C710-76F3-46E6-9141-EABFB0F93B89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDealership.SeleniumTests", "AutoDealership.SeleniumTests\AutoDealership.SeleniumTests.csproj", "{79E6C710-76F3-46E6-9141-EABFB0F93B89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
