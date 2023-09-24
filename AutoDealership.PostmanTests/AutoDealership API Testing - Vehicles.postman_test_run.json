@@ -1,0 +1,207 @@
+{
+	"id": "eb776589-5e5f-4dc4-b349-52ced3da8504",
+	"name": "AutoDealership API Testing - Vehicles",
+	"timestamp": "2023-09-24T08:53:49.829Z",
+	"collection_id": "19352197-3e5dee86-3d89-4c5c-9309-92cd0b0ea373",
+	"folder_id": 0,
+	"environment_id": "19352197-9a6ed4f3-db4f-4889-99a2-c7a7581a6038",
+	"totalPass": 10,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-09-24T08:53:48.898Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1a7299ac-0b40-4e2b-a69f-93344a2b8296",
+			"name": "VehiclesAPI - Get All Vehicles",
+			"url": "https://localhost:44378/api/Vehicles",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"At least one vehicle is returned": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"At least one vehicle is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"At least one vehicle is returned": true
+				}
+			]
+		},
+		{
+			"id": "6231c210-9bcb-41d2-992a-4c8dfd0d626f",
+			"name": "VehiclesAPI - Get Specific Vehicle",
+			"url": "https://localhost:44378/api/Vehicles/9",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"Only one vehicle is returned": true,
+				"The correct vehicle is returned": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Only one vehicle is returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The correct vehicle is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"Only one vehicle is returned": true,
+					"The correct vehicle is returned": true
+				}
+			]
+		},
+		{
+			"id": "cfc6f6a8-f0f0-4add-a1e1-654bd95e6f74",
+			"name": "VehiclesAPI - Create a new vehicle",
+			"url": "https://localhost:44378/api/Vehicles",
+			"time": 66,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Response returns status 201 - Created": true,
+				"Response returns non empty vehicle": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 201 - Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response returns non empty vehicle": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				66
+			],
+			"allTests": [
+				{
+					"Response returns status 201 - Created": true,
+					"Response returns non empty vehicle": true
+				}
+			]
+		},
+		{
+			"id": "6082f20d-ecfe-45b2-9b4d-09b7d6ffdab3",
+			"name": "VehiclesAPI - Edit the newly created vehicle",
+			"url": "https://localhost:44378/api/Vehicles/1035",
+			"time": 35,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Response returns status 204 - No Content": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 204 - No Content": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				35
+			],
+			"allTests": [
+				{
+					"Response returns status 204 - No Content": true
+				}
+			]
+		},
+		{
+			"id": "beab5f2f-192c-456a-adeb-c192bced4016",
+			"name": "VehiclesAPI - Delete a vehicle",
+			"url": "https://localhost:44378/api/Vehicles/1035",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"Response returns the deleted vehicle": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response returns the deleted vehicle": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				27
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"Response returns the deleted vehicle": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 180,
+	"collection": {
+		"requests": [
+			{
+				"id": "1a7299ac-0b40-4e2b-a69f-93344a2b8296",
+				"method": "GET"
+			},
+			{
+				"id": "6231c210-9bcb-41d2-992a-4c8dfd0d626f",
+				"method": "GET"
+			},
+			{
+				"id": "cfc6f6a8-f0f0-4add-a1e1-654bd95e6f74",
+				"method": "POST"
+			},
+			{
+				"id": "6082f20d-ecfe-45b2-9b4d-09b7d6ffdab3",
+				"method": "PUT"
+			},
+			{
+				"id": "beab5f2f-192c-456a-adeb-c192bced4016",
+				"method": "DELETE"
+			}
+		]
+	}
+}

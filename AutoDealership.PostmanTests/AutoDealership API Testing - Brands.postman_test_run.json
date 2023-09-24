@@ -1,0 +1,207 @@
+{
+	"id": "62650c2c-a8e7-46e2-aee5-0ceb85221fa9",
+	"name": "AutoDealership API Testing - Brands",
+	"timestamp": "2023-09-24T08:53:37.945Z",
+	"collection_id": "19352197-466cce81-72bd-4bca-843e-3bee28e1b056",
+	"folder_id": 0,
+	"environment_id": "19352197-9a6ed4f3-db4f-4889-99a2-c7a7581a6038",
+	"totalPass": 10,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-09-24T08:53:34.539Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "eb66d3c9-fafa-48d3-bef9-b118b0bec41d",
+			"name": "BrandsAPI - Get All Brands",
+			"url": "https://localhost:44378/api/Brands",
+			"time": 1771,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"At least one brand is returned": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"At least one brand is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1771
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"At least one brand is returned": true
+				}
+			]
+		},
+		{
+			"id": "4dd1aa0f-8f05-4923-837b-ac6e9adaeffd",
+			"name": "BrandsAPI - Get Specific Brand",
+			"url": "https://localhost:44378/api/Brands/5",
+			"time": 129,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"Only one brand is returned": true,
+				"The correct brand is returned": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Only one brand is returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The correct brand is returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				129
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"Only one brand is returned": true,
+					"The correct brand is returned": true
+				}
+			]
+		},
+		{
+			"id": "4acf9f66-c24e-4d68-bbc4-914eec5b044c",
+			"name": "BrandsAPI - Create a new brand",
+			"url": "https://localhost:44378/api/Brands",
+			"time": 393,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Response returns status 201 - Created": true,
+				"Response returns non empty brand": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 201 - Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response returns non empty brand": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				393
+			],
+			"allTests": [
+				{
+					"Response returns status 201 - Created": true,
+					"Response returns non empty brand": true
+				}
+			]
+		},
+		{
+			"id": "57a5dd20-40e7-4b13-bb71-61c876c8845a",
+			"name": "BrandsAPI - Edit the newly created Brand",
+			"url": "https://localhost:44378/api/Brands/29",
+			"time": 45,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Response returns status 204 - No Content": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 204 - No Content": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				45
+			],
+			"allTests": [
+				{
+					"Response returns status 204 - No Content": true
+				}
+			]
+		},
+		{
+			"id": "2962bce4-392d-4dec-b0f1-ec912ffeaad5",
+			"name": "BrandsAPI - Delete a brand",
+			"url": "https://localhost:44378/api/Brands/29",
+			"time": 127,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response returns status 200 - OK": true,
+				"Response returns the deleted brand": true
+			},
+			"testPassFailCounts": {
+				"Response returns status 200 - OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response returns the deleted brand": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				127
+			],
+			"allTests": [
+				{
+					"Response returns status 200 - OK": true,
+					"Response returns the deleted brand": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2465,
+	"collection": {
+		"requests": [
+			{
+				"id": "eb66d3c9-fafa-48d3-bef9-b118b0bec41d",
+				"method": "GET"
+			},
+			{
+				"id": "4dd1aa0f-8f05-4923-837b-ac6e9adaeffd",
+				"method": "GET"
+			},
+			{
+				"id": "4acf9f66-c24e-4d68-bbc4-914eec5b044c",
+				"method": "POST"
+			},
+			{
+				"id": "57a5dd20-40e7-4b13-bb71-61c876c8845a",
+				"method": "PUT"
+			},
+			{
+				"id": "2962bce4-392d-4dec-b0f1-ec912ffeaad5",
+				"method": "DELETE"
+			}
+		]
+	}
+}
