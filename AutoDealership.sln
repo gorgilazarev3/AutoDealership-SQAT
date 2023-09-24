@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDealership.SeleniumTest
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "AutoDealership.PostmanTests", "AutoDealership.PostmanTests\AutoDealership.PostmanTests.esproj", "{369FA02C-62D4-4B1C-B8C8-5FF38F6F224A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealership.LoadTests", "AutoDealership.LoadTests\AutoDealership.LoadTests.csproj", "{90F18968-A594-4A40-B06C-4045DA8C13EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDealership.LoadTests", "AutoDealership.LoadTests\AutoDealership.LoadTests.csproj", "{90F18968-A594-4A40-B06C-4045DA8C13EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealership.IntegrationTests", "AutoDealership.IntegrationTests\AutoDealership.IntegrationTests.csproj", "{BCE3EA1F-0EEA-4B82-BE72-933CD7A195E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{90F18968-A594-4A40-B06C-4045DA8C13EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F18968-A594-4A40-B06C-4045DA8C13EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F18968-A594-4A40-B06C-4045DA8C13EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE3EA1F-0EEA-4B82-BE72-933CD7A195E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE3EA1F-0EEA-4B82-BE72-933CD7A195E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE3EA1F-0EEA-4B82-BE72-933CD7A195E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE3EA1F-0EEA-4B82-BE72-933CD7A195E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

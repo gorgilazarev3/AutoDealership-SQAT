@@ -32,6 +32,7 @@ namespace AutoDealership.PerformanceTests
             testCounter.Increment();
         }
 
+
         [PerfCleanup]
         public void Cleanup()
         {

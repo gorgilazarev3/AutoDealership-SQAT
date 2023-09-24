@@ -1,0 +1,104 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.IntegrationTests\\AutoDealership.IntegrationTests.csproj": {}
+  },
+  "projects": {
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.IntegrationTests\\AutoDealership.IntegrationTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.IntegrationTests\\AutoDealership.IntegrationTests.csproj",
+        "projectName": "AutoDealership.IntegrationTests",
+        "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.IntegrationTests\\AutoDealership.IntegrationTests.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.IntegrationTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj": {
+                "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "Microsoft.Owin.Host.SystemWeb": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj": {
+      "restore": {
+        "projectUniqueName": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj",
+        "projectName": "AutoDealership",
+        "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}
