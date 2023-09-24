@@ -1,7 +1,7 @@
 ﻿using NBench;
 using System;
 
-namespace AutoDealership.StressTests
+namespace AutoDealership.PerformanceTests
 {
     internal class Program
     {

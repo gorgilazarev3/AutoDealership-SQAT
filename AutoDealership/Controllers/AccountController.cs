@@ -479,7 +479,7 @@ namespace AutoDealership.Controllers
 
         //with ApplicationDbContext parameter
         [Authorize(Roles = "Administrator")]
-        public ActionResult AllUsers(ApplicationDbContext db)
+        public ActionResult AllUsersC(ApplicationDbContext db)
         {
             //var db = new ApplicationDbContext();
             var users = db.Users.ToList();
@@ -488,7 +488,7 @@ namespace AutoDealership.Controllers
         }
 
 
-        public ActionResult GetRoleToUser(string userEmail, string userRole, ApplicationDbContext db)
+        public ActionResult GetRoleToUserC(string userEmail, string userRole, ApplicationDbContext db)
         {
             //var db = new ApplicationDbContext();
             UserRoleViewModel model = new UserRoleViewModel();
@@ -506,7 +506,7 @@ namespace AutoDealership.Controllers
             return PartialView("_RoleToUser", model);
         }
         [HttpPost]
-        public async Task<ActionResult> SetRoleToUser(UserRoleViewModel model, ApplicationDbContext db)
+        public async Task<ActionResult> SetRoleToUserC(UserRoleViewModel model, ApplicationDbContext db)
         {
             var user = UserManager.FindByEmail(model.UserEmail);
             var roles = UserManager.GetRoles(user.Id).ToArray();
@@ -517,7 +517,7 @@ namespace AutoDealership.Controllers
             return View("AllUsers", UserManager.Users.ToList());
         }
 
-        public ActionResult Roles(ApplicationDbContext db)
+        public ActionResult RolesC(ApplicationDbContext db)
         {
             //var db = new ApplicationDbContext();
             RolesViewModel model = new RolesViewModel();
@@ -528,7 +528,7 @@ namespace AutoDealership.Controllers
         }
 
         [HttpPost]
-        public ActionResult Roles(RolesViewModel model, ApplicationDbContext db)
+        public ActionResult RolesC(RolesViewModel model, ApplicationDbContext db)
         {
             //var db = new ApplicationDbContext();
             var roleStore = new RoleStore<IdentityRole>(db);
@@ -539,7 +539,7 @@ namespace AutoDealership.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteRole(string role, ApplicationDbContext db)
+        public ActionResult DeleteRoleC(string role, ApplicationDbContext db)
         {
             //var db = new ApplicationDbContext();
             var roleStore = new RoleStore<IdentityRole>(db);

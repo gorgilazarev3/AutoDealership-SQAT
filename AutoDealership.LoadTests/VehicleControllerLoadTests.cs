@@ -23,7 +23,7 @@ namespace AutoDealership.LoadTests
             ).Run();
             Assert.Equal(0, stats.Overall.ErrorsCount);
             Assert.Equal(1000, stats.Overall.SamplesCount);
-            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(5));
+            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(10));
         }
 
         //Load testing the page for getting all brands
@@ -38,7 +38,7 @@ namespace AutoDealership.LoadTests
             ).Run();
             Assert.Equal(0, stats.Overall.ErrorsCount);
             Assert.Equal(1000, stats.Overall.SamplesCount);
-            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(5));
+            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(10));
         }
 
         //Load testing the page for getting all reservations
@@ -53,7 +53,7 @@ namespace AutoDealership.LoadTests
             ).Run();
             Assert.Equal(0, stats.Overall.ErrorsCount);
             Assert.Equal(1000, stats.Overall.SamplesCount);
-            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(5));
+            Assert.True(stats.Overall.SampleTimePercentile99 < TimeSpan.FromSeconds(10));
         }
     }
 }

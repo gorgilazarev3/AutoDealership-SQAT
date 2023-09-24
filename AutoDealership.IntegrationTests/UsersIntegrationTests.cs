@@ -43,7 +43,7 @@ namespace AutoDealership.IntegrationTests
             Assert.True(contextUser.Identity.IsAuthenticated);
             Assert.True(contextUser.IsInRole(TestConstants.UserAdminRole));
             //Let's get all roles and verify that the roles are there
-            var resultRoles = controller.Roles(fixture.context) as ViewResult;
+            var resultRoles = controller.RolesC(fixture.context) as ViewResult;
             var rolesModel = resultRoles.Model as RolesViewModel;
             Assert.NotNull(rolesModel);
             var rolesStrings = rolesModel.Roles.Select(r => r.Name).ToList();
@@ -73,11 +73,11 @@ namespace AutoDealership.IntegrationTests
                 NewRole = "TestRole",
                 Roles = fixture.roleManager.Roles
             };
-            var resultCreate = controller.Roles(modelRoleCreate, fixture.context) as ViewResult;
+            var resultCreate = controller.RolesC(modelRoleCreate, fixture.context) as ViewResult;
             var rolesStrings = fixture.roleManager.Roles.Select(r => r.Name).ToList();
             Assert.Contains("TestRole", rolesStrings);
             //Let's delete the role now
-            var resultDelete = controller.DeleteRole("TestRole", fixture.context);
+            var resultDelete = controller.DeleteRoleC("TestRole", fixture.context);
             //Check that the count of roles is back to two
             Assert.Equal(2, fixture.roleManager.Roles.Count());
         }
@@ -99,7 +99,7 @@ namespace AutoDealership.IntegrationTests
             Assert.True(contextUser.Identity.IsAuthenticated);
             Assert.True(contextUser.IsInRole(TestConstants.UserAdminRole));
             //Let's get all roles and verify that the roles are there
-            var result = controller.AllUsers(fixture.context) as ViewResult;
+            var result = controller.AllUsersC(fixture.context) as ViewResult;
             var allUsers = result.Model as List<ApplicationUser>;
             Assert.NotNull(allUsers);
             //Check if the user is returned with all users since it's the only user
