@@ -1,0 +1,116 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.LoadTests\\AutoDealership.LoadTests.csproj": {}
+  },
+  "projects": {
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.LoadTests\\AutoDealership.LoadTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.LoadTests\\AutoDealership.LoadTests.csproj",
+        "projectName": "AutoDealership.LoadTests",
+        "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.LoadTests\\AutoDealership.LoadTests.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership.LoadTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj": {
+                "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Abstracta.JmeterDsl": {
+              "target": "Package",
+              "version": "[0.3.1, )"
+            },
+            "Abstracta.JmeterDsl.BlazeMeter": {
+              "target": "Package",
+              "version": "[0.3.1, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj": {
+      "restore": {
+        "projectUniqueName": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj",
+        "projectName": "AutoDealership",
+        "projectPath": "E:\\Projects\\AutoDealership-With Tests\\AutoDealership-SQAT\\AutoDealership-SQAT\\AutoDealership\\AutoDealership.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

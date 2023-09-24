@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AutoDealership.LoadTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "BZ_TOKEN": "613576bd29d6c6dd93a30281:8dd109530c2bb81f16203c98d5bc17f9edc524f6c86436565ea029bda123d3c565855db6"
+      }
+    }
+  }
+}

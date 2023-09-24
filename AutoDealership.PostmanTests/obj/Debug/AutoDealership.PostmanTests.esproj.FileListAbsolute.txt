@@ -1,0 +1,2 @@
+E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership.PostmanTests\obj\Debug\AutoDealership.PostmanTests.esproj.SuggestedBindingRedirects.cache
+E:\Projects\AutoDealership-With Tests\AutoDealership-SQAT\AutoDealership-SQAT\AutoDealership.PostmanTests\obj\Debug\AutoDealership.PostmanTests.esproj.CoreCompileInputs.cache
