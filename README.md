@@ -14,5 +14,5 @@ Several types of testing were done to the application, below is a list of the ty
  
 #####  Created by:
 
->  Gorgi Lazarev
+>  Gorgi Lazarev <br>
 > 201042
