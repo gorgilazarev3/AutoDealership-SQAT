@@ -95,8 +95,8 @@ namespace AutoDealership.Tests
             Assert.Equal(mercedesVeh.Price, result.ViewBag.MinPrice);
             Assert.Equal(bmwVeh.Price + 100, result.ViewBag.MaxPrice);
             var model = result.ViewData.Model as InventoryViewModel;
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.Inventory.Count);
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.FullInventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.Inventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.FullInventory.Count);
             Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.AllBrands.Count);
             //there should be one page only since we have only two items and the active page should be 0
             //since the active pages are 0 based to help with deciding the count of pages
@@ -115,8 +115,8 @@ namespace AutoDealership.Tests
             string query = "sedan";
             var result = (controller.InventoryByBodyStyle(query)) as ViewResult;
             var model = result.ViewData.Model as InventoryViewModel;
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.Inventory.Count);
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.FullInventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.Inventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.FullInventory.Count);
             Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.AllBrands.Count);
             //there should be one page only since we have only two items and the active page should be 0
             //since the active pages are 0 based to help with deciding the count of pages
@@ -153,8 +153,8 @@ namespace AutoDealership.Tests
 
             var result = (controller.SpeedInventory()) as ViewResult;
             var model = result.ViewData.Model as InventoryViewModel;
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.Inventory.Count);
-            Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.FullInventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.Inventory.Count);
+            Assert.Equal(TestsHelpers.GetMockVehicleList().Count, model.FullInventory.Count);
             Assert.Equal(TestsHelpers.GetMockBrandsList().Count, model.AllBrands.Count);
             //there should be one page only since we have only one item and the active page should be 0
             //since the active pages are 0 based to help with deciding the count of pages
